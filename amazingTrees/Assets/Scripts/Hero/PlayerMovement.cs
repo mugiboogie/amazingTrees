@@ -133,9 +133,15 @@ public class PlayerMovement : MonoBehaviour
             jumpDirection.y -= 1f * Time.deltaTime; //Reduce the gravity to a glide when dashing.
         }
 
-        
 
-        charCon.Move((inputDirection * charSpeed * Time.deltaTime) + (jumpDirection * Time.deltaTime));
+        if (!anim.applyRootMotion)
+        {
+            charCon.Move((inputDirection * charSpeed * Time.deltaTime) + (jumpDirection * Time.deltaTime));
+        }
+        else
+        {
+            charCon.Move(jumpDirection * Time.deltaTime);
+        }
     }
 
     void Turning(Vector3 inputDirection)
