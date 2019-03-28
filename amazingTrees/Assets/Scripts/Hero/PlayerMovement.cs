@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f; //Default Jump force that is applied when player jumps.
     private float verticalVelocity = 0f; //The value in which the jumpVector changes. (in Movement)
     private Quaternion targetRotation; //Rotation that the player aligns to when movement is applied. (in Turning)
+    private bool dash; //True if the player is in a dash.
+    private float dashDuration; //The end time of the player's dash.
+    private float dashCooldown; //The cooldown for the time the player's next dash can begin.
+    private bool canDash; //A check to ensure that the player can dash. It is only true when the player is grounded, so an airborne player must touch the ground before dashing again.
+    private Vector3 dashDirection; //The direction of the dash. This is the inputDirection as it is on the frame the dash button was pushed.
+    
 
     void Start()
     {
@@ -47,6 +53,10 @@ public class PlayerMovement : MonoBehaviour
         //Apply Animation Parameters
         anim.SetFloat("Speed", inputDirection.magnitude, .05f, Time.deltaTime); //"Speed" in anim is 0=idle to 1=running. A dampening time was added to make the locomotion feel smoother.
         anim.SetBool("isGrounded", charCon.isGrounded); //"isGrounded" in anim is true=grounded or false=in air.
+        anim.SetBool("Dashing", dash);
+
+       
+        
     }
 
     void Movement(Vector3 inputDirection)
@@ -80,6 +90,50 @@ public class PlayerMovement : MonoBehaviour
         }
         //Once the verticalVelocity is determined, we can assign it to the jumpDirection. Note that X and Z are always 0.
         Vector3 jumpDirection = new Vector3(0, verticalVelocity, 0);
+
+
+        //Get Dash Input. A dash can be performed when grounded or airborne. Whenever the player dashes, they lose the ability to dash. 
+        //The ability is only replenished when the player's feet touch the floor.
+        //--First check if we can replenish the player's dash ability.
+        if (charCon.isGrounded)
+        {
+            canDash = true;
+        }
+
+        //--Then check all conditions if the player can perform a dash.
+        //---The player must not already be in a dash
+        //---The dash key is tapped
+        //---The dash key is passed it's cooldown
+        //---And the player has a dash ready
+        if ((dash==false)&&(Input.GetButtonDown("Dash"))&&(dashCooldown<Time.time) && (canDash==true))
+        {
+            //dashDirection by default where the player is facing. However, this can be overwritten if the player is holding down a direction.
+            dashDirection = transform.forward;
+
+            if (inputDirection.magnitude > 0f)
+            {
+                dashDirection = inputDirection;
+            }
+            dashCooldown = Time.time + .425f;
+            dashDuration = Time.time + .325f;
+            dash = true;
+            canDash = false;
+        }
+
+        //--Once the player exhausts their dash duration, they stop dashing.
+        if(dashDuration<Time.time)
+        {
+            dash = false;
+        }
+        
+        //--Movement changes when the player is dashing.
+        if(dash)
+        {
+            inputDirection = dashDirection * (2.5f * (Time.time / dashDuration)); //The last bit is just a ratio of the current time and the end time of the dash. This will make the dash feel like it's slowing down over time.
+            jumpDirection.y -= 1f * Time.deltaTime; //Reduce the gravity to a glide when dashing.
+        }
+
+        
 
         charCon.Move((inputDirection * charSpeed * Time.deltaTime) + (jumpDirection * Time.deltaTime));
     }
