@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     private float durationTime;
     private int meleeChain;
     private float stutterTime;
+    private PlayerTargetting playerTargetting;
+    private GameObject lastHitEnemy;
 
     private Animator anim;
 
@@ -24,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        playerTargetting = GetComponent<PlayerTargetting>();
     }
 
     
@@ -32,13 +35,14 @@ public class PlayerAttack : MonoBehaviour
         attackOrigin = transform.position + Vector3.up;
 
         
-        if(Input.GetButtonDown("Fire1") && (Time.time> durationTime) && (meleeChain<3))
+        if(Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (meleeChain<3))
         {
             cooldownTime = Time.time + attackRate * 3f;
             durationTime = Time.time + attackRate;
             
             
                 meleeChain++;
+
             
         }
         if(Time.time>cooldownTime)
@@ -48,9 +52,18 @@ public class PlayerAttack : MonoBehaviour
 
         anim.SetInteger("MeleeChain", meleeChain);
         anim.SetBool("Melee", Time.time< cooldownTime);
-        anim.applyRootMotion = (Time.time < cooldownTime);
+        anim.applyRootMotion = (anim.GetCurrentAnimatorStateInfo(0).tagHash==Animator.StringToHash("Attack"));
 
         anim.enabled = (Time.time > stutterTime);
+
+
+        Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
+
+        if ((Vector3.Distance(lastHitEnemy.transform.position, transform.position) > 3f) || (Vector3.Angle(targetDir, transform.forward) > 45f))
+        {
+            playerTargetting.overrideEnemy = null;
+        }
+
     }
 
     public void Melee(float damage)
@@ -65,6 +78,15 @@ public class PlayerAttack : MonoBehaviour
             if(Vector3.Angle(targetDir,transform.forward)<attackAngle)
             {
                 Debug.Log(targets[i]);
+
+                if (targets[i].CompareTag("Enemy"))
+                {
+                    playerTargetting.overrideTime = Time.time + 2f;
+                    lastHitEnemy = targets[i].gameObject;
+                    playerTargetting.overrideEnemy = lastHitEnemy;
+                    
+                }
+
                 targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
                 StartCoroutine(cameraShake.Shake(.01f*damage,.005f*damage));
                 stutterTime = Time.time + .125f;

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private CharacterController charCon;
     private Transform camera;
+    private PlayerTargetting playerTargetting;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -24,12 +25,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 dashDirection; //The direction of the dash. This is the inputDirection as it is on the frame the dash button was pushed.
     
 
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         charCon = GetComponent<CharacterController>();
         camera = Camera.main.transform;
+        playerTargetting = GetComponent<PlayerTargetting>();
     }
 
 
@@ -48,7 +50,16 @@ public class PlayerMovement : MonoBehaviour
 
         //Apply Movement
         Movement(inputDirection);
-        Turning(inputDirection);
+        if (!(anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack")))
+        {
+            //If the player is not in an attack, face the direction the joystick is pulled.
+            Turning(inputDirection);
+        }
+        else
+        {
+            //If the player is attacking, automatically face the lock-on target.
+            Turning(playerTargetting.enemyTarget.transform.position- transform.position);
+        }
 
         //Apply Animation Parameters
         anim.SetFloat("Speed", inputDirection.magnitude, .05f, Time.deltaTime); //"Speed" in anim is 0=idle to 1=running. A dampening time was added to make the locomotion feel smoother.

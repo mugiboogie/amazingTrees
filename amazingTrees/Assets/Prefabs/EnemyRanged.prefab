@@ -1310,7 +1310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd471d43427ee24981de5ead95123b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistance: 6
+  desiredDistance: 10
+  stopDistance: 1
   charSpeed: 5
 --- !u!136 &3488396497760856720
 CapsuleCollider:

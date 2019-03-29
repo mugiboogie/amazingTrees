@@ -5,11 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
-    Transform player;
-    NavMeshAgent nav;
-    Animator anim;
+    private Transform player;
+    private NavMeshAgent nav;
+    private Animator anim;
+    public float desiredDistance; //Distance the enemy wants to stay away from the player.
     public float stopDistance;
     public float charSpeed;
+    private float startMoving;
+
+    private EnemyDirector enemyDirector;
 
 
     void Awake()
@@ -17,23 +21,27 @@ public class EnemyController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
+
+        enemyDirector.AddEnemy(this.gameObject);
+
+        nav.destination = FindRandomPoint();
     }
 
     void Update()
     {
         //Sets the current target to the player.
         //--Consider modifying when the enemy is not "Aggro"
-        nav.SetDestination(player.position);
+        //nav.SetDestination(player.position);
 
-        //Rotation
-        //--The enemy is always looking at the player.
-        Vector3 direction = player.position - this.transform.position;
-        direction.y = 0;
-        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+        
 
         //Movement
         //By default, set the navigation speed to the charSpeed.
-        nav.speed = charSpeed;
+        if (Time.time > startMoving)
+        {
+            nav.speed = charSpeed;
+        }
 
         //Autobraking is enabled.
         nav.autoBraking = true;
@@ -52,10 +60,46 @@ public class EnemyController : MonoBehaviour {
         if (remainingDistance <= stopDistance)
         {
             nav.speed = 0f;
+            if (Vector3.Distance(transform.position, player.transform.position) > desiredDistance)
+            {
+                nav.destination = FindRandomPoint();
+            }
+            startMoving = Time.time + Random.Range(2f,5f);
+            
         }
+
+
+
+
+        //Rotation
+        //--The enemy is always looking at the player.
+        Vector3 direction;
+
+        if (Time.time < startMoving)
+        {
+            direction = player.position - this.transform.position;
+        }
+        else
+        {
+            direction = nav.steeringTarget - this.transform.position;
+        }
+        direction.y = 0;
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
         //Applies animation for locomotion. The parameter "Speed" is 0=idle and 1=running. A damp time was added to smooth out the animation.
         anim.SetFloat("Speed", Mathf.Clamp(nav.speed, 0f, 1f),.1f,Time.deltaTime);
+    }
+
+    private Vector3 FindRandomPoint()
+    {
+        float angle = Random.Range(0f, 360f);
+        //And then let's do some trig... Remember SOHCAHTOA?
+
+        float x = player.transform.position.x + desiredDistance * Mathf.Sin(angle);
+        float z = player.transform.position.z + desiredDistance * Mathf.Cos(angle);
+
+        return new Vector3(x, 0, z);
+
     }
 
 }
