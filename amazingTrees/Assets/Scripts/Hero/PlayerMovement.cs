@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController charCon;
     private Transform camera;
     private PlayerTargetting playerTargetting;
+    private PlayerAttack playerAttack;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashCooldown; //The cooldown for the time the player's next dash can begin.
     private bool canDash; //A check to ensure that the player can dash. It is only true when the player is grounded, so an airborne player must touch the ground before dashing again.
     private Vector3 dashDirection; //The direction of the dash. This is the inputDirection as it is on the frame the dash button was pushed.
+    private float airborneTime;
     
 
     void Awake()
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         charCon = GetComponent<CharacterController>();
         camera = Camera.main.transform;
         playerTargetting = GetComponent<PlayerTargetting>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
 
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Apply Movement
         Movement(inputDirection);
-        if (!(anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack")))
+        if ((!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")))&& (!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))))
         {
             //If the player is not in an attack, face the direction the joystick is pulled.
             Turning(inputDirection);
@@ -82,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //Character is jumping.
             verticalVelocity = jumpForce;
+
+            playerAttack.AttackCancel();
+
+            airborneTime += Time.deltaTime;
         }
         else
         {
@@ -91,14 +98,28 @@ public class PlayerMovement : MonoBehaviour
                 if (charCon.isGrounded)
                 {
                     verticalVelocity = -gravity * Time.deltaTime;
+
+
+                    //Cancel Attack if just landed
+                    if (airborneTime > 0f)
+                    {
+                        playerAttack.AttackCancel();
+                    }
+
+                    airborneTime = 0f;
                 }
                 else
                 {
                     //Character is in freefall.
-                    verticalVelocity -= gravity * Time.deltaTime;
+
+                        verticalVelocity -= gravity * Time.deltaTime;
+
                 }
             }
         }
+
+       
+
         //Once the verticalVelocity is determined, we can assign it to the jumpDirection. Note that X and Z are always 0.
         Vector3 jumpDirection = new Vector3(0, verticalVelocity, 0);
 
@@ -129,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
             dashDuration = Time.time + .325f;
             dash = true;
             canDash = false;
+
+            playerAttack.AttackCancel();
         }
 
         //--Once the player exhausts their dash duration, they stop dashing.
@@ -144,6 +167,10 @@ public class PlayerMovement : MonoBehaviour
             jumpDirection.y -= 1f * Time.deltaTime; //Reduce the gravity to a glide when dashing.
         }
 
+        if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")))
+        {
+            jumpDirection.y = 0f;
+        }
 
         if (!anim.applyRootMotion)
         {
@@ -153,6 +180,8 @@ public class PlayerMovement : MonoBehaviour
         {
             charCon.Move(jumpDirection * Time.deltaTime);
         }
+
+
     }
 
     void Turning(Vector3 inputDirection)
@@ -172,5 +201,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSmoothing * Time.deltaTime);
         }
     }
+
 
 }

@@ -10,10 +10,10 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 attackOrigin;
     public LayerMask affectedLayers;
 
-    public float attackRate;
-    private float cooldownTime;
+    public float lightAttackRate;
+    public float heavyAttackRate;
+    public float cooldownTime;
     private float durationTime;
-    private int meleeChain;
     private float stutterTime;
     private PlayerTargetting playerTargetting;
     private GameObject lastHitEnemy;
@@ -34,25 +34,29 @@ public class PlayerAttack : MonoBehaviour
     {
         attackOrigin = transform.position + Vector3.up;
 
-        
-        if(Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (meleeChain<3))
-        {
-            cooldownTime = Time.time + attackRate * 3f;
-            durationTime = Time.time + attackRate;
-            
-            
-                meleeChain++;
+        anim.SetBool("LightAttack", false);
+        anim.SetBool("HeavyAttack", false);
 
-            
-        }
-        if(Time.time>cooldownTime)
+
+        if (Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
         {
-            meleeChain = 0;
+            cooldownTime = Time.time + lightAttackRate + .25f;
+            durationTime = Time.time + lightAttackRate;
+
+            anim.SetTrigger("LightAttack");
         }
 
-        anim.SetInteger("MeleeChain", meleeChain);
+        if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+        {
+            cooldownTime = Time.time + heavyAttackRate + .5f;
+            durationTime = Time.time + heavyAttackRate;
+
+            anim.SetTrigger("HeavyAttack");
+        }
+
+
         anim.SetBool("Melee", Time.time< cooldownTime);
-        anim.applyRootMotion = (anim.GetCurrentAnimatorStateInfo(0).tagHash==Animator.StringToHash("Attack"));
+        anim.applyRootMotion = ((anim.GetCurrentAnimatorStateInfo(1).tagHash==Animator.StringToHash("Attack"))|| (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
 
         anim.enabled = (Time.time > stutterTime);
 
@@ -88,7 +92,8 @@ public class PlayerAttack : MonoBehaviour
                 }
 
                 targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
-                StartCoroutine(cameraShake.Shake(.01f*damage,.005f*damage));
+
+                StartCoroutine(cameraShake.Shake(.1f,.005f*damage));
                 stutterTime = Time.time + .125f;
             }
         }
@@ -98,5 +103,15 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(attackOrigin, attackRange);
+    }
+
+    public void AttackCancel()
+    {
+        cooldownTime = Time.time;
+        durationTime = Time.time;
+        anim.SetBool("Melee", false);
+        anim.SetBool("LightAttack", false);
+        anim.SetBool("HeavyAttack", false);
+
     }
 }
