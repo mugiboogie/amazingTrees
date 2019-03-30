@@ -17,6 +17,10 @@ public class PlayerAttack : MonoBehaviour
     private float stutterTime;
     private PlayerTargetting playerTargetting;
     private GameObject lastHitEnemy;
+    public float lightAttackChargeTime;
+    public float heavyAttackChargeTime;
+    private float lightAttackCharge;
+    private float heavyAttackCharge;
 
     private Animator anim;
 
@@ -36,6 +40,8 @@ public class PlayerAttack : MonoBehaviour
 
         anim.SetBool("LightAttack", false);
         anim.SetBool("HeavyAttack", false);
+        anim.SetBool("ChLightAttack", false);
+        anim.SetBool("ChHeavyAttack", false);
 
 
         if (Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
@@ -54,8 +60,51 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("HeavyAttack");
         }
 
+        //Light Attack Charge
+        if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime))
+        {
+            //Unleash attack
+            lightAttackCharge = 0f;
+
+            cooldownTime = Time.time + lightAttackRate + .5f;
+            durationTime = Time.time + lightAttackRate;
+
+            anim.SetTrigger("ChLightAttack");
+        }
+        if (Input.GetButton("LightAttack"))
+        {
+            lightAttackCharge += Time.deltaTime;
+        }
+        else
+        {
+            lightAttackCharge = 0f;
+        }
+
+
+
+        //Heavy Attack Charge
+        if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime))
+        {
+            //Unleash attack
+            heavyAttackCharge = 0f;
+
+            cooldownTime = Time.time + heavyAttackRate + 1f;
+            durationTime = Time.time + heavyAttackRate;
+
+            anim.SetTrigger("ChHeavyAttack");
+        }
+        if (Input.GetButton("HeavyAttack"))
+        {
+            heavyAttackCharge += Time.deltaTime;
+        }
+        else
+        {
+            heavyAttackCharge = 0f;
+        }
+
 
         anim.SetBool("Melee", Time.time< cooldownTime);
+        anim.SetBool("Charging", (heavyAttackCharge> heavyAttackChargeTime/2f) ||(lightAttackCharge> lightAttackChargeTime / 2f));
         anim.applyRootMotion = ((anim.GetCurrentAnimatorStateInfo(1).tagHash==Animator.StringToHash("Attack"))|| (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
 
         anim.enabled = (Time.time > stutterTime);
@@ -81,7 +130,7 @@ public class PlayerAttack : MonoBehaviour
             Vector3 targetDir = targets[i].transform.position - attackOrigin;
             if(Vector3.Angle(targetDir,transform.forward)<attackAngle)
             {
-                Debug.Log(targets[i]);
+                //Debug.Log(targets[i]);
 
                 if (targets[i].CompareTag("Enemy"))
                 {
@@ -109,9 +158,14 @@ public class PlayerAttack : MonoBehaviour
     {
         cooldownTime = Time.time;
         durationTime = Time.time;
+        lightAttackCharge = 0f;
+        heavyAttackCharge = 0f;
+
         anim.SetBool("Melee", false);
         anim.SetBool("LightAttack", false);
         anim.SetBool("HeavyAttack", false);
+        anim.SetBool("ChLightAttack", false);
+        anim.SetBool("ChHeavyAttack", false);
 
     }
 }

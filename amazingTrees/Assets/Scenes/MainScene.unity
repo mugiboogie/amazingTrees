@@ -749,7 +749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &103265102
 Transform:
   m_ObjectHideFlags: 0
@@ -8476,6 +8476,8 @@ MonoBehaviour:
   lightAttackRate: 0.125
   heavyAttackRate: 0.25
   cooldownTime: 0
+  lightAttackChargeTime: 0.5
+  heavyAttackChargeTime: 0.5
   cameraShake: {fileID: 0}
 --- !u!114 &1357522790
 MonoBehaviour:

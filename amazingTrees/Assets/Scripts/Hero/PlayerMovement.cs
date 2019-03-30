@@ -172,13 +172,14 @@ public class PlayerMovement : MonoBehaviour
             jumpDirection.y = 0f;
         }
 
-        if (!anim.applyRootMotion)
+
+        if ((!anim.applyRootMotion) && (anim.GetBool("Charging")==false))
         {
             charCon.Move((inputDirection * charSpeed * Time.deltaTime) + (jumpDirection * Time.deltaTime));
         }
         else
         {
-            charCon.Move(jumpDirection * Time.deltaTime);
+                charCon.Move(jumpDirection * Time.deltaTime);
         }
 
 
