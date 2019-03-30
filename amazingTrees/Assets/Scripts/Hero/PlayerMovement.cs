@@ -61,7 +61,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //If the player is attacking, automatically face the lock-on target.
-            Turning(playerTargetting.enemyTarget.transform.position- transform.position);
+            if (playerTargetting.enemyTarget != null)
+            {
+                Turning(playerTargetting.enemyTarget.transform.position - transform.position);
+            }
+            else
+            {
+                Turning(inputDirection);
+            }
         }
 
         //Apply Animation Parameters
@@ -137,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         //---The dash key is tapped
         //---The dash key is passed it's cooldown
         //---And the player has a dash ready
-        if ((dash==false)&&(Input.GetButtonDown("Dash"))&&(dashCooldown<Time.time) && (canDash==true))
+        if ((dash==false)&&(Input.GetButton("Dash"))&&(dashCooldown<Time.time) && (canDash==true))
         {
             //dashDirection by default where the player is facing. However, this can be overwritten if the player is holding down a direction.
             dashDirection = transform.forward;

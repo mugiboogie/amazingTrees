@@ -109,12 +109,14 @@ public class PlayerAttack : MonoBehaviour
 
         anim.enabled = (Time.time > stutterTime);
 
-
-        Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
-
-        if ((Vector3.Distance(lastHitEnemy.transform.position, transform.position) > 3f) || (Vector3.Angle(targetDir, transform.forward) > 45f))
+        if (lastHitEnemy != null)
         {
-            playerTargetting.overrideEnemy = null;
+            Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
+
+            if ((Vector3.Distance(lastHitEnemy.transform.position, transform.position) > 3f) || (Vector3.Angle(targetDir, transform.forward) > 45f))
+            {
+                playerTargetting.overrideEnemy = null;
+            }
         }
 
     }
@@ -122,7 +124,7 @@ public class PlayerAttack : MonoBehaviour
     public void Melee(float damage)
     {
         
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
         Collider[] targets = Physics.OverlapSphere(attackOrigin, attackRange, affectedLayers);
 
         for (int i = 0; i < targets.Length; i++)
