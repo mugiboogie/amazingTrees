@@ -31,6 +31,7 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHealth = player.gameObject.GetComponent<PlayerHealth>();
         enemyController = GetComponent<EnemyController>();
+
     }
 
     void Update()
