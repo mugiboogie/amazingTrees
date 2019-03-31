@@ -87,7 +87,7 @@ public class EnemyAttack : MonoBehaviour
         {
             if(hitscan == false)
             {
-                GameObject projectile = Instantiate(projectile, transform.position, transform.rotation);
+                Instantiate(projectile, transform.position, transform.rotation);
             }
             else
             {
