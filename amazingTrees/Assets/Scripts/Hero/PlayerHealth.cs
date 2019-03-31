@@ -7,22 +7,24 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public bool canDamage;
-    //public AudioClip dodge;
+    public AudioClip Dashing;
     public float resetAfterDeathTime = 5f;
 
     private Animator anim;
     private PlayerMovement playerMovement;
     private bool playerDead;
-    //private AudioSource audio;
+    private AudioSource audio;
     //private SceneFadeInOut sceneFadeInOut;
     private float timer;
+    private bool dash;
+
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
-        //audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         //sceneFadeInOut = GameObject.FindGameObjectsWithTag(tag.fader).GetComponent<sceneFadeInOut>;
 
     }
@@ -48,13 +50,13 @@ public class PlayerHealth : MonoBehaviour
         if(!canDamage)
         {
             currentHealth -= 0;
-           // if ("Dodging")
+           if (anim.GetBool("Dashing"))
             {
-                //AudioSource.PlayClipAtPoint(dodge, transform.position);
+                AudioSource.PlayClipAtPoint(Dashing, transform.position);
             }
-            //else ("Stun", "Stagger", "Knockdown", "Knockup", "Knockback"); (this line is giving me issues)
+            else 
             {
-                
+              
             }
         }
         else
