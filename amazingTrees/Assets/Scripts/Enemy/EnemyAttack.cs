@@ -28,13 +28,28 @@ public class EnemyAttack : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerHealth = player.gameObject.GetComponent<PlayerHealth>();
+        enemyController = GetComponent<EnemyController>();
+
     }
 
     void Update()
     {
         anim.SetBool("Attack", false);
         anim.SetBool("Taunt", false);
+
+        if(Vector3.Distance(transform.position, player.position)<attackRange)
+        {
+            if((setAttack) && (Time.time>nextAttack))
+            {
+                nextAttack = Time.time + cooldownTime;
+                if(ranged == true)
+                {
+                    
+                }
+            }
+        }
     }
 
 }
