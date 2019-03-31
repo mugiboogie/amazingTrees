@@ -46,7 +46,20 @@ public class EnemyAttack : MonoBehaviour
                 nextAttack = Time.time + cooldownTime;
                 if(ranged == true)
                 {
-                    
+                    //RAYCAST
+                    //Set up origin of raycast and destination of raycast.
+                    Vector3 origin = transform.position + Vector3.up;
+                    Vector3 destination = player.position + Vector3.up;
+
+                    //Store a RaycastHit
+                    RaycastHit hit;
+                    //Notation is: if(Physics.Raycast(Vector3 start, Vector3 direction, RaycastHit, Distance, LayerMask)
+                    if(Physics.Raycast(origin,(destination-origin).normalized,out hit,Vector3.Distance(origin,destination)-2f,affectedLayers))
+                    {
+                        //Logic
+                    }
+
+                    //RAYCAST
                 }
             }
         }
