@@ -109,7 +109,10 @@ public class EnemyAttack : MonoBehaviour
     {
         float appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
 
-
+        if(Vector3.Distance(transform.position,player.position)>2f)
+        {
+            Attack()
+        }
 
     }
 
