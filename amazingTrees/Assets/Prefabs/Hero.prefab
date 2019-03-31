@@ -4295,10 +4295,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   canDamage: 0
-<<<<<<< HEAD
+
   Dashing: {fileID: 8300000, guid: 2642ba66036fbac45a1b9cc92606a562, type: 3}
-=======
->>>>>>> ba235bfb6b11630fbd038383ce6c56e015c74507
+
   resetAfterDeathTime: 5
 --- !u!82 &4399365503773501706
 AudioSource:
