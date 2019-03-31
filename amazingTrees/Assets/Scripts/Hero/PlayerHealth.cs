@@ -7,13 +7,13 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public bool canDamage;
-    public AudioClip dodge;
+    //public AudioClip dodge;
     public float resetAfterDeathTime = 5f;
 
     private Animator anim;
     private PlayerMovement playerMovement;
     private bool playerDead;
-    private AudioSource audio;
+    //private AudioSource audio;
     //private SceneFadeInOut sceneFadeInOut;
     private float timer;
 
@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
         //sceneFadeInOut = GameObject.FindGameObjectsWithTag(tag.fader).GetComponent<sceneFadeInOut>;
 
     }
@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= 0;
            // if ("Dodging")
             {
-                AudioSource.PlayClipAtPoint(dodge, transform.position);
+                //AudioSource.PlayClipAtPoint(dodge, transform.position);
             }
             //else ("Stun", "Stagger", "Knockdown", "Knockup", "Knockback"); (this line is giving me issues)
             {
@@ -85,7 +85,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         playerMovement.enabled = false;
-        audio.Stop();
+        //audio.Stop();
     }
 
     void LevelReset()
