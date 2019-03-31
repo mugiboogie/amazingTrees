@@ -28,6 +28,7 @@ public class EnemyAttack : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        
     }
 
     void Update()
