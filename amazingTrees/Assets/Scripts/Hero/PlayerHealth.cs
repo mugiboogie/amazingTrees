@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement playerMovement;
     private bool playerDead;
     private AudioSource audio;
-    private SceneFadeInOut sceneFadeInOut;
+    //private SceneFadeInOut sceneFadeInOut;
     private float timer;
 
 
@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audio = GetComponent<AudioSource>();
-        sceneFadeInOut = GameObject.FindGameObjectsWithTag(tag.fader).GetComponent<sceneFadeInOut>;
+        //sceneFadeInOut = GameObject.FindGameObjectsWithTag(tag.fader).GetComponent<sceneFadeInOut>;
 
     }
 
@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
         if(!canDamage)
         {
             currentHealth -= 0;
-            if ("Dodging")
+           // if ("Dodging")
             {
                 AudioSource.PlayClipAtPoint(dodge, transform.position);
             }
@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (timer >= resetAfterDeathTime)
         {
-            sceneFadeInOut.EndScene();
+            //sceneFadeInOut.EndScene();
         }
     }
 }
