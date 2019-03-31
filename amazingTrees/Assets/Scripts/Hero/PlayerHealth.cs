@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         audio = GetComponent<AudioSource>();
         //sceneFadeInOut = GameObject.FindGameObjectsWithTag(tag.fader).GetComponent<sceneFadeInOut>;
-
+        currentHealth = maxHealth;
     }
 
     void Update()
