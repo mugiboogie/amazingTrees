@@ -84,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
             anim.SetBool("isDead", false);
         }
 
-        playerMovement.enabled = false;
+        //playerMovement.enabled = false;
         //audio.Stop();
     }
 
