@@ -54,15 +54,57 @@ public class EnemyAttack : MonoBehaviour
                     //Store a RaycastHit
                     RaycastHit hit;
                     //Notation is: if(Physics.Raycast(Vector3 start, Vector3 direction, RaycastHit, Distance, LayerMask)
-                    if(Physics.Raycast(origin,(destination-origin).normalized,out hit,Vector3.Distance(origin,destination)-2f,affectedLayers))
+                    if(!Physics.Raycast(origin,(destination-origin).normalized,out hit,Vector3.Distance(origin,destination)-2f,affectedLayers))
                     {
                         //Logic
+                        anim.SetTrigger("Taunt");
+                        beginAttack = Time.time + tauntTime;
                     }
-
+                    else
+                    {
+                        anim.SetTrigger("Taunt");
+                        beginAttack = Time.time + tauntTime;
+                    }
                     //RAYCAST
+                }
+                
+                if((Time.time>beginAttack)&&(willAttack == true))
+                {
+                    Attack();
                 }
             }
         }
+    }
+
+    void Attack()
+    {
+        float appliedDamage;
+
+        appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
+        anim.SetTrigger("Attack");
+
+        if(ranged == true)
+        {
+            if(hitscan == false)
+            {
+                GameObject projectile = Instantiate(projectile, transform.position, transform.rotation);
+            }
+            else
+            {
+                RaycastHit hit;
+
+            }
+        }
+        else
+        {
+            anim.SetTrigger("Melee");
+        }
+    }
+
+    void Melee()
+    {
+        float appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
+
     }
 
 }
