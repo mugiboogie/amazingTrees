@@ -121,7 +121,7 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    public void Melee(float damage)
+    public void Melee(float damage, string effect)
     {
         
         //Debug.Log("Attack");
