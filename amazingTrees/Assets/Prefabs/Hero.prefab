@@ -4119,6 +4119,7 @@ GameObject:
   - component: {fileID: 503665196448764524}
   - component: {fileID: 503665196448764523}
   - component: {fileID: 503665196448764525}
+  - component: {fileID: 1061604079808855437}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -4278,6 +4279,23 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   overrideTime: 0
   overrideEnemy: {fileID: 0}
+--- !u!114 &1061604079808855437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503665196448764500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d254fce94f42ff4193857adf48758db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  canDamage: 0
+  dodge: {fileID: 0}
+  resetAfterDeathTime: 5
 --- !u!1 &503665196452484814
 GameObject:
   m_ObjectHideFlags: 0
