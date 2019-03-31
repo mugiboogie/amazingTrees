@@ -92,6 +92,10 @@ public class EnemyAttack : MonoBehaviour
             else
             {
                 RaycastHit hit;
+                Vector3 origin = transform.position + Vector3.up;
+                Vector3 hitscanTarget = player.position + Vector3.up;
+
+                Physics.Raycast(origin, (hitscanTarget - origin).normalized, out hit, Vector3.Distance(origin, hitscanTarget), affectedLayers);
 
             }
         }
@@ -104,6 +108,8 @@ public class EnemyAttack : MonoBehaviour
     void Melee()
     {
         float appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
+
+
 
     }
 
