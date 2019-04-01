@@ -111,7 +111,7 @@ public class EnemyAttack : MonoBehaviour
 
         if(Vector3.Distance(transform.position,player.position)>2f)
         {
-            Attack();
+            
         }
 
     }
