@@ -6,12 +6,15 @@ public class EnemyDirector : MonoBehaviour
 {
     private GameObject player;
     public List<GameObject> enemies;
+    public float aggroCooldown;
+    private float nextAggro;
+
     
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
-
+        nextAggro = Time.time + aggroCooldown;
     }
 
     void Update()
@@ -33,6 +36,16 @@ public class EnemyDirector : MonoBehaviour
 
             return 0;
         });
+
+        if(Time.time>nextAggro)
+        {
+            nextAggro = Time.time + aggroCooldown;
+            if (enemies.Count > 0)
+            {
+                int enemyIndex = Random.Range(0, enemies.Count);
+                AggroEnemy(enemies[enemyIndex]);
+            }
+        }
     }
 
     public void AddEnemy(GameObject enemy)
@@ -49,6 +62,11 @@ public class EnemyDirector : MonoBehaviour
             enemies.Remove(enemy);
         }
 
+    }
+
+    void AggroEnemy(GameObject enemy)
+    {
+        enemy.GetComponent<EnemyAttack>().setAttack = true;
     }
 
 }

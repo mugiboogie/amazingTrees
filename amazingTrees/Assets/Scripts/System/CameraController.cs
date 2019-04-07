@@ -10,13 +10,17 @@ public class CameraController : MonoBehaviour
     public float followSpeed = 5f;
     public bool follow;
     public Transform anchor;
+    public float desiredFOV;
+    private float currentFOV;
 
     private Vector3 lookAt;
     private Vector3 setPosition;
+    private Camera camera;
 
     void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        camera = Camera.main.GetComponent<Camera>();
     }
 
     void FixedUpdate()
@@ -38,5 +42,9 @@ public class CameraController : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, setPosition, followSpeed * Time.deltaTime);
+
+        currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 1f * Time.deltaTime);
+        camera.fieldOfView = currentFOV;
+
     }
 }

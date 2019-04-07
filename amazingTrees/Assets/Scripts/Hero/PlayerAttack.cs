@@ -14,7 +14,6 @@ public class PlayerAttack : MonoBehaviour
     public float heavyAttackRate;
     public float cooldownTime;
     private float durationTime;
-    private float stutterTime;
     private PlayerTargetting playerTargetting;
     private GameObject lastHitEnemy;
     public float lightAttackChargeTime;
@@ -22,20 +21,52 @@ public class PlayerAttack : MonoBehaviour
     private float lightAttackCharge;
     private float heavyAttackCharge;
 
+    private float comboChain;
+    private float comboChainReset;
+
     private Animator anim;
 
+    private CameraController cameraController;
     public CameraShake cameraShake;
-    
+    private PlayerMovement playerMovement;
+
+    public MeleeWeaponTrail trail1;
+    public MeleeWeaponTrail trail2;
+
+    [HideInInspector] public float damageDealt;
+
+
     void Awake()
     {
         anim = GetComponent<Animator>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
         playerTargetting = GetComponent<PlayerTargetting>();
+        cameraController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     
     void FixedUpdate()
     {
+
+        bool emitTrail = ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
+
+        if (trail1 != null)
+        {
+            trail1.Emit = emitTrail;
+        }
+        if (trail2 != null)
+        {
+            trail2.Emit = emitTrail;
+        }
+
+        CameraFOV();
+
+        if(Time.time>comboChainReset)
+        {
+            comboChain = 0f;
+        }
+
         attackOrigin = transform.position + Vector3.up;
 
         anim.SetBool("LightAttack", false);
@@ -71,7 +102,7 @@ public class PlayerAttack : MonoBehaviour
 
             anim.SetTrigger("ChLightAttack");
         }
-        if (Input.GetButton("LightAttack"))
+        if (Input.GetButton("LightAttack")&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit"))&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             lightAttackCharge += Time.deltaTime;
         }
@@ -88,12 +119,12 @@ public class PlayerAttack : MonoBehaviour
             //Unleash attack
             heavyAttackCharge = 0f;
 
-            cooldownTime = Time.time + heavyAttackRate + 1f;
+            cooldownTime = Time.time + heavyAttackRate + .5f;
             durationTime = Time.time + heavyAttackRate;
 
             anim.SetTrigger("ChHeavyAttack");
         }
-        if (Input.GetButton("HeavyAttack"))
+        if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             heavyAttackCharge += Time.deltaTime;
         }
@@ -105,11 +136,20 @@ public class PlayerAttack : MonoBehaviour
 
         anim.SetBool("Melee", Time.time< cooldownTime);
         anim.SetBool("Charging", (heavyAttackCharge> heavyAttackChargeTime/2f) ||(lightAttackCharge> lightAttackChargeTime / 2f));
-        anim.applyRootMotion = ((anim.GetCurrentAnimatorStateInfo(1).tagHash==Animator.StringToHash("Attack"))|| (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
+        if(anim.GetBool("Charging"))
+        {
+            AttackCancel();
+        }
 
-        anim.enabled = (Time.time > stutterTime);
+        if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit"))|| (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
+        {
+            AttackCancel();
+        }
 
-        if (lastHitEnemy != null)
+
+
+
+            if (lastHitEnemy != null)
         {
             Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
 
@@ -121,9 +161,14 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    public void Melee(float damage, string effect)
+    public void Melee(string property)
     {
-        
+
+        string[] propertyArray = property.Split(char.Parse("/"));
+        float damage = float.Parse(propertyArray[0]);
+        string effect = propertyArray[1];
+
+
         //Debug.Log("Attack");
         Collider[] targets = Physics.OverlapSphere(attackOrigin, attackRange, affectedLayers);
 
@@ -136,17 +181,37 @@ public class PlayerAttack : MonoBehaviour
 
                 if (targets[i].CompareTag("Enemy"))
                 {
-                    playerTargetting.overrideTime = Time.time + 2f;
-                    lastHitEnemy = targets[i].gameObject;
-                    playerTargetting.overrideEnemy = lastHitEnemy;
+                    EnemyHealth enemyHealth = targets[i].GetComponent<EnemyHealth>();
+
+                    if (!enemyHealth.isDead)
+                    {
+                        playerTargetting.overrideTime = Time.time + 2f;
+                        lastHitEnemy = targets[i].gameObject;
+                        playerTargetting.overrideEnemy = lastHitEnemy;
+                    }
+
+                    enemyHealth.TakeDamage(damage,effect,transform.position);
                     
                 }
 
+                comboChain++;
+                comboChainReset = Time.time + 3f;
+
                 targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
 
-                StartCoroutine(cameraShake.Shake(.1f,.005f*damage));
-                stutterTime = Time.time + .125f;
+                
+                if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))
+                {
+                    //StartCoroutine(cameraShake.Shake(.1f, .005f * damage));
+                    StartCoroutine(cameraShake.Shake(.1f, .25f));
+                }
+                else
+                {
+                    StartCoroutine(cameraShake.Shake(.1f, .00625f));
+                }
+                playerMovement.stutterTime = Time.time + .25f;
             }
+            damageDealt += damage;
         }
     }
 
@@ -160,8 +225,8 @@ public class PlayerAttack : MonoBehaviour
     {
         cooldownTime = Time.time;
         durationTime = Time.time;
-        lightAttackCharge = 0f;
-        heavyAttackCharge = 0f;
+        //lightAttackCharge = 0f;
+        //heavyAttackCharge = 0f;
 
         anim.SetBool("Melee", false);
         anim.SetBool("LightAttack", false);
@@ -169,5 +234,18 @@ public class PlayerAttack : MonoBehaviour
         anim.SetBool("ChLightAttack", false);
         anim.SetBool("ChHeavyAttack", false);
 
+    }
+
+    void CameraFOV()
+    {
+        cameraController.desiredFOV = 60f;
+        if (anim.GetBool("Charging"))
+        {
+            cameraController.desiredFOV = 30f;
+        }
+        else if(comboChain>2)
+        {
+            cameraController.desiredFOV = 40f;
+        }
     }
 }

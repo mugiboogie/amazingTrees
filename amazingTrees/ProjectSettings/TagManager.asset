@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - UI
+  - HealthBar
+  - Level
+  - CameraHolder
+  - PlayerEffects/PlayerDecoy
+  - PlayerEffects/FlinchNegate
   layers:
   - Default
   - TransparentFX

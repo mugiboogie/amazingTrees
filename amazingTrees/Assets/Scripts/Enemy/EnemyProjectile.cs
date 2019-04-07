@@ -5,24 +5,35 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
     public float speed;
-    public float baseDamage;
-    public float damageVariance;
+    public float damage;
     public string effect;
     public GameObject particleFx;
     private GameObject player;
-    //private PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;
     private Rigidbody rb;
+
+    private float lifetime;
+
+    private Vector3 origin;
+
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        //playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = player.GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody>();
+        lifetime = Time.time + 10f;
+        origin = transform.position;
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+        
+        if(Time.time>lifetime)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -33,9 +44,13 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if(other.gameObject == player)
         {
-            float appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
-            //playerHealth.Damage(appliedDamage, effect);
-            Destroy(this.gameObject);
+           
+            playerHealth.TakeDamage(damage, effect, origin);
+
+            if (playerHealth.canDamage == true)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

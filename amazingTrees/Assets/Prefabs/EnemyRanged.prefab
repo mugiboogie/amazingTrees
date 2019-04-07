@@ -1225,6 +1225,7 @@ GameObject:
   - component: {fileID: 2058460664001519978}
   - component: {fileID: 3488396497760856720}
   - component: {fileID: 410730374419913039}
+  - component: {fileID: 3980958978276617711}
   m_Layer: 9
   m_Name: EnemyRanged
   m_TagString: Enemy
@@ -1313,7 +1314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  canDamage: 0
+  canDamage: 1
+  isDead: 0
 --- !u!114 &2058460664001519978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,6 +1331,9 @@ MonoBehaviour:
   desiredDistance: 10
   stopDistance: 1
   charSpeed: 5
+  damageOrigin: {x: 0, y: 0, z: 0}
+  knockUpVelocity: 0
+  gravity: 10
 --- !u!136 &3488396497760856720
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1359,6 +1364,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3980958978276617711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058460663760699019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce84fb860691a047aed0a23a8548fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  damageVariance: 5
+  attackRange: 15
+  passiveRange: 20
+  ranged: 1
+  hitscan: 0
+  attackEffect: 
+  projectile: {fileID: 8024722315556182740, guid: 29ecc3cbb120dbc46936ca81aad7dabe,
+    type: 3}
+  setAttack: 0
+  cooldownTime: 0
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  tauntTime: 0
 --- !u!1 &2058460663760699021
 GameObject:
   m_ObjectHideFlags: 0

@@ -4294,10 +4294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  canDamage: 0
-
+  canDamage: 1
   Dashing: {fileID: 8300000, guid: 2642ba66036fbac45a1b9cc92606a562, type: 3}
-
   resetAfterDeathTime: 5
 --- !u!82 &4399365503773501706
 AudioSource:
