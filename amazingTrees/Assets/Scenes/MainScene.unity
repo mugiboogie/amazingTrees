@@ -185,6 +185,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!4 &13697396 stripped
@@ -1648,6 +1658,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2006704404769929869, guid: ad1b7fbb7a80ce845a3a77c9e28ca204,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1b7fbb7a80ce845a3a77c9e28ca204, type: 3}
 --- !u!4 &220426964 stripped
@@ -2433,6 +2448,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!1001 &346946899
@@ -2506,6 +2531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006704404769929869, guid: ad1b7fbb7a80ce845a3a77c9e28ca204,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1b7fbb7a80ce845a3a77c9e28ca204, type: 3}
@@ -3624,6 +3654,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2006704404769929869, guid: ad1b7fbb7a80ce845a3a77c9e28ca204,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1b7fbb7a80ce845a3a77c9e28ca204, type: 3}
 --- !u!1001 &469649945
@@ -4274,6 +4309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006704404769929869, guid: ad1b7fbb7a80ce845a3a77c9e28ca204,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1b7fbb7a80ce845a3a77c9e28ca204, type: 3}
@@ -5605,6 +5645,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!4 &701953467 stripped
@@ -6669,6 +6719,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!4 &819736458 stripped
@@ -6984,6 +7044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006704404769929869, guid: ad1b7fbb7a80ce845a3a77c9e28ca204,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1b7fbb7a80ce845a3a77c9e28ca204, type: 3}
@@ -7452,6 +7517,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
@@ -8642,6 +8717,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!4 &1112663656 stripped
@@ -9533,6 +9618,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!1001 &1236365082
@@ -10025,6 +10120,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!4 &1276705751 stripped
@@ -10408,6 +10513,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
@@ -12702,6 +12817,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
 --- !u!1001 &1631301882
@@ -13338,6 +13463,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
@@ -14132,6 +14267,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
@@ -15894,6 +16039,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757870631715694462, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054043966937157556, guid: 4a38035a94269584ea4b05c59e2d1ee0,
+        type: 3}
+      propertyPath: baseDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a38035a94269584ea4b05c59e2d1ee0, type: 3}
