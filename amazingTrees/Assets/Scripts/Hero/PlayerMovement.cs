@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim.applyRootMotion = (((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")));
 
-        Debug.Log(jumpDirection);
+        
 
         if (((!anim.applyRootMotion) && (anim.GetBool("Charging")==false)))
         {
