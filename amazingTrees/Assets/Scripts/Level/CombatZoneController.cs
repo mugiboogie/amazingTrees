@@ -14,12 +14,14 @@ public class CombatZoneController : MonoBehaviour
     private bool inCombat;
     public float combatTimer;
     private EnemyDirector enemyDirector;
+    public BoxCollider cZone;
 
     void Awake()
     {
         camController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
         player = GameObject.FindGameObjectWithTag("Player");
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
+        //boxCollider = GetComponent<BoxCollider>();
     }
 
     void Update()
