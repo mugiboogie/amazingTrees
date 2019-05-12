@@ -40,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         charCon = GetComponent<CharacterController>();
-        camera = Camera.main.transform;
+        //camera = Camera.main.transform;
+        camera = GameObject.FindGameObjectWithTag("CameraHolder").transform;
         playerTargetting = GetComponent<PlayerTargetting>();
         playerAttack = GetComponent<PlayerAttack>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -60,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraVertical = (camera.up + camera.forward)*moveVertical;
         Vector3 cameraHorizontal = (camera.right)*moveHorizontal;
         Vector3 cameraVector = cameraVertical + cameraHorizontal;
+
+        
         //--Calculate Input: Gets the final Vector for input. This will be the cameraVector's X and Z. It is normalized to prevent diagonals being faster than straights.
         Vector3 inputDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized;
 

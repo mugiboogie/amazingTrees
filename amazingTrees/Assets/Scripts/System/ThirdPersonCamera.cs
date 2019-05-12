@@ -13,8 +13,8 @@ public class ThirdPersonCamera : MonoBehaviour
     private float distance = 10.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    public float sensitivityX = 400.0f;
-    public float sensitivityY = 400.0f;
+    public float sensitivityX;
+    public float sensitivityY;
 
     private void Start()
     {
@@ -24,8 +24,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X");
-        currentY += Input.GetAxis("Mouse Y");
+        currentX += Input.GetAxis("Mouse X")* sensitivityX;
+        currentY -= Input.GetAxis("Mouse Y")* sensitivityY;
 
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
     }
