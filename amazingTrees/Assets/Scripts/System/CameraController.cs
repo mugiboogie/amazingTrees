@@ -17,13 +17,13 @@ public class CameraController : MonoBehaviour
     public Transform anchor;
     public float desiredFOV;
     private float currentFOV;
+    public float distance = 7.0f;
 
     private Vector3 setPosition;
    
     private const float Y_ANGLE_MIN = 0.0f;
     private const float Y_ANGLE_MAX = 50.0f;
     private Camera cam;
-    private float distance = 10.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
 
@@ -50,23 +50,13 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            setPosition = anchor.position;
+            camTransform = anchor.position;
+            lookAt = target;
         }
 
-        transform.position = Vector3.Lerp(transform.position, setPosition, followSpeed * Time.deltaTime);
 
-        currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 1f * Time.deltaTime);
-        cam.fieldOfView = currentFOV;
 
     }
-
-    //private void Update()
-    //{
-    //currentX += Input.GetAxis("Mouse X") * sensitivityX;
-    //currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
-
-    // currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
-    //}
 
     private void LateUpdate()
     {

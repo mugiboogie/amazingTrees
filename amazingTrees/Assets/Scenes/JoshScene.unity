@@ -1111,15 +1111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3af955d00c1bd4f9340adb8fc919cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAt: {fileID: 1098063853}
+  lookAt: {fileID: 0}
   camTransform: {fileID: 0}
-  sensitivityX: 0
-  sensitivityY: 0
+  sensitivityX: 5
+  sensitivityY: 5
   target: {fileID: 0}
   followSpeed: 5
   follow: 0
-  anchor: {fileID: 0}
-  desiredFOV: 0
+  anchor: {fileID: 2142459071}
+  desiredFOV: 5
+  distance: 7
 --- !u!4 &1176154525
 Transform:
   m_ObjectHideFlags: 0
