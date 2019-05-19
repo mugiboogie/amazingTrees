@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Transform lookAt;
+    public Transform camTransform;
+    public float sensitivityX;
+    public float sensitivityY;
+
     public Transform target;
-    public Vector3 targetOffset = new Vector3(0f,1f,0f);
-    public float turnSpeed = 5f;
+    //public Vector3 targetOffset = new Vector3(0f,1f,0f);
+    //public float turnSpeed = 5f;
     public float followSpeed = 5f;
     public bool follow;
     public Transform anchor;
     public float desiredFOV;
     private float currentFOV;
 
-    private Vector3 lookAt;
     private Vector3 setPosition;
-    private Camera camera;
+   
+    private const float Y_ANGLE_MIN = 0.0f;
+    private const float Y_ANGLE_MAX = 50.0f;
+    private Camera cam;
+    private float distance = 10.0f;
+    private float currentX = 0.0f;
+    private float currentY = 0.0f;
 
-    void Awake()
+    private void Start()
     {
+        camTransform = transform;
+        cam = Camera.main;
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        camera = Camera.main.GetComponent<Camera>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        lookAt = Vector3.Lerp(lookAt, target.position + targetOffset, Time.deltaTime * turnSpeed);
-        transform.LookAt(lookAt);
 
-        
         follow = (anchor==null);
         
-
         if(follow)
         {
-            setPosition = target.position + (new Vector3(0f, 2f, 2f));
+            currentX += Input.GetAxis("Mouse X") * sensitivityX;
+            currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
+
+            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+
+            LateUpdate();
         }
         else
         {
@@ -44,7 +56,23 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, setPosition, followSpeed * Time.deltaTime);
 
         currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 1f * Time.deltaTime);
-        camera.fieldOfView = currentFOV;
+        cam.fieldOfView = currentFOV;
 
+    }
+
+    //private void Update()
+    //{
+    //currentX += Input.GetAxis("Mouse X") * sensitivityX;
+    //currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
+
+    // currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+    //}
+
+    private void LateUpdate()
+    {
+        Vector3 dir = new Vector3(0, 0, -distance);
+        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+        camTransform.position = lookAt.position + rotation * dir;
+        camTransform.LookAt(lookAt.position);
     }
 }
