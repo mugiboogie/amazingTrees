@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            camTransform = anchor.position;
+            camTransform.position = anchor.position;
             lookAt = target;
         }
 
