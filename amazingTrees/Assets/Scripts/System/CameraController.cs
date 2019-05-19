@@ -36,33 +36,35 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-
+        
         follow = (anchor==null);
         
         if(follow)
         {
+            lookAt = target;
             currentX += Input.GetAxis("Mouse X") * sensitivityX;
             currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
 
             currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 
-            LateUpdate();
+            Vector3 dir = new Vector3(0, 0, -distance);
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            camTransform.position = lookAt.position + rotation * dir;
+            camTransform.LookAt(lookAt.position);
         }
         else
         {
             camTransform.position = anchor.position;
             lookAt = target;
+
+            Vector3 dir = new Vector3(0, 0, -distance);
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            camTransform.position = anchor.position;
+            camTransform.LookAt(lookAt.position);
         }
 
 
 
     }
 
-    private void LateUpdate()
-    {
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = lookAt.position + rotation * dir;
-        camTransform.LookAt(lookAt.position);
-    }
 }
