@@ -20,8 +20,10 @@ public class PlayerAttack : MonoBehaviour
     public float heavyAttackChargeTime;
     private float lightAttackCharge;
     private float heavyAttackCharge;
+    public float spAttackCharge;
+    public float spAttackChargeMax;
 
-    private float comboChain;
+    [SerializeField] private float comboChain;
     private float comboChainReset;
 
     private Animator anim;
@@ -247,5 +249,10 @@ public class PlayerAttack : MonoBehaviour
         {
             cameraController.desiredFOV = 40f;
         }
+    }
+
+    public void AddSpAttack(float value)
+    {
+        spAttackCharge += value;
     }
 }
