@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour {
             }
             else if (anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack"))
             {
+                transform.parent.GetComponent<combatZone>();
                 assignRandomTimer = 0f;
                 lookAt();
                 isAttacking();
@@ -69,6 +70,7 @@ public class EnemyController : MonoBehaviour {
                 if (assignRandomTimer == 0f)
                 {
                     nav.destination = FindRandomPoint();
+                    
                 }
                 assignRandomTimer += Time.deltaTime;
                 //Sets the current target to the player.
@@ -146,6 +148,7 @@ public class EnemyController : MonoBehaviour {
         float z = player.transform.position.z + desiredDistance * Mathf.Cos(angle);
 
         return new Vector3(x, 0, z);
+
 
     }
 

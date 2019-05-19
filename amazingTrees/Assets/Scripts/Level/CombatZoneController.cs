@@ -14,14 +14,22 @@ public class CombatZoneController : MonoBehaviour
     private bool inCombat;
     public float combatTimer;
     private EnemyDirector enemyDirector;
-    public BoxCollider cZone;
+    public BoxCollider combatZone;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
 
     void Awake()
     {
         camController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
         player = GameObject.FindGameObjectWithTag("Player");
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
-        //boxCollider = GetComponent<BoxCollider>();
+        combatZone = GetComponent<BoxCollider>();
+        minX = combatZone.transform.position.x - combatZone.size.x;
+        maxX = combatZone.transform.position.x + combatZone.size.x;
+        minY = combatZone.transform.position.y - combatZone.size.y;
+        maxY = combatZone.transform.position.y + combatZone.size.y;
     }
 
     void Update()
