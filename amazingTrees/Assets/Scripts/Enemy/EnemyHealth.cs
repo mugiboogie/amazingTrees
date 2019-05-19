@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     private EnemyController enemyController ;
     private AudioSource audio;
     private Rigidbody rb;
+    private PlayerAttack playerAttack;
      
     
     void Awake()
@@ -21,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         currentHealth = maxHealth;
         
         
@@ -80,6 +82,7 @@ public class EnemyHealth : MonoBehaviour
 
                 currentHealth -= damageValue;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+                playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;
             }
         }
