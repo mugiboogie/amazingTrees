@@ -22,7 +22,11 @@ public class EnemyController : MonoBehaviour {
     public float gravity = 14f;
     private Rigidbody rb;
     private CapsuleCollider col;
-
+    private BoxCollider combatZone;
+    private float minX;
+    private float maxX;
+    private float minZ;
+    private float maxZ;
 
     void Awake()
     {
@@ -33,6 +37,11 @@ public class EnemyController : MonoBehaviour {
         enemyHealth = GetComponent<EnemyHealth>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        combatZone = transform.parent.GetComponent<BoxCollider>();
+        minX = combatZone.transform.position.x - combatZone.size.x;
+        maxX = combatZone.transform.position.x + combatZone.size.x;
+        minZ = combatZone.transform.position.z - combatZone.size.z;
+        maxZ = combatZone.transform.position.z + combatZone.size.z;
 
         enemyDirector.AddEnemy(this.gameObject);
         
@@ -144,10 +153,16 @@ public class EnemyController : MonoBehaviour {
         float angle = Random.Range(0f, 360f);
         //And then let's do some trig... Remember SOHCAHTOA?
 
+        
         float x = player.transform.position.x + desiredDistance * Mathf.Sin(angle);
         float z = player.transform.position.z + desiredDistance * Mathf.Cos(angle);
-
+        Mathf.Clamp(x, minX, maxX);
+        Mathf.Clamp(z, minZ, maxZ);
+        
         return new Vector3(x, 0, z);
+        
+
+        
 
 
     }
