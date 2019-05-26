@@ -38,10 +38,10 @@ public class EnemyController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         combatZone = transform.parent.GetComponent<BoxCollider>();
-        minX = combatZone.transform.position.x - combatZone.size.x;
-        maxX = combatZone.transform.position.x + combatZone.size.x;
-        minZ = combatZone.transform.position.z - combatZone.size.z;
-        maxZ = combatZone.transform.position.z + combatZone.size.z;
+        minX = combatZone.transform.position.x - (combatZone.size.x/2f);
+        maxX = combatZone.transform.position.x + (combatZone.size.x/2f);
+        minZ = combatZone.transform.position.z - (combatZone.size.z/2f);
+        maxZ = combatZone.transform.position.z + (combatZone.size.z/2f);
 
         enemyDirector.AddEnemy(this.gameObject);
         
@@ -115,11 +115,13 @@ public class EnemyController : MonoBehaviour {
                     if (Vector3.Distance(transform.position, player.transform.position) > desiredDistance)
                     {
                         nav.destination = FindRandomPoint();
+                        Debug.Log(nav.destination);
                     }
                     startMoving = Time.time + Random.Range(2f, 5f);
 
                 }
 
+                Debug.DrawLine(transform.position, nav.destination, Color.red);
 
 
 
@@ -156,9 +158,11 @@ public class EnemyController : MonoBehaviour {
         
         float x = player.transform.position.x + desiredDistance * Mathf.Sin(angle);
         float z = player.transform.position.z + desiredDistance * Mathf.Cos(angle);
-        Mathf.Clamp(x, minX, maxX);
-        Mathf.Clamp(z, minZ, maxZ);
+        x = Mathf.Clamp(x, minX, maxX);
+        z = Mathf.Clamp(z, minZ, maxZ);
+
         
+
         return new Vector3(x, 0, z);
         
 
