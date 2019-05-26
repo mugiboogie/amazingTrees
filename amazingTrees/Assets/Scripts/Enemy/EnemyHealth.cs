@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
     public bool canDamage;
+    public Image healthBar;
     [HideInInspector] public bool isDead = false;
 
     private Animator anim;
@@ -81,6 +83,7 @@ public class EnemyHealth : MonoBehaviour
                 }
 
                 currentHealth -= damageValue;
+                healthBar.fillAmount = currentHealth / maxHealth;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
                 playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;
