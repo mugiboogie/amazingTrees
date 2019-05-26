@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
             isDead = false;
         }
 
-        healthBar.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+        healthBar.transform.parent.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
     }
 
     public void TakeDamage(float damageValue, string effect, Vector3 origin)
