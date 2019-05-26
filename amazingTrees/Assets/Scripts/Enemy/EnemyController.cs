@@ -115,7 +115,7 @@ public class EnemyController : MonoBehaviour {
                     if (Vector3.Distance(transform.position, player.transform.position) > desiredDistance)
                     {
                         nav.destination = FindRandomPoint();
-                        Debug.Log(nav.destination);
+
                     }
                     startMoving = Time.time + Random.Range(2f, 5f);
 
