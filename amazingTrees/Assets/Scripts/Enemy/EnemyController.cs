@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour {
             }
             else if (anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack"))
             {
-                transform.parent.GetComponent<combatZone>();
+                
                 assignRandomTimer = 0f;
                 lookAt();
                 isAttacking();
