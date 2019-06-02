@@ -13,6 +13,7 @@ TagManager:
   - PlayerEffects/FlinchNegate
   - PlayerDecoy
   - SpellMeter
+  - ComboCounter
   layers:
   - Default
   - TransparentFX

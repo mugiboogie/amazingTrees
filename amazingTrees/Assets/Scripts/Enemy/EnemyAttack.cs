@@ -27,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
     private float stutterTime;
     private CameraShake cameraShake;
     private Vector3 hitscanTarget;
+    public Animator warningIndicator;
 
     void Awake()
     {
@@ -53,8 +54,8 @@ public class EnemyAttack : MonoBehaviour
 
         if ((setAttack==true)&& (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
         {
-            
 
+            warningIndicator.SetTrigger("Warning");
             anim.SetTrigger("Attack");
             
         }
@@ -70,6 +71,11 @@ public class EnemyAttack : MonoBehaviour
         hitscanTarget = Vector3.Lerp(hitscanTarget, player.position+Vector3.up, 2.5f * Time.deltaTime);
         //Debug.DrawLine(transform.position + Vector3.up, hitscanTarget, Color.green);
 
+    }
+
+    void FixedUpdate()
+    {
+        warningIndicator.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
     }
 
     void Attack()

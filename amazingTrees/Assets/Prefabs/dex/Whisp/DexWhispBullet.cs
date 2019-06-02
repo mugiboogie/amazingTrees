@@ -11,12 +11,16 @@ public class DexWhispBullet : MonoBehaviour
     private Transform player;
     private Vector3 destination;
     private Rigidbody rb;
+    private PlayerAttack playerAttack;
+    public CameraShake cameraShake;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         lifeTime = Time.time + 3f;
         rb = GetComponent<Rigidbody>();
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
     void OnEnable()
     {
@@ -79,6 +83,9 @@ public class DexWhispBullet : MonoBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
+                StartCoroutine(cameraShake.Shake(.1f, .125f));
+                playerAttack.comboChain += 1;
+                playerAttack.comboChainReset = Time.time + 3f;
                 target = null;
                 EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
                 enemyHealth.TakeDamage(Random.Range(15f, 25f), "S", transform.position);

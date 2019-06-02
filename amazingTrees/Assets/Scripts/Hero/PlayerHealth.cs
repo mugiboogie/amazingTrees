@@ -27,6 +27,8 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector] public float damageTaken;
 
     private PlayerAttack playerAttack;
+
+    public GameObject invinciblityDebug;
     
 
 
@@ -44,6 +46,13 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         
+        
+            if(invinciblityDebug != null)
+            {
+                invinciblityDebug.SetActive(Time.time < playerMovement.dashDuration);
+            }
+        
+
         if (currentHealth <= 0f)
         {
             playerDead = true;
@@ -65,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         //Set canDamage
-        canDamage = ((!playerDead) && ((Time.time>invincibilityTime) || (Time.time > playerMovement.dashDuration) || (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp"))));
+        canDamage = ((!playerDead) && ((Time.time>invincibilityTime) && (Time.time > playerMovement.dashDuration) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp"))));
         
 
 
@@ -82,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
         if (!canDamage)
         {
             currentHealth -= 0;
-           if (anim.GetBool("Dashing"))
+           if (Time.time <= playerMovement.dashDuration)
             {
                 AudioSource.PlayClipAtPoint(Dashing, transform.position);
                 
@@ -94,6 +103,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            playerAttack.comboChainReset = Time.time;
             playerAttack.manaRegenTime = Time.time + 2f;
             StartCoroutine(cameraShake.Shake(.1f, .005f * damageValue));
             healthBar.burnTime = Time.time + .5f;

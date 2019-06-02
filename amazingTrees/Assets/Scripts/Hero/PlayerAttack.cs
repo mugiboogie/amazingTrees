@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class PlayerAttack : MonoBehaviour
     public float manaRegenTime;
     
 
-    [SerializeField] private float comboChain;
-    private float comboChainReset;
+    public float comboChain;
+    public float comboChainReset;
 
     private Animator anim;
 
@@ -41,6 +42,10 @@ public class PlayerAttack : MonoBehaviour
 
     private EnemyDirector enemyDirector;
 
+    private Animator comboCounter;
+    private Text comboNumber;
+    private Text comboComment;
+
 
     void Awake()
     {
@@ -50,11 +55,34 @@ public class PlayerAttack : MonoBehaviour
         cameraController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
         playerMovement = GetComponent<PlayerMovement>();
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
+
+        comboCounter = GameObject.FindGameObjectWithTag("ComboCounter").GetComponent<Animator>();
+        comboNumber = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboNumber").GetComponent<Text>();
+        comboComment = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboComment").GetComponent<Text>();
     }
 
     
     void FixedUpdate()
     {
+
+        comboCounter.SetBool("ShowCombo", Time.time < comboChainReset);
+        if (comboChain > 0)
+        {
+            comboNumber.text = comboChain + " Hits";
+
+            if(comboChain>100) { comboComment.text = "KWEEEEN!!!"; }
+            else if ((comboChain > 90) && (comboChain <= 100)) { comboComment.text = "R.I.P.!!"; }
+            else if ((comboChain > 80) && (comboChain <= 90)) { comboComment.text = "Wicked!!"; }
+            else if ((comboChain > 69) && (comboChain <= 80)) { comboComment.text = "Freaky!!"; }
+            else if (comboChain == 69) { comboComment.text = "nice."; }
+            else if ((comboChain > 60) && (comboChain <= 68)) { comboComment.text = "OMG!!"; }
+            else if ((comboChain > 50) && (comboChain <= 60)) { comboComment.text = "Killer!!"; }
+            else if ((comboChain > 40) && (comboChain <=50)) { comboComment.text = "Witchin'!!"; }
+            else if ((comboChain > 30) && (comboChain <= 40)) { comboComment.text = "Slay!!"; }
+            else if ((comboChain > 20) && (comboChain <= 30)) { comboComment.text = "Yaass!"; }
+            else if ((comboChain > 10) && (comboChain <= 20)) { comboComment.text = "Beautiful!"; }
+            else { comboComment.text = "Cool!"; }
+        }
 
 
         if((Time.time>manaRegenTime) && (enemyDirector.enemies.Count>0))

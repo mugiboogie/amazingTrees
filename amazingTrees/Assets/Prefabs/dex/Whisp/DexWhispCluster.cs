@@ -7,11 +7,13 @@ public class DexWhispCluster : MonoBehaviour
     public DexWhispBullet[] whispBullets;
     private EnemyDirector enemyDirector;
     private PlayerAttack playerAttack;
+    private Animator playerAnim;
 
     void Awake()
     {
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
     void Update()
@@ -23,6 +25,7 @@ public class DexWhispCluster : MonoBehaviour
 
         if((Input.GetButtonDown("SpellAttack"))&&(playerAttack.mana>=playerAttack.manaMax))
         {
+            playerAnim.SetTrigger("Spell");
             playerAttack.mana = 0f;
             BlastWhisp();
         }

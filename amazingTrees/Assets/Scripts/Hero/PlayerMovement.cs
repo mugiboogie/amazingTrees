@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     //References
@@ -184,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
                 dashDirection = inputDirection;
             }
             dashCooldown = Time.time + .5f;
-            dashDuration = Time.time + .25f;
+            dashDuration = Time.time + .45f;
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
