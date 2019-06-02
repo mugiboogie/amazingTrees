@@ -1060,7 +1060,7 @@ PrefabInstance:
     - target: {fileID: 1977986245746955056, guid: c00a70673309e2a42a2682dcba669975,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1977986245747052304, guid: c00a70673309e2a42a2682dcba669975,
         type: 3}
@@ -4534,7 +4534,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1842403183}
-  - component: {fileID: 1842403182}
   - component: {fileID: 1842403184}
   m_Layer: 0
   m_Name: CameraHolder
@@ -4543,28 +4542,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1842403182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842403181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d3af955d00c1bd4f9340adb8fc919cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAt: {fileID: 0}
-  camTransform: {fileID: 0}
-  sensitivityX: 0
-  sensitivityY: 0
-  target: {fileID: 0}
-  followSpeed: 5
-  follow: 0
-  anchor: {fileID: 0}
-  desiredFOV: 0
-  distance: 7
 --- !u!4 &1842403183
 Transform:
   m_ObjectHideFlags: 0
@@ -4596,6 +4573,9 @@ MonoBehaviour:
   camTransform: {fileID: 1403188617}
   sensitivityX: 14
   sensitivityY: 14
+  levelLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1861705660
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ TagManager:
   - CameraHolder
   - PlayerEffects/PlayerDecoy
   - PlayerEffects/FlinchNegate
+  - PlayerDecoy
+  - SpellMeter
   layers:
   - Default
   - TransparentFX

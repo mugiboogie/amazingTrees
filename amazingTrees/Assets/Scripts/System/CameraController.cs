@@ -20,12 +20,16 @@ public class CameraController : MonoBehaviour
     public float distance = 7.0f;
 
     private Vector3 setPosition;
+    private Vector3 targetPosition;
    
     private const float Y_ANGLE_MIN = 0.0f;
     private const float Y_ANGLE_MAX = 50.0f;
     private Camera cam;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
+
+    public LayerMask levelLayers;
+
 
     private void Start()
     {
@@ -34,9 +38,11 @@ public class CameraController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+
+        distance = CalculateDistance();
+
         follow = (anchor==null);
         
         if(follow)
@@ -49,22 +55,54 @@ public class CameraController : MonoBehaviour
 
             Vector3 dir = new Vector3(0, 0, -distance);
             Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            camTransform.position = lookAt.position + rotation * dir;
-            camTransform.LookAt(lookAt.position);
+            setPosition = lookAt.position + (Vector3.up*2f) + rotation * dir;
+            //camTransform.LookAt(lookAt.position);
+            
         }
         else
         {
-            camTransform.position = anchor.position;
+            setPosition = anchor.position;
             lookAt = target;
+            //camTransform.LookAt(lookAt.position);
+        }
 
-            Vector3 dir = new Vector3(0, 0, -distance);
-            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            camTransform.position = anchor.position;
-            camTransform.LookAt(lookAt.position);
+        transform.position = Vector3.Lerp(transform.position, setPosition, 5f * Time.deltaTime);
+
+        targetPosition = Vector3.Lerp(targetPosition, lookAt.position, 4f * Time.deltaTime);
+        camTransform.LookAt(targetPosition);
+
+
+
+    }
+
+
+    private float CalculateDistance()
+    {
+        float defaultDistance = 5f;
+        float setDistance = defaultDistance;
+
+        Vector3 origin = lookAt.position + Vector3.up * 2f;
+        RaycastHit hit;
+
+        float radius = .3f;
+        Vector3 targetDir = -camTransform.forward;
+
+        Debug.DrawLine(origin, origin + targetDir);
+
+        if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
+        {
+            setDistance = hit.distance;
         }
 
 
-
+        if (setDistance < defaultDistance)
+        {
+            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+        }
+        else
+        {
+            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+        }
     }
 
 }

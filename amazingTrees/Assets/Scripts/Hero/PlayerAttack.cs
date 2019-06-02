@@ -20,8 +20,10 @@ public class PlayerAttack : MonoBehaviour
     public float heavyAttackChargeTime;
     private float lightAttackCharge;
     private float heavyAttackCharge;
-    public float spAttackCharge;
-    public float spAttackChargeMax;
+    public float mana;
+    public float manaMax;
+    public float manaRegenTime;
+    
 
     [SerializeField] private float comboChain;
     private float comboChainReset;
@@ -37,6 +39,8 @@ public class PlayerAttack : MonoBehaviour
 
     [HideInInspector] public float damageDealt;
 
+    private EnemyDirector enemyDirector;
+
 
     void Awake()
     {
@@ -45,11 +49,18 @@ public class PlayerAttack : MonoBehaviour
         playerTargetting = GetComponent<PlayerTargetting>();
         cameraController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
         playerMovement = GetComponent<PlayerMovement>();
+        enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
     }
 
     
     void FixedUpdate()
     {
+
+
+        if((Time.time>manaRegenTime) && (enemyDirector.enemies.Count>0))
+        {
+            AddSpAttack(25f * Time.deltaTime);
+        }
 
         bool emitTrail = ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
 
@@ -253,6 +264,6 @@ public class PlayerAttack : MonoBehaviour
 
     public void AddSpAttack(float value)
     {
-        spAttackCharge += value;
+        mana += value;
     }
 }

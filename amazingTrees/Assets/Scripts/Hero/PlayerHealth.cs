@@ -25,6 +25,8 @@ public class PlayerHealth : MonoBehaviour
     private float invincibilityTime; // An anti-spam function that prevents the enemy from dealing too much damage after an attack.
 
     [HideInInspector] public float damageTaken;
+
+    private PlayerAttack playerAttack;
     
 
 
@@ -36,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<UIHealthBar>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -91,6 +94,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            playerAttack.manaRegenTime = Time.time + 2f;
             StartCoroutine(cameraShake.Shake(.1f, .005f * damageValue));
             healthBar.burnTime = Time.time + .5f;
            currentHealth -= damageValue;

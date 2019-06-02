@@ -16,6 +16,8 @@ public class ThirdPersonCamera : MonoBehaviour
     private float currentX = 0.0f;
     private float currentY = 0.0f;
 
+    public LayerMask levelLayers;
+
 
     private void Start()
     {
@@ -33,9 +35,40 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        distance = CalculateDistance();
+
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = lookAt.position + rotation * dir;
+        camTransform.position = lookAt.position + (Vector3.up * 2f) + rotation * dir;
         camTransform.LookAt(lookAt.position);
+    }
+
+    private float CalculateDistance()
+    {
+        float defaultDistance = 5f;
+        float setDistance = defaultDistance;
+
+        Vector3 origin = lookAt.position + Vector3.up * 2f;
+        RaycastHit hit;
+
+        float radius = .3f;
+        Vector3 targetDir = -camTransform.forward;
+
+        Debug.DrawLine(origin, origin + targetDir);
+
+        if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
+        {
+            setDistance = hit.distance;
+        }
+        
+
+        if(setDistance<defaultDistance)
+        {
+            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+        }
+        else
+        {
+            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+        }
     }
 }

@@ -176,7 +176,14 @@ public class EnemyController : MonoBehaviour {
         nav.speed = 0f;
         nav.destination = transform.position;
         enemyDirector.RemoveEnemy(this.gameObject);
-        Destroy(this.gameObject, 5.0f);//destroy the dead enemy after 5 seconds
+        StartCoroutine(DestroyEnemy());
+        
+    }
+
+    IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSeconds(5f);
+        this.gameObject.SetActive(false);//destroy the dead enemy after 5 seconds
     }
 
     void isAttacking()

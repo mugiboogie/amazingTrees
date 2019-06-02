@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
     public bool canDamage;
     public Image healthBar;
+    public Image healthBarBurn;
     [HideInInspector] public bool isDead = false;
 
     private Animator anim;
@@ -16,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     private AudioSource audio;
     private Rigidbody rb;
     private PlayerAttack playerAttack;
+    private float healthBarBurnTime;
      
     
     void Awake()
@@ -43,6 +45,12 @@ public class EnemyHealth : MonoBehaviour
         }
 
         healthBar.transform.parent.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+
+        if(Time.time>healthBarBurnTime)
+        {
+            //Set the HealthBarBurn to be the same value as health.
+            healthBarBurn.fillAmount = Mathf.Lerp(healthBarBurn.fillAmount,healthBar.fillAmount,5f*Time.deltaTime);
+        }
     }
 
     public void TakeDamage(float damageValue, string effect, Vector3 origin)
@@ -86,6 +94,7 @@ public class EnemyHealth : MonoBehaviour
 
                 currentHealth -= damageValue;
                 healthBar.fillAmount = currentHealth / maxHealth;
+                healthBarBurnTime = Time.time + 1f;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
                 playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;
