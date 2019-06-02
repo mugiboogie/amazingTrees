@@ -72,6 +72,9 @@ public class CameraController : MonoBehaviour
         camTransform.LookAt(targetPosition);
 
 
+        currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 4f * Time.deltaTime);
+        cam.fieldOfView = currentFOV;
+
 
     }
 
