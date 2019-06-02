@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour {
     public float charSpeed;
     private float startMoving;
     private EnemyHealth enemyHealth;
+    public GameObject drop;
 
     private EnemyDirector enemyDirector;
 
@@ -178,12 +179,15 @@ public class EnemyController : MonoBehaviour {
         enemyDirector.RemoveEnemy(this.gameObject);
         StartCoroutine(DestroyEnemy());
         
+
     }
 
     IEnumerator DestroyEnemy()
     {
         yield return new WaitForSeconds(5f);
-        this.gameObject.SetActive(false);//destroy the dead enemy after 5 seconds
+        this.gameObject.SetActive(false);//destroy the dead enemy after 5 secondsz
+        Instantiate(drop, transform.position, drop.transform.rotation);
+
     }
 
     void isAttacking()

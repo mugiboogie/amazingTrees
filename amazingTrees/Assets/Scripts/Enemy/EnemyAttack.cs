@@ -28,6 +28,9 @@ public class EnemyAttack : MonoBehaviour
     private CameraShake cameraShake;
     private Vector3 hitscanTarget;
     public Animator warningIndicator;
+    private string status;
+    float normalAttack = 0.75f;
+    float heavyattack = 0.25f;
 
     void Awake()
     {
@@ -37,10 +40,13 @@ public class EnemyAttack : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         col = GetComponent<CapsuleCollider>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        status = "H";
     }
 
     void Update()
     {
+        float random = Random.value;
+        
         anim.SetBool("Attack", false);
 
         if (setAttack)
@@ -52,7 +58,7 @@ public class EnemyAttack : MonoBehaviour
             enemyController.desiredDistance = passiveRange;
         }
 
-        if ((setAttack==true)&& (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
+        if ((setAttack==true) && (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
         {
 
             warningIndicator.SetTrigger("Warning");
@@ -87,16 +93,19 @@ public class EnemyAttack : MonoBehaviour
         if(ranged==false)
         {
             //Melee Unit
-            if (Vector3.Distance(transform.position, player.position) < 2f)
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position + Vector3.up*col.height/2f + transform.forward*attackRange/2f, attackRange/2f);
+
+            for (int i = 0; i < hitcollider.Length; i++)
             {
-                Vector3 targetDir = player.position - transform.position;
-                if (Vector3.Angle(targetDir, transform.forward) < 45f)
+                if (hitcollider[i].gameObject.CompareTag("Player"))
                 {
-                    playerHealth.TakeDamage(appliedDamage, "H", transform.position);
+                    playerHealth.TakeDamage(appliedDamage, status, transform.position);
                     StartCoroutine(cameraShake.Shake(.1f, .005f * appliedDamage));
                     stutterTime = Time.time + .125f;
                 }
+
             }
+            
         }
         else
         {
@@ -123,37 +132,6 @@ public class EnemyAttack : MonoBehaviour
             }
             
         }
-
-        /*setAttack = false;
-        willAttack = false;
-        float appliedDamage;
-
-        appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
-        anim.SetTrigger("Attack");
-
-        if(ranged == true)
-        {
-            if(hitscan == false)
-            {
-                float projectileHeight = col.height / 2f;
-                GameObject projectileObj = Instantiate(projectile, transform.position + Vector3.up*projectileHeight, transform.rotation);
-                projectileObj.GetComponent<EnemyProjectile>().damage = appliedDamage;
-            }
-            else
-            {
-                //Revise Hitscan attack.
-                RaycastHit hit;
-                Vector3 origin = transform.position + Vector3.up;
-                Vector3 hitscanTarget = player.position + Vector3.up;
-
-                Physics.Raycast(origin, (hitscanTarget - origin).normalized, out hit, Vector3.Distance(origin, hitscanTarget), affectedLayers);
-
-            }
-        }
-        else
-        {
-            anim.SetTrigger("Melee");
-        }*/
     }
 
 
