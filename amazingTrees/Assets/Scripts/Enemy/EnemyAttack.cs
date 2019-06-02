@@ -28,6 +28,7 @@ public class EnemyAttack : MonoBehaviour
     private CameraShake cameraShake;
     private Vector3 hitscanTarget;
     public Animator warningIndicator;
+    private string status;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class EnemyAttack : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         col = GetComponent<CapsuleCollider>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        status = "S";
     }
 
     void Update()
@@ -87,16 +89,24 @@ public class EnemyAttack : MonoBehaviour
         if(ranged==false)
         {
             //Melee Unit
-            if (Vector3.Distance(transform.position, player.position) < 2f)
+            
+            
+            
+            Collider[] hitcollider = Physics.OverlapSphere(transform.position + Vector3.up*col.height/2f + transform.forward*attackRange/2f, attackRange/2f);
+
+            for (int i = 0; i < hitcollider.Length; i++)
             {
-                Vector3 targetDir = player.position - transform.position;
-                if (Vector3.Angle(targetDir, transform.forward) < 45f)
+                if (hitcollider[i].gameObject.CompareTag("Player"))
                 {
-                    playerHealth.TakeDamage(appliedDamage, "H", transform.position);
+                    playerHealth.TakeDamage(appliedDamage, status, transform.position);
                     StartCoroutine(cameraShake.Shake(.1f, .005f * appliedDamage));
                     stutterTime = Time.time + .125f;
                 }
+
             }
+                    
+   
+            
         }
         else
         {
