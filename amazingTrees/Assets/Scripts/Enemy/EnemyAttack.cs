@@ -86,6 +86,8 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack()
     {
+        playerHealth.CheckDodge(transform.position);
+
         float appliedDamage = baseDamage + Random.Range(-damageVariance, damageVariance);
 
         setAttack = false;

@@ -94,7 +94,7 @@ public class EnemyHealth : MonoBehaviour
 
                 currentHealth -= damageValue;
                 healthBar.fillAmount = currentHealth / maxHealth;
-                healthBarBurnTime = Time.time + 1f;
+                healthBarBurnTime = Time.time + .25f;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
                 playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;

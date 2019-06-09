@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         distance = CalculateDistance();
@@ -66,13 +66,13 @@ public class CameraController : MonoBehaviour
             //camTransform.LookAt(lookAt.position);
         }
 
-        transform.position = Vector3.Lerp(transform.position, setPosition, 5f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, setPosition, 5f * Time.unscaledDeltaTime);
 
-        targetPosition = Vector3.Lerp(targetPosition, lookAt.position, 4f * Time.deltaTime);
+        targetPosition = Vector3.Lerp(targetPosition, lookAt.position, 4f * Time.unscaledDeltaTime);
         camTransform.LookAt(targetPosition);
 
 
-        currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 4f * Time.deltaTime);
+        currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 4f * Time.unscaledDeltaTime);
         cam.fieldOfView = currentFOV;
 
 
@@ -100,11 +100,11 @@ public class CameraController : MonoBehaviour
 
         if (setDistance < defaultDistance)
         {
-            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+            return Mathf.Lerp(distance, setDistance, 10f * Time.unscaledDeltaTime);
         }
         else
         {
-            return Mathf.Lerp(distance, setDistance, 10f * Time.deltaTime);
+            return Mathf.Lerp(distance, setDistance, 10f * Time.unscaledDeltaTime);
         }
     }
 

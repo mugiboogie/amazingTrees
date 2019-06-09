@@ -29,8 +29,8 @@ public class PlayerHealth : MonoBehaviour
     private PlayerAttack playerAttack;
 
     public GameObject invinciblityDebug;
-    
 
+    private TimeManager timeManager;
 
     void Awake()
     {
@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<UIHealthBar>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
     }
 
     void Update()
@@ -91,15 +92,7 @@ public class PlayerHealth : MonoBehaviour
         if (!canDamage)
         {
             currentHealth -= 0;
-           if (Time.time <= playerMovement.dashDuration)
-            {
-                AudioSource.PlayClipAtPoint(Dashing, transform.position);
-                
-            }
-            else 
-            {
-              
-            }
+           
         }
         else
         {
@@ -150,5 +143,22 @@ public class PlayerHealth : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void CheckDodge(Vector3 attackLocation)
+    {
+        float range = 2.5f;
+        if (Time.time <= playerMovement.dashDuration)
+        {
+            if (Vector3.Distance(attackLocation, transform.position) < range)
+            {
+                AudioSource.PlayClipAtPoint(Dashing, transform.position);
+                timeManager.DoSlowmotion();
+                invincibilityTime = Time.time + 1f;
+            }
+        }
+    }
+        
+        
+        
 
 }

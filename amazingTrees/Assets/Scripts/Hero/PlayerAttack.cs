@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     
-    void FixedUpdate()
+    void Update()
     {
 
         comboCounter.SetBool("ShowCombo", Time.time < comboChainReset);

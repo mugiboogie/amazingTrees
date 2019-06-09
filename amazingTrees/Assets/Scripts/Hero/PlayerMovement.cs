@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerTargetting playerTargetting;
     private PlayerAttack playerAttack;
     private PlayerHealth playerHealth;
+    private TimeManager timeManager;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -48,11 +49,12 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
 
         playerDecoyController = GameObject.FindGameObjectWithTag("PlayerEffects/PlayerDecoy").GetComponent<PlayerDecoyController>();
+        timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
 
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         //Get Inputs
         //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
@@ -95,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         //Apply Animation Parameters
         anim.SetFloat("Speed", inputDirection.magnitude, .05f, Time.deltaTime); //"Speed" in anim is 0=idle to 1=running. A dampening time was added to make the locomotion feel smoother.
         anim.SetBool("isGrounded", charCon.isGrounded); //"isGrounded" in anim is true=grounded or false=in air.
-        anim.SetBool("Dashing", (dashCooldown > Time.time));
+        anim.SetBool("Dashing", (dashDuration > Time.time));
 
         anim.enabled = (Time.time > stutterTime);
 
@@ -184,17 +186,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 dashDirection = inputDirection;
             }
-            dashCooldown = Time.time + .5f;
-            dashDuration = Time.time + .45f;
+            dashCooldown = Time.time + 1f;
+            dashDuration = Time.time + .5f;
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
 
+            
             playerAttack.AttackCancel();
         }
 
         //--Once the player exhausts their dash duration, they stop dashing.
-        if(dashCooldown<Time.time)
+        if(dashDuration < Time.time)
         {
             dash = false;
         }
