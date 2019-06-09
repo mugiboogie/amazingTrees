@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public float baseDamage;
+    private float baseDamage;
     public float damageVariance;
     public float attackRange;
     public float passiveRange;
@@ -29,8 +29,6 @@ public class EnemyAttack : MonoBehaviour
     private Vector3 hitscanTarget;
     public Animator warningIndicator;
     private string status;
-    float normalAttack = 0.75f;
-    float heavyattack = 0.25f;
 
     void Awake()
     {
@@ -40,13 +38,12 @@ public class EnemyAttack : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         col = GetComponent<CapsuleCollider>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
-        status = "H";
     }
 
     void Update()
     {
-        float random = Random.value;
-        
+        float chooseAttack = Random.value;
+
         anim.SetBool("Attack", false);
 
         if (setAttack)
@@ -62,7 +59,19 @@ public class EnemyAttack : MonoBehaviour
         {
 
             warningIndicator.SetTrigger("Warning");
-            anim.SetTrigger("Attack");
+            if(chooseAttack > 0.75f)//25% chance for heavy attack
+            {
+                baseDamage = 30f;
+                status = "S";
+                anim.SetTrigger("Attack");
+            }
+            else
+            {
+                baseDamage = 15f;
+                status = "H";
+                anim.SetTrigger("Attack");
+            }
+
             
         }
 
