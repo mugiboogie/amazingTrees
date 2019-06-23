@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce84fb860691a047aed0a23a8548fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
   damageVariance: 5
   attackRange: 15
   passiveRange: 20
@@ -117,6 +116,9 @@ MonoBehaviour:
     m_Bits: 1
   tauntTime: 0
   warningIndicator: {fileID: 3198413642283390213}
+  attacks:
+  - 10/H
+  - 25/S
 --- !u!114 &6788247689097028916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +134,7 @@ MonoBehaviour:
   desiredDistance: 10
   stopDistance: 1
   charSpeed: 5
+  drop: {fileID: 0}
   damageOrigin: {x: 0, y: 0, z: 0}
   knockUpVelocity: 0
   gravity: 10

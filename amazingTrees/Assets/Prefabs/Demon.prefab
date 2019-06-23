@@ -3477,9 +3477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce84fb860691a047aed0a23a8548fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 15
   damageVariance: 5
-  attackRange: 2
+  attackRange: 1
   passiveRange: 5
   ranged: 0
   hitscan: 0
@@ -3492,6 +3491,9 @@ MonoBehaviour:
     m_Bits: 0
   tauntTime: 0
   warningIndicator: {fileID: 873460779971196575}
+  attacks:
+  - 8/H
+  - 20/S
 --- !u!114 &5672407910452476209
 MonoBehaviour:
   m_ObjectHideFlags: 0
