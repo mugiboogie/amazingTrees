@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     private float baseDamage;
+    private float heavyAttackChance = 0.15f;
     public float damageVariance;
     public float attackRange;
     public float passiveRange;
@@ -29,6 +30,7 @@ public class EnemyAttack : MonoBehaviour
     private Vector3 hitscanTarget;
     public Animator warningIndicator;
     private string status;
+    public string[] attacks = new string[2];
 
     void Awake()
     {
@@ -42,8 +44,9 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        float chooseAttack = Random.value;
 
+        float chooseAttack = Random.value;
+        int index;
         anim.SetBool("Attack", false);
 
         if (setAttack)
@@ -57,22 +60,20 @@ public class EnemyAttack : MonoBehaviour
 
         if ((setAttack==true) && (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
         {
-
-            warningIndicator.SetTrigger("Warning");
-            if(chooseAttack > 0.75f)//25% chance for heavy attack
+            if (chooseAttack < heavyAttackChance)
             {
-                baseDamage = 30f;
-                status = "S";
-                anim.SetTrigger("Attack");
+                index = 1;
             }
             else
             {
-                baseDamage = 15f;
-                status = "H";
-                anim.SetTrigger("Attack");
+                index = 0;
             }
 
-            
+            warningIndicator.SetTrigger("Warning");
+            string[] propertyArray = attacks[index].Split(char.Parse("/"));
+            baseDamage = float.Parse(propertyArray[0]);
+            status = propertyArray[1];
+            anim.SetTrigger("Attack");
         }
 
 
