@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject invinciblityDebug;
 
     private TimeManager timeManager;
+    private ParticleController particleController;
 
     void Awake()
     {
@@ -42,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         cameraShake = Camera.main.GetComponent<CameraShake>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
+        particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
     }
 
     void Update()
@@ -127,6 +129,7 @@ public class PlayerHealth : MonoBehaviour
 
             damageTaken += damageValue;
 
+            particleController.CreateParticle(hitOrigin + Vector3.up, damageValue);
             //playerMovement.stutterTime = Time.time + .125f;
         }
     }
