@@ -14,10 +14,13 @@ public class EnemyHealth : MonoBehaviour
 
     private Animator anim;
     private EnemyController enemyController ;
+    private ParticleController particleController;
     private AudioSource audio;
     private Rigidbody rb;
     private PlayerAttack playerAttack;
     private float healthBarBurnTime;
+
+
      
     
     void Awake()
@@ -28,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         currentHealth = maxHealth;
-        
+        particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
         
     }
 
@@ -98,6 +101,8 @@ public class EnemyHealth : MonoBehaviour
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
                 playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;
+
+                particleController.CreateParticle(origin + Vector3.up, damageValue);
             }
         }
     }
