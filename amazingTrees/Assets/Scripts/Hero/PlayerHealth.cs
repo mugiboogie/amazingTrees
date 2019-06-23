@@ -129,7 +129,7 @@ public class PlayerHealth : MonoBehaviour
 
             damageTaken += damageValue;
 
-            particleController.CreateParticle(hitOrigin + Vector3.up, damageValue);
+            particleController.CreateParticle(transform.position + Vector3.up, damageValue);
             //playerMovement.stutterTime = Time.time + .125f;
         }
     }

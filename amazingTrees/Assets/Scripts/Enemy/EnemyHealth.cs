@@ -102,7 +102,7 @@ public class EnemyHealth : MonoBehaviour
                 playerAttack.AddSpAttack(damageValue);
                 enemyController.damageOrigin = origin;
 
-                particleController.CreateParticle(origin + Vector3.up, damageValue);
+                particleController.CreateParticle(transform.position + Vector3.up, damageValue);
             }
         }
     }
