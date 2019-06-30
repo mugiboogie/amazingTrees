@@ -204,7 +204,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.5686275, g: 0.003921569, b: 0.38823533, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9390,7 +9390,7 @@ GameObject:
   - component: {fileID: 199920416580933770}
   - component: {fileID: 114761281448565636}
   m_Layer: 0
-  m_Name: hit - yellow 2
+  m_Name: hitDark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14282,7 +14282,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.7294118, g: 0.64705884, b: 1, a: 1}
+      maxColor: {r: 0.32941177, g: 0.015686275, b: 0.38823533, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

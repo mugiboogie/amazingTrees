@@ -4,24 +4,46 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    public GameObject[] weakHit;
-    public GameObject[] medHit;
-    public GameObject[] heavyHit;
+    public GameObject[] WeakHit;
+    public GameObject[] MedHit;
+    public GameObject[] HeavyHit;
+
+    public GameObject[] enemyWeakHit;
+    public GameObject[] enemyMedHit;
+    public GameObject[] enemyHeavyHit;
 
     public void CreateParticle(Vector3 position, float damage)
     {
         GameObject setParticle;
         if (damage < 10f)
         {
-            setParticle = weakHit[Random.Range(0, weakHit.Length)];
+            setParticle = WeakHit[Random.Range(0, WeakHit.Length)];
         }
         else if ((damage >= 10f) || (damage < 20f))
         {
-            setParticle = medHit[Random.Range(0, medHit.Length)];
+            setParticle = MedHit[Random.Range(0, MedHit.Length)];
         }
         else
         {
-            setParticle = heavyHit[Random.Range(0, heavyHit.Length)];
+            setParticle = HeavyHit[Random.Range(0, HeavyHit.Length)];
+        }
+        Instantiate(setParticle, position, Quaternion.identity);
+    }
+
+    public void CreateEnemyParticle(Vector3 position, float damage)
+    {
+        GameObject setParticle;
+        if (damage < 10f)
+        {
+            setParticle = enemyWeakHit[Random.Range(0, enemyWeakHit.Length)];
+        }
+        else if ((damage >= 10f) || (damage < 20f))
+        {
+            setParticle = enemyMedHit[Random.Range(0, enemyMedHit.Length)];
+        }
+        else
+        {
+            setParticle = enemyHeavyHit[Random.Range(0, enemyHeavyHit.Length)];
         }
         Instantiate(setParticle, position, Quaternion.identity);
     }

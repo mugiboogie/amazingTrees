@@ -204,7 +204,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.80392164, g: 0.97647065, b: 0.93725497, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9563,7 +9563,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.34509805, g: 0.9137255, b: 1, a: 0.05882353}
+      maxColor: {r: 0.9450981, g: 0.83921576, b: 0.9725491, a: 0.05882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -18695,7 +18695,7 @@ GameObject:
   - component: {fileID: 199089700866434090}
   - component: {fileID: 114185294768730222}
   m_Layer: 0
-  m_Name: slash - teal fixed
+  m_Name: slashLightTeal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18892,7 +18892,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.61960787, g: 1, b: 0.79607844, a: 1}
+      maxColor: {r: 0.62352943, g: 0.77647066, b: 0.8588236, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19925,7 +19925,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0.9529412}
         key1: {r: 1, g: 1, b: 1, a: 0.9764706}
-        key2: {r: 0.64705884, g: 0.7372549, b: 1, a: 0}
+        key2: {r: 0.9450981, g: 0.8313726, b: 0.9725491, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -23598,7 +23598,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.80392164, g: 0.97647065, b: 0.93725497, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

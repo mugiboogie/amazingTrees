@@ -4897,7 +4897,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.2901961, b: 0.58431375, a: 1}
+      maxColor: {r: 1, g: 0.2901961, b: 0.58431375, a: 0.05882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14020,7 +14020,7 @@ GameObject:
   - component: {fileID: 199703207585024848}
   - component: {fileID: 114061718456734646}
   m_Layer: 0
-  m_Name: hit - orange 3
+  m_Name: hitMagenta3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15249,7 +15249,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0.9529412}
         key1: {r: 1, g: 1, b: 1, a: 0.9764706}
-        key2: {r: 1, g: 0.28627452, b: 0.03137255, a: 0}
+        key2: {r: 1, g: 0.3137255, b: 0.6, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}

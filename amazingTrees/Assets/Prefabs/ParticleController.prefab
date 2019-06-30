@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6748855728616829232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6748855728616829198}
+  - component: {fileID: 6748855728616829199}
+  m_Layer: 0
+  m_Name: ParticleController
+  m_TagString: ParticleController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6748855728616829198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748855728616829232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6597943, y: 1.073627, z: 38.85145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6748855728616829199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748855728616829232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84ee3aef6d43764586732b5473691e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeakHit:
+  - {fileID: 1524715861061776, guid: b49ab42338f575a4a9af15e81a985571, type: 3}
+  - {fileID: 1720069347621488, guid: 7637e5dd806a5064493782cfdccc1436, type: 3}
+  - {fileID: 1221272536104276, guid: 48fb3004a6ae1ef4595938cb84af303a, type: 3}
+  MedHit:
+  - {fileID: 1332399844379766, guid: d5a42f6bd9584fe4ab47d227092cebdf, type: 3}
+  - {fileID: 1106933244615982, guid: de4c530154d61874d93237f265b8d909, type: 3}
+  - {fileID: 1419525465467072, guid: ca151ce4250545c41b60b0dea0a85a6d, type: 3}
+  HeavyHit:
+  - {fileID: 1540434181813176, guid: a0a02d36db8a1e84990985a55f8b692f, type: 3}
+  - {fileID: 1822451596522066, guid: fa9a3f9a8006d8b40b1164c2c91ee3bc, type: 3}
+  - {fileID: 1760920807038068, guid: db50ad2a73e328a4ea71c415c0c62739, type: 3}
+  enemyWeakHit:
+  - {fileID: 188946, guid: f2fd3d1d97b106c42a962f6dcf074ccd, type: 3}
+  - {fileID: 173094, guid: c4c246947415325428ae30438860f0cf, type: 3}
+  enemyMedHit:
+  - {fileID: 1739205390092530, guid: 2078f3597a3daab428fe4f0d849b3243, type: 3}
+  - {fileID: 1386863584468592, guid: b45e7a69e3434ad4caf13ca67391210d, type: 3}
+  - {fileID: 1625315462354166, guid: bd3d5a9489b3a004d86399694b134bdc, type: 3}
+  enemyHeavyHit:
+  - {fileID: 1883552001520024, guid: a30cd0ba5c00c6d459196515ec56574a, type: 3}
+  - {fileID: 1602197966606650, guid: 639ffe8a2dcaab14fa53988d89810e9d, type: 3}
+  - {fileID: 1295152798636446, guid: 36ce92b00d043ba4c859539c4698af88, type: 3}
