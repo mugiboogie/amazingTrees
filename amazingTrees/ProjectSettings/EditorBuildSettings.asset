@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 52cb212ce696739498d67ed83c21fbbe
+  - enabled: 0
+    path: Assets/Scenes/JoshScene1.unity
+    guid: bb42b1bbf81b7474bb2ed49eda49bc56
   m_configObjects: {}

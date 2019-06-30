@@ -4697,7 +4697,7 @@ GameObject:
   - component: {fileID: 199065285730645140}
   - component: {fileID: 114305738409588318}
   m_Layer: 0
-  m_Name: slash - fixed B
+  m_Name: slashDarkRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5933,7 +5933,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0.9529412}
         key1: {r: 1, g: 1, b: 1, a: 0.9764706}
-        key2: {r: 0.26666668, g: 0, b: 0, a: 0}
+        key2: {r: 0.36078432, g: 0, b: 0.1764706, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
