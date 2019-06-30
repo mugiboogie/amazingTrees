@@ -9225,18 +9225,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84ee3aef6d43764586732b5473691e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weakHit:
-  - {fileID: 1419525465467072, guid: ca151ce4250545c41b60b0dea0a85a6d, type: 3}
-  - {fileID: 1524715861061776, guid: b49ab42338f575a4a9af15e81a985571, type: 3}
-  - {fileID: 1720069347621488, guid: 7637e5dd806a5064493782cfdccc1436, type: 3}
-  medHit:
+  WeakHit:
+  - {fileID: 1550758432805618, guid: c88fce5c72bc96946804de742bcfbdf5, type: 3}
+  MedHit:
+  - {fileID: 1028757127096146, guid: 7cef54b64731a754e96acc803eca057d, type: 3}
+  HeavyHit:
+  - {fileID: 1090746884428094, guid: e1c9b870f7b049747ba72932d9e7a8b1, type: 3}
+  enemyWeakHit:
   - {fileID: 1332399844379766, guid: d5a42f6bd9584fe4ab47d227092cebdf, type: 3}
   - {fileID: 1822451596522066, guid: fa9a3f9a8006d8b40b1164c2c91ee3bc, type: 3}
   - {fileID: 1532786354616134, guid: a758dd4ff2cdeca4490d8bad46793923, type: 3}
-  heavyHit:
-  - {fileID: 1211728282166712, guid: ff8053654c6032d4aab42a0e49f9aae5, type: 3}
-  - {fileID: 1106933244615982, guid: de4c530154d61874d93237f265b8d909, type: 3}
-  - {fileID: 1090746884428094, guid: e1c9b870f7b049747ba72932d9e7a8b1, type: 3}
+  enemyMedHit:
+  - {fileID: 1419525465467072, guid: ca151ce4250545c41b60b0dea0a85a6d, type: 3}
+  - {fileID: 1524715861061776, guid: b49ab42338f575a4a9af15e81a985571, type: 3}
+  - {fileID: 1720069347621488, guid: 7637e5dd806a5064493782cfdccc1436, type: 3}
+  enemyHeavyHit:
+  - {fileID: 1883552001520024, guid: a30cd0ba5c00c6d459196515ec56574a, type: 3}
+  - {fileID: 1602197966606650, guid: 639ffe8a2dcaab14fa53988d89810e9d, type: 3}
+  - {fileID: 1295152798636446, guid: 36ce92b00d043ba4c859539c4698af88, type: 3}
 --- !u!4 &1042892641
 Transform:
   m_ObjectHideFlags: 0
