@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     public float heavyAttackChargeTime;
     private float lightAttackCharge;
     private float heavyAttackCharge;
+    private AudioClipController audioClipController;
     public float mana;
     public float manaMax;
     public float manaRegenTime;
@@ -59,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
         comboCounter = GameObject.FindGameObjectWithTag("ComboCounter").GetComponent<Animator>();
         comboNumber = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboNumber").GetComponent<Text>();
         comboComment = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboComment").GetComponent<Text>();
+        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
     }
 
     
@@ -295,5 +297,10 @@ public class PlayerAttack : MonoBehaviour
     public void AddSpAttack(float value)
     {
         mana += value;
+    }
+
+    public void Swing()
+    {
+        audioClipController.PlaySwing(transform.position);
     }
 }
