@@ -16,6 +16,7 @@ TagManager:
   - ComboCounter
   - ParticleController
   - AudioController
+  - Scoreboard
   layers:
   - Default
   - TransparentFX

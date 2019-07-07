@@ -14,7 +14,7 @@ public class CombatZoneController : MonoBehaviour
     private bool inCombat;
     public float combatTimer;
     private EnemyDirector enemyDirector;
-    public Scoreboard scoreboard;
+    private Scoreboard scoreboard;
     
     
 
@@ -23,7 +23,7 @@ public class CombatZoneController : MonoBehaviour
         camController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();
         player = GameObject.FindGameObjectWithTag("Player");
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
-        scoreboard = GetComponent<Scoreboard>();
+        scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Scoreboard>();
     }
 
     void Update()
@@ -78,11 +78,11 @@ public class CombatZoneController : MonoBehaviour
     {
         inCombat = false;
         completed = true;
+        scoreboard.AreaClear();
 
         for (int i = 0; i < walls.Count; i++)
         {
             walls[i].SetActive(false);
-            scoreboard.AreaClear();
         }
     }
 
