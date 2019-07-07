@@ -52,14 +52,10 @@ public class Scoreboard : MonoBehaviour
 
     }
 
-    void AreaClear()
+    public void AreaClear()
     {
-        string aC = "Area Cleared! \n";
-
-        if (combatZone.completed == true)
-        {
-            text.text = aC;
-        }
+        string aC = "Area Cleared!";
+        text.text = aC;
     }
 
 
