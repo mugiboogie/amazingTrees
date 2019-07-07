@@ -15,6 +15,7 @@ public class CombatZoneController : MonoBehaviour
     public float combatTimer;
     private EnemyDirector enemyDirector;
     private Scoreboard scoreboard;
+    private Animator AreaClearImage;
     
     
 
@@ -24,6 +25,7 @@ public class CombatZoneController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Scoreboard>();
+        AreaClearImage = GameObject.FindGameObjectWithTag("AreaClearImage").GetComponent<Animator>();
     }
 
     void Update()
@@ -33,7 +35,7 @@ public class CombatZoneController : MonoBehaviour
             combatTimer += Time.deltaTime;
         }
 
-        if((combatTimer > 5f) && (enemyDirector.enemies.Count==0))
+        if((combatTimer > 5f) && (enemyDirector.enemies.Count==0) && (completed == false))
         {
             EndBattle();
         }
@@ -78,6 +80,7 @@ public class CombatZoneController : MonoBehaviour
     {
         inCombat = false;
         completed = true;
+        AreaClearImage.SetTrigger("Activate");
 
         for (int i = 0; i < walls.Count; i++)
         {

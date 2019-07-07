@@ -17,6 +17,7 @@ TagManager:
   - ParticleController
   - AudioController
   - Scoreboard
+  - AreaClearImage
   layers:
   - Default
   - TransparentFX
