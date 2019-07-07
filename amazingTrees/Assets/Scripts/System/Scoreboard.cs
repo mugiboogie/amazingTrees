@@ -9,6 +9,7 @@ public class Scoreboard : MonoBehaviour
     private PlayerHealth playerHealth;
     private PlayerAttack playerAttack;
     private Text text;
+    public CombatZoneController combatZone;
 
     public GameObject prize;
 
@@ -17,6 +18,7 @@ public class Scoreboard : MonoBehaviour
         text = GetComponent<Text>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+        combatZone = GetComponent<CombatZoneController>();
     }
     void Update()
     {
@@ -46,6 +48,17 @@ public class Scoreboard : MonoBehaviour
         {
             text.text = result;
             prize.SetActive(true);
+        }
+
+    }
+
+    void AreaClear()
+    {
+        string aC = "Area Cleared! \n";
+
+        if (combatZone.completed == true)
+        {
+            text.text = aC;
         }
     }
 
