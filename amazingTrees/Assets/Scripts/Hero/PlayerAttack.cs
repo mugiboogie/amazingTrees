@@ -282,7 +282,9 @@ public class PlayerAttack : MonoBehaviour
         cameraController.desiredFOV = 60f;
         if (anim.GetBool("Charging"))
         {
-            cameraController.desiredFOV = 30f;
+            float chargeValue = Mathf.Min(1f,Mathf.Max(heavyAttackCharge, lightAttackCharge));
+            cameraController.desiredFOV = 60f-(30f*chargeValue * chargeValue);
+            StartCoroutine(cameraShake.Shake(.1f, .125f*chargeValue*chargeValue));
         }
         else if(comboChain>2)
         {
