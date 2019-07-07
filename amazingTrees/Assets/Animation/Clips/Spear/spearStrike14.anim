@@ -31949,8 +31949,8 @@ AnimationClip:
   m_Events:
   - time: 0.6
     functionName: Melee
-    data: Stagger
+    data: 16/S
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
