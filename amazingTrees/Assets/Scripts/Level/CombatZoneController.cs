@@ -78,7 +78,6 @@ public class CombatZoneController : MonoBehaviour
     {
         inCombat = false;
         completed = true;
-        scoreboard.AreaClear();
 
         for (int i = 0; i < walls.Count; i++)
         {
