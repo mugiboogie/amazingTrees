@@ -52,11 +52,4 @@ public class Scoreboard : MonoBehaviour
 
     }
 
-    public void AreaClear()
-    {
-        string aC = "Area Cleared!";
-        text.text = aC;
-    }
-
-
 }
