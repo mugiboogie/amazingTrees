@@ -14299,7 +14299,7 @@ GameObject:
   - component: {fileID: 1581537753}
   m_Layer: 0
   m_Name: AudioController
-  m_TagString: Untagged
+  m_TagString: AudioController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14316,6 +14316,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e792a1cc064072347869c5f1f3049cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit:
+  - {fileID: 8300000, guid: 0957f44796392954b80434bcf970ffaa, type: 3}
+  - {fileID: 8300000, guid: a4e95e9a1c578024e87026aa5b2008f5, type: 3}
+  - {fileID: 8300000, guid: c2a8179533c750f48aab1cb1794a0e87, type: 3}
+  - {fileID: 8300000, guid: 31aeeb90bed81d140866f8674081cb27, type: 3}
 --- !u!4 &1581537754
 Transform:
   m_ObjectHideFlags: 0

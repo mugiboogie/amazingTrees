@@ -15,6 +15,7 @@ TagManager:
   - SpellMeter
   - ComboCounter
   - ParticleController
+  - AudioController
   layers:
   - Default
   - TransparentFX

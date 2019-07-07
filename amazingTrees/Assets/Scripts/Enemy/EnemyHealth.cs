@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     private Animator anim;
     private EnemyController enemyController ;
     private ParticleController particleController;
+    private AudioClipController audioClipController;
     private AudioSource audio;
     private Rigidbody rb;
     private PlayerAttack playerAttack;
@@ -32,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         currentHealth = maxHealth;
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
+        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
         
     }
 
@@ -103,6 +105,7 @@ public class EnemyHealth : MonoBehaviour
                 enemyController.damageOrigin = origin;
 
                 particleController.CreateParticle(transform.position + Vector3.up, damageValue);
+                audioClipController.PlayHit(transform.position);
             }
         }
     }
