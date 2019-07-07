@@ -35549,7 +35549,7 @@ AnimationClip:
   m_Events:
   - time: 0.46666667
     functionName: Melee
-    data: 30/D
+    data: 25/D
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
