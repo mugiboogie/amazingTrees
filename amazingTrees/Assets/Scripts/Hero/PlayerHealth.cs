@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     public bool canDamage;
     public AudioClip Dashing;
+    public AudioClip[] hits;
     public float resetAfterDeathTime = 5f;
 
     private Animator anim;
@@ -48,13 +49,13 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        
-        
-            if(invinciblityDebug != null)
-            {
-                invinciblityDebug.SetActive(Time.time < playerMovement.dashDuration);
-            }
-        
+
+
+        if (invinciblityDebug != null)
+        {
+            invinciblityDebug.SetActive(Time.time < playerMovement.dashDuration);
+        }
+
 
         if (currentHealth <= 0f)
         {
@@ -66,19 +67,19 @@ public class PlayerHealth : MonoBehaviour
             gameOverTime = Time.time + 5f;
         }
 
-        if(Time.time>gameOverTime)
+        if (Time.time > gameOverTime)
         {
             GameOver();
         }
 
-        if((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
+        if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
         {
             invincibilityTime = Time.time + .5f;
         }
 
         //Set canDamage
-        canDamage = ((!playerDead) && ((Time.time>invincibilityTime) && (Time.time > playerMovement.dashDuration) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp"))));
-        
+        canDamage = ((!playerDead) && ((Time.time > invincibilityTime) && (Time.time > playerMovement.dashDuration) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp"))));
+
 
 
     }
@@ -94,7 +95,7 @@ public class PlayerHealth : MonoBehaviour
         if (!canDamage)
         {
             currentHealth -= 0;
-           
+
         }
         else
         {
@@ -102,11 +103,11 @@ public class PlayerHealth : MonoBehaviour
             playerAttack.manaRegenTime = Time.time + 2f;
             StartCoroutine(cameraShake.Shake(.1f, .005f * damageValue));
             healthBar.burnTime = Time.time + .5f;
-           currentHealth -= damageValue;
+            currentHealth -= damageValue;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
             playerMovement.hitPosition = hitOrigin;
 
-            switch(effect)
+            switch (effect)
             {
                 case "H":
                     anim.SetTrigger("Hit");
@@ -130,6 +131,7 @@ public class PlayerHealth : MonoBehaviour
             damageTaken += damageValue;
 
             particleController.CreateEnemyParticle(transform.position + Vector3.up, damageValue);
+            PlayHits(transform.position);
             //playerMovement.stutterTime = Time.time + .125f;
         }
     }
@@ -160,8 +162,10 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
-        
-        
-        
 
+    public void PlayHits(Vector3 position)
+    {
+        AudioClip clip = hits[Random.Range(0, hits.Length)];
+        AudioSource.PlayClipAtPoint(clip, position);
+    }
 }

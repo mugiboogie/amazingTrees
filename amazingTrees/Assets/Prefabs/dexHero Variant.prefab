@@ -2321,7 +2321,9 @@ MonoBehaviour:
   heavyAttackChargeTime: 0.5
   mana: 0
   manaMax: 1000
+  manaRegenTime: 0
   comboChain: 0
+  comboChainReset: 0
   cameraShake: {fileID: 0}
   trail1: {fileID: 8549646579989068981}
   trail2: {fileID: 7145476118735384556}
@@ -2379,9 +2381,13 @@ MonoBehaviour:
   currentHealth: 0
   canDamage: 1
   Dashing: {fileID: 8300000, guid: 2642ba66036fbac45a1b9cc92606a562, type: 3}
+  hits:
+  - {fileID: 8300000, guid: f3c412f6d057dd341984ca5cf52de261, type: 3}
+  - {fileID: 8300000, guid: 7d4e4010c69114447ba09aab6b34dcbd, type: 3}
   resetAfterDeathTime: 5
   playerDead: 0
   damageTaken: 0
+  invinciblityDebug: {fileID: 0}
 --- !u!1001 &9057700911598263262
 PrefabInstance:
   m_ObjectHideFlags: 0

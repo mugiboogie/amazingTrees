@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 1fd1d29b04c21664cb86eb45523749f7, type: 3}
+  - {fileID: 8300000, guid: e5edfb30cd388d3439c8a09755dd3856, type: 3}
+  - {fileID: 8300000, guid: b4ab2d6bd1b8d054d9ba67addac61003, type: 3}
+  - {fileID: 8300000, guid: d505f99c638b6d3438362048033b6de6, type: 3}
   swing:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: fb967deaf39ea1448a8e7bdace496965, type: 3}
+  - {fileID: 8300000, guid: 3fc16c0b825777d4ca3a6130bd9c78f1, type: 3}
+  - {fileID: 8300000, guid: 1b2ab5747a55c384789faf2893ab625f, type: 3}
+  - {fileID: 8300000, guid: 02175a6c0a3ecef429bef081ab13f43e, type: 3}
 --- !u!82 &4609753483395718550
 AudioSource:
   m_ObjectHideFlags: 0
