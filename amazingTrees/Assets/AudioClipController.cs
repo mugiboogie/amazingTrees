@@ -9,10 +9,12 @@ public class AudioClipController : MonoBehaviour
 
     void Awake()
     {
-        audio = GetComponenet<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
 
     public void PlayHit(Vector3 position)
-        AudioClip clip = ControllerColliderHit[Random.Range(0,hit.length)];
-        AudioSource.PlayClipAtPoint(clip,Position);
+    {
+        AudioClip clip = hit[Random.Range(0, hit.Length)];
+        AudioSource.PlayClipAtPoint(clip, position);
+    }
 }
