@@ -108,7 +108,7 @@ MonoBehaviour:
   speed: 10
   damage: 0
   effect: U
-  particleFx: {fileID: 0}
+  particleFx: {fileID: 1295152798636446, guid: 36ce92b00d043ba4c859539c4698af88, type: 3}
 --- !u!54 &3111165697009822551
 Rigidbody:
   m_ObjectHideFlags: 0

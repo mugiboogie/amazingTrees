@@ -134,7 +134,7 @@ MonoBehaviour:
   desiredDistance: 10
   stopDistance: 1
   charSpeed: 5
-  drop: {fileID: 0}
+  drop: {fileID: 8887703948734314598, guid: de849963e80d56c498beecb86bb1948e, type: 3}
   damageOrigin: {x: 0, y: 0, z: 0}
   knockUpVelocity: 0
   gravity: 10
