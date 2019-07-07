@@ -19148,6 +19148,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4609753483395718548, guid: d9b4730814fd97f49ae2a2ed04134fe5,
+        type: 3}
+      propertyPath: swing.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609753483395718548, guid: d9b4730814fd97f49ae2a2ed04134fe5,
+        type: 3}
+      propertyPath: swing.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 19f9c3a78814cdc4c93e90b0e5d65add, type: 3}
+    - target: {fileID: 4609753483395718548, guid: d9b4730814fd97f49ae2a2ed04134fe5,
+        type: 3}
+      propertyPath: swing.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6fd0a88c44b450a4cbf91c4f01fefc9a, type: 3}
+    - target: {fileID: 4609753483395718548, guid: d9b4730814fd97f49ae2a2ed04134fe5,
+        type: 3}
+      propertyPath: swing.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 66bccbca19fb3104298143fef873bcc3, type: 3}
+    - target: {fileID: 4609753483395718548, guid: d9b4730814fd97f49ae2a2ed04134fe5,
+        type: 3}
+      propertyPath: swing.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: d04d0abe439eac348aa331a8f8aa4e89, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9b4730814fd97f49ae2a2ed04134fe5, type: 3}
 --- !u!1001 &9057700911690371136

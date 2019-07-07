@@ -45,11 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit:
-  - {fileID: 8300000, guid: 0957f44796392954b80434bcf970ffaa, type: 3}
-  - {fileID: 8300000, guid: a4e95e9a1c578024e87026aa5b2008f5, type: 3}
-  - {fileID: 8300000, guid: c2a8179533c750f48aab1cb1794a0e87, type: 3}
-  - {fileID: 8300000, guid: 31aeeb90bed81d140866f8674081cb27, type: 3}
-  swing: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  swing:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!82 &4609753483395718550
 AudioSource:
   m_ObjectHideFlags: 0
