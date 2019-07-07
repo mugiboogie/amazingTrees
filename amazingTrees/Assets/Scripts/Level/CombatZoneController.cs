@@ -73,7 +73,7 @@ public class CombatZoneController : MonoBehaviour
         }
     }
 
-    void EndBattle()
+    public void EndBattle()
     {
         inCombat = false;
         completed = true;
