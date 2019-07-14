@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
             GameObject trailrender = Instantiate(dashTrail, transform.position, transform.rotation);
             trailrender.transform.SetParent(this.transform);
             trailrender.transform.localPosition = new Vector3(0f, 1f, 0f);
-            Destroy(trailrender, 1f);
+            Destroy(trailrender, 0.75f);
 
             playerAttack.AttackCancel();
 
