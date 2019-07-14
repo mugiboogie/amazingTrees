@@ -19,11 +19,19 @@ public class HealthPickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == player)
+        if (health.currentHealth < health.maxHealth)
         {
-            AudioSource.PlayClipAtPoint(healthPickup, transform.position);
-            Destroy(gameObject);
-            health.currentHealth = health.currentHealth + healthBonus;
+            if (other.gameObject == player)
+            {
+                AudioSource.PlayClipAtPoint(healthPickup, transform.position);
+                Destroy(gameObject);
+                health.currentHealth = health.currentHealth + healthBonus;
+
+                if(health.currentHealth > health.maxHealth)
+                {
+                    health.currentHealth = health.maxHealth;
+                }
+            }
         }
 
     }

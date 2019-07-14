@@ -19,12 +19,20 @@ public class MagicPickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == player)
+        if(magic.mana < magic.manaMax)
         {
-            AudioSource.PlayClipAtPoint(magicPickup, transform.position);
-            Destroy(gameObject);
-            magic.mana = magic.mana + magicBonus;
-        }
+            if (other.gameObject == player)
+            {
+                AudioSource.PlayClipAtPoint(magicPickup, transform.position);
+                Destroy(gameObject);
+                magic.mana = magic.mana + magicBonus;
 
+                if(magic.mana > magic.manaMax)
+                {
+                    magic.mana = magic.manaMax;
+                }
+
+            }
+        }
     }
 }
