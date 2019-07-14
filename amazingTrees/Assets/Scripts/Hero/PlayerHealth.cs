@@ -62,7 +62,12 @@ public class PlayerHealth : MonoBehaviour
         {
             playerDead = true;
             anim.SetBool("isDead", true);
-            audio.PlayOneShot(dead);
+            float nextSoundTime = 0;
+            if(Time.time>=nextSoundTime)
+            {
+                audio.PlayOneShot(dead);
+                nextSoundTime = Time.time + dead.length;
+            }
         }
         else
         {
