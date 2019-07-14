@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     public Image healthBar;
     public Image healthBarBurn;
     [HideInInspector] public bool isDead = false;
+    public AudioClip[] hits;
 
     private Animator anim;
     private EnemyController enemyController ;
@@ -60,6 +61,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damageValue, string effect, Vector3 origin)
     {
+
         if (!canDamage)
         {
             currentHealth -= 0;
@@ -106,11 +108,17 @@ public class EnemyHealth : MonoBehaviour
 
                 particleController.CreateParticle(transform.position + Vector3.up, damageValue);
                 audioClipController.PlayHit(transform.position);
+                PlayHits(transform.position);
             }
         }
     }
 
-
+    public void PlayHits(Vector3 position)
+    {
+        AudioClip clip = hits[Random.Range(0, hits.Length)];
+        //audio.PlayOneShot(clip, 1f);
+        AudioSource.PlayClipAtPoint(clip, position);
+    }
 
 
 }
