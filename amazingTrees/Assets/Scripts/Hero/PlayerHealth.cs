@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip dead;
     public float resetAfterDeathTime = 5f;
 
+    private bool deathPlayed;
     private Animator anim;
     private PlayerMovement playerMovement;
     [HideInInspector] public bool playerDead;
@@ -62,17 +63,21 @@ public class PlayerHealth : MonoBehaviour
         {
             playerDead = true;
             anim.SetBool("isDead", true);
-            float nextSoundTime = 0;
-            if(Time.time>=nextSoundTime)
+
+            if (deathPlayed == false)
             {
-                audio.PlayOneShot(dead);
-                nextSoundTime = Time.time + dead.length;
+                deathPlayed = true;
+                AudioClip clip = dead;
+                audio.PlayOneShot(clip, 1f);
             }
         }
+
         else
         {
             gameOverTime = Time.time + 5f;
         }
+
+        
 
         if (Time.time > gameOverTime)
         {

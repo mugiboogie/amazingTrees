@@ -12,7 +12,9 @@ public class EnemyHealth : MonoBehaviour
     public Image healthBarBurn;
     [HideInInspector] public bool isDead = false;
     public AudioClip[] hits;
+    public AudioClip[] dead;
 
+    private bool deathPlayed;
     private Animator anim;
     private EnemyController enemyController ;
     private ParticleController particleController;
@@ -44,6 +46,13 @@ public class EnemyHealth : MonoBehaviour
          {
             anim.SetBool("isDead", true);
             isDead = true;
+
+            if (deathPlayed == false)
+            {
+                deathPlayed = true;
+                PlayDead(transform.position);
+            }
+
         }
          else
         {
@@ -111,6 +120,12 @@ public class EnemyHealth : MonoBehaviour
                 PlayHits(transform.position);
             }
         }
+    }
+
+    public void PlayDead(Vector3 position)
+    {
+        AudioClip clip = dead[Random.Range(0, hits.Length)];
+        AudioSource.PlayClipAtPoint(clip, position);
     }
 
     public void PlayHits(Vector3 position)
