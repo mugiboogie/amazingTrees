@@ -11,6 +11,7 @@ public class AudioClipController : MonoBehaviour
     void Awake()
     {
         audio = GetComponent<AudioSource>();
+        AudioListener.volume = .5f;
     }
 
     public void PlayHit(Vector3 position)
