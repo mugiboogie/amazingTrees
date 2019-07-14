@@ -9,7 +9,10 @@ public class DestructablesHealth : MonoBehaviour
     public GameObject destroyedObj;
     public AudioClip[] hits;
     public AudioClip[] dead;
+    public bool canDamage;
+    [HideInInspector] public bool isDead = false;
 
+    private AudioClipController audioClipController;
     private bool deathPlayed;
     private Animator anim;
     private PlayerMovement playerMovement;
@@ -21,9 +24,11 @@ public class DestructablesHealth : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audio = GetComponent<AudioSource>();
+        currentHealth = maxHealth;
+        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
 
     }
 
@@ -48,24 +53,37 @@ public class DestructablesHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damageValue, string effect)
+    public void TakeDamage(float damageValue, string effect, Vector3 origin)
     {
-            currentHealth -= damageValue;
-            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-            PlayHits(transform.position);
+
+        if (!canDamage)
+        {
+            currentHealth -= 0;
+        }
+        else
+        {
+            if (!isDead)
+            {
+                currentHealth -= damageValue;
+                currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+                audioClipController.PlayHit(transform.position);
+                PlayHits(transform.position);
+            }
+        }
     }
 
     void ObjDying()
     {
         playerDead = true;
-        anim.SetBool("isDead", true);
+        //anim.SetBool("isDead", true);
     }
 
     void Dead()
     {
         if (anim.GetBool("isDead"))
         {
-            anim.SetBool("isDead", false);
+          anim.SetBool("isDead", false);
         }
         Destroy(gameObject);
         Instantiate(destroyedObj, transform.position, transform.rotation);
