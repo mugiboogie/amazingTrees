@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAttack playerAttack;
     private PlayerHealth playerHealth;
     private TimeManager timeManager;
+    public GameObject dashTrail;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -191,8 +192,11 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
+            GameObject trailrender = Instantiate(dashTrail, transform.position, transform.rotation);
+            trailrender.transform.SetParent(this.transform);
+            trailrender.transform.localPosition = new Vector3(0f, 1f, 0f);
 
-            
+
             playerAttack.AttackCancel();
         }
 
