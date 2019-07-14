@@ -166,6 +166,7 @@ public class PlayerHealth : MonoBehaviour
     public void PlayHits(Vector3 position)
     {
         AudioClip clip = hits[Random.Range(0, hits.Length)];
-        AudioSource.PlayClipAtPoint(clip, position);
+        audio.PlayOneShot(clip, 1f);
+        //AudioSource.PlayClipAtPoint(clip, position);
     }
 }
