@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public bool canDamage;
     public AudioClip Dashing;
     public AudioClip[] hits;
+    public AudioClip dead;
     public float resetAfterDeathTime = 5f;
 
     private Animator anim;
@@ -61,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
         {
             playerDead = true;
             anim.SetBool("isDead", true);
+            PlayDead();
         }
         else
         {
@@ -163,9 +165,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void PlayDead()
+    {
+        AudioClip clip = dead;
+        audio.PlayOneShot(clip, 1f);
+    }
+
     public void PlayHits(Vector3 position)
     {
         AudioClip clip = hits[Random.Range(0, hits.Length)];
-        AudioSource.PlayClipAtPoint(clip, position);
+        audio.PlayOneShot(clip, 1f);
+        //AudioSource.PlayClipAtPoint(clip, position);
     }
 }

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerHealth playerHealth;
     private TimeManager timeManager;
     public GameObject dashTrail;
+    private AudioSource audio;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash; //A check to ensure that the player can dash. It is only true when the player is grounded, so an airborne player must touch the ground before dashing again.
     private Vector3 dashDirection; //The direction of the dash. This is the inputDirection as it is on the frame the dash button was pushed.
     private float airborneTime;
+    public AudioClip dashSound;
 
     public float stutterTime;
 
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         playerTargetting = GetComponent<PlayerTargetting>();
         playerAttack = GetComponent<PlayerAttack>();
         playerHealth = GetComponent<PlayerHealth>();
+        audio = GetComponent<AudioSource>();
 
         playerDecoyController = GameObject.FindGameObjectWithTag("PlayerEffects/PlayerDecoy").GetComponent<PlayerDecoyController>();
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
@@ -198,6 +201,8 @@ public class PlayerMovement : MonoBehaviour
 
 
             playerAttack.AttackCancel();
+
+            audio.PlayOneShot(dashSound, 1f);
         }
 
         //--Once the player exhausts their dash duration, they stop dashing.

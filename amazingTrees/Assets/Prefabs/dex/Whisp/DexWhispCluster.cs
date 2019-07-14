@@ -8,12 +8,21 @@ public class DexWhispCluster : MonoBehaviour
     private EnemyDirector enemyDirector;
     private PlayerAttack playerAttack;
     private Animator playerAnim;
+    private AudioSource audio;
+
+    public AudioClip spellSound;
+    public AudioClip attackSound;
+    private Animator bishoujoEyes;
+    private TimeManager timeManager;
 
     void Awake()
     {
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        bishoujoEyes = GameObject.FindGameObjectWithTag("PlayerEffects/BishoujoEyes").GetComponent<Animator>();
+        timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
     }
 
     void Update()
@@ -25,6 +34,11 @@ public class DexWhispCluster : MonoBehaviour
 
         if((Input.GetButtonDown("SpellAttack"))&&(playerAttack.mana>=playerAttack.manaMax))
         {
+            //AudioSource.PlayClipAtPoint(attackSound, playerAttack.transform.position);
+            audio.PlayOneShot(spellSound, 1f);
+            audio.PlayOneShot(attackSound, 1f);
+            bishoujoEyes.SetTrigger("Activate");
+            timeManager.DoSlowmotion();
             playerAnim.SetTrigger("Spell");
             playerAttack.mana = 0f;
             BlastWhisp();

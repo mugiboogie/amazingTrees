@@ -18,6 +18,7 @@ TagManager:
   - AudioController
   - Scoreboard
   - AreaClearImage
+  - PlayerEffects/BishoujoEyes
   layers:
   - Default
   - TransparentFX

@@ -231,14 +231,16 @@ public class PlayerAttack : MonoBehaviour
                         playerTargetting.overrideTime = Time.time + 2f;
                         lastHitEnemy = targets[i].gameObject;
                         playerTargetting.overrideEnemy = lastHitEnemy;
+
+                        comboChain++;
+                        comboChainReset = Time.time + 3f;
                     }
 
                     enemyHealth.TakeDamage(damage,effect,transform.position);
                     
                 }
 
-                comboChain++;
-                comboChainReset = Time.time + 3f;
+                
 
                 targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
 

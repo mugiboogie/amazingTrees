@@ -3531,6 +3531,10 @@ MonoBehaviour:
   healthBar: {fileID: 2740817374789460827}
   healthBarBurn: {fileID: 3238233406429149726}
   isDead: 0
+  hits:
+  - {fileID: 8300000, guid: c47d4d79f23f35447986067871b8c539, type: 3}
+  - {fileID: 8300000, guid: 6ff7e939715f4e84c96e9c89372c8702, type: 3}
+  - {fileID: 8300000, guid: ec876c5879ed36044bc34af3db1d1a18, type: 3}
 --- !u!195 &5672407910452476211
 NavMeshAgent:
   m_ObjectHideFlags: 0

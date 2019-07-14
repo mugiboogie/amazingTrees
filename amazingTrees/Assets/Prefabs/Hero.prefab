@@ -4223,6 +4223,10 @@ MonoBehaviour:
   turnSmoothing: 15
   gravity: 20
   jumpForce: 10
+  dashDuration: 0
+  dashSound: {fileID: 0}
+  stutterTime: 0
+  hitPosition: {x: 0, y: 0, z: 0}
 --- !u!208 &503665196448764524
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -4261,7 +4265,15 @@ MonoBehaviour:
   cooldownTime: 0
   lightAttackChargeTime: 0.5
   heavyAttackChargeTime: 0.5
+  mana: 0
+  manaMax: 0
+  manaRegenTime: 0
+  comboChain: 0
+  comboChainReset: 0
   cameraShake: {fileID: 0}
+  trail1: {fileID: 0}
+  trail2: {fileID: 0}
+  damageDealt: 0
 --- !u!114 &503665196448764525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4296,7 +4308,13 @@ MonoBehaviour:
   currentHealth: 0
   canDamage: 1
   Dashing: {fileID: 8300000, guid: 2642ba66036fbac45a1b9cc92606a562, type: 3}
+  hits: []
+  Dead:
+  - {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
   resetAfterDeathTime: 5
+  playerDead: 0
+  damageTaken: 0
+  invinciblityDebug: {fileID: 0}
 --- !u!82 &4399365503773501706
 AudioSource:
   m_ObjectHideFlags: 0
