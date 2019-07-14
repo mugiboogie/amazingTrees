@@ -19411,6 +19411,11 @@ PrefabInstance:
       propertyPath: invinciblityDebug
       value: 
       objectReference: {fileID: 1644091094}
+    - target: {fileID: 8999591198091340677, guid: cf693adc7effccd408dea9e09a3f60c3,
+        type: 3}
+      propertyPath: dead
+      value: 
+      objectReference: {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
     - target: {fileID: 9057700911598387432, guid: cf693adc7effccd408dea9e09a3f60c3,
         type: 3}
       propertyPath: m_LocalRotation.x
