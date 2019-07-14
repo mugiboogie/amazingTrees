@@ -62,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
         {
             playerDead = true;
             anim.SetBool("isDead", true);
-            PlayDead();
+            audio.PlayOneShot(dead);
         }
         else
         {
@@ -163,12 +163,6 @@ public class PlayerHealth : MonoBehaviour
                 invincibilityTime = Time.time + 1f;
             }
         }
-    }
-
-    public void PlayDead()
-    {
-        AudioClip clip = dead;
-        audio.PlayOneShot(clip, 1f);
     }
 
     public void PlayHits(Vector3 position)
