@@ -19,6 +19,7 @@ TagManager:
   - Scoreboard
   - AreaClearImage
   - PlayerEffects/BishoujoEyes
+  - Destructables
   layers:
   - Default
   - TransparentFX

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6741569593542780303}
   m_Layer: 0
   m_Name: propPalmTree
-  m_TagString: Untagged
+  m_TagString: Destructables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,6 +214,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba3a62ca8d8ab5c409fcf3e774f293e5, type: 3}
   dead:
   - {fileID: 8300000, guid: d38c1d6f450d1514ba3269ea8c711e18, type: 3}
+  canDamage: 0
+  isDead: 0
 --- !u!1 &3810846398453882062
 GameObject:
   m_ObjectHideFlags: 0

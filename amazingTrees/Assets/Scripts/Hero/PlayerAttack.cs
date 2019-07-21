@@ -240,7 +240,25 @@ public class PlayerAttack : MonoBehaviour
                     
                 }
 
-                
+                if (targets[i].CompareTag("Destructables"))
+                {
+                    DestructablesHealth destructablesHealth = targets[i].GetComponent<DestructablesHealth>();
+
+                    if (!destructablesHealth.isDead)
+                    {
+                        playerTargetting.overrideTime = Time.time + 2f;
+                        lastHitEnemy = targets[i].gameObject;
+                        playerTargetting.overrideEnemy = lastHitEnemy;
+
+                        comboChain++;
+                        comboChainReset = Time.time + 3f;
+                    }
+
+                    destructablesHealth.TakeDamage(damage, effect, transform.position);
+
+                }
+
+
 
                 targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
 
