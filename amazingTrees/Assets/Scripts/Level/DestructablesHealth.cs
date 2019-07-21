@@ -76,7 +76,7 @@ public class DestructablesHealth : MonoBehaviour
     void ObjDying()
     {
         playerDead = true;
-        //anim.SetBool("isDead", true);
+        anim.SetBool("isDead", true);
     }
 
     void Dead()

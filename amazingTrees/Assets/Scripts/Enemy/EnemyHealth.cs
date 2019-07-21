@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
     private Rigidbody rb;
     private PlayerAttack playerAttack;
     private float healthBarBurnTime;
+    private CapsuleCollider CapCol;
 
 
      
@@ -37,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
-        
+        CapCol = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -126,6 +127,7 @@ public class EnemyHealth : MonoBehaviour
     {
         AudioClip clip = dead[Random.Range(0, hits.Length)];
         AudioSource.PlayClipAtPoint(clip, position);
+        CapCol.enabled = false;
     }
 
     public void PlayHits(Vector3 position)
