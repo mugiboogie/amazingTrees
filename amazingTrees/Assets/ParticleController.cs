@@ -12,6 +12,8 @@ public class ParticleController : MonoBehaviour
     public GameObject[] enemyMedHit;
     public GameObject[] enemyHeavyHit;
 
+    public GameObject[] destructableHit;
+
     public void CreateParticle(Vector3 position, float damage)
     {
         GameObject setParticle;
@@ -46,5 +48,13 @@ public class ParticleController : MonoBehaviour
             setParticle = enemyHeavyHit[Random.Range(0, enemyHeavyHit.Length)];
         }
         Instantiate(setParticle, position, Quaternion.identity);
+    }
+
+    public void CreateDestructableParticle(Vector3 position)
+    {
+        GameObject setParticle = destructableHit[Random.Range(0, destructableHit.Length)];
+       
+        GameObject iParticle = Instantiate(setParticle, position, Quaternion.identity);
+        iParticle.transform.localScale = new Vector3(.25f, .25f, .25f);
     }
 }

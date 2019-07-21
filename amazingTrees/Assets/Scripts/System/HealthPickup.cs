@@ -17,6 +17,14 @@ public class HealthPickup : MonoBehaviour
         health = FindObjectOfType<PlayerHealth>();
     }
 
+    private void FixedUpdate()
+    {
+        if (health.currentHealth < health.maxHealth)
+        {
+            followPlayer();
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (health.currentHealth < health.maxHealth)
@@ -34,5 +42,14 @@ public class HealthPickup : MonoBehaviour
             }
         }
 
+    }
+
+    private void followPlayer()
+    {
+        float distanceNeeded = 5f;
+        if (Vector3.Distance(transform.position, player.transform.position) < distanceNeeded)
+        {
+            transform.position += (player.transform.position - transform.position) * 2f * Time.deltaTime;
+        }
     }
 }

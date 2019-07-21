@@ -32865,7 +32865,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.033333335
+  - time: 0.06666667
     functionName: Swing
     data: 
     objectReferenceParameter: {fileID: 0}

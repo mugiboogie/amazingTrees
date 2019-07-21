@@ -14,20 +14,21 @@ public class DestructablesHealth : MonoBehaviour
 
     private AudioClipController audioClipController;
     private bool deathPlayed;
-    private PlayerMovement playerMovement;
     private bool playerDead;
     private AudioSource audio;
     private float timer;
 
+    private ParticleController particleController;
 
+    private Transform player;
 
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
         audio = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
-
+        particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -67,6 +68,7 @@ public class DestructablesHealth : MonoBehaviour
             }
         }
 
+        particleController.CreateDestructableParticle(transform.position);
         audioClipController.PlayHit(transform.position);
         PlayHits(transform.position);
     }

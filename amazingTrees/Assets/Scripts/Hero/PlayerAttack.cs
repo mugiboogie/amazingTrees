@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private float lightAttackCharge;
     private float heavyAttackCharge;
     private AudioClipController audioClipController;
+    private AudioSource audio;
     public float mana;
     public float manaMax;
     public float manaRegenTime;
@@ -48,6 +49,21 @@ public class PlayerAttack : MonoBehaviour
     private Text comboComment;
 
 
+    private Animator chargeEffect;
+    private bool chargeCompletePlayed;
+    private bool chargeInitiatePlayed;
+    private float chargePulseTime;
+    public GameObject chargeCompleteEffect;
+    public AudioClip chargeComplete;
+    public AudioClip charging;
+    public AudioClip chargingPulse;
+    public AudioClip chargeAttackVoice;
+    public AudioClip chargeAttackFoley;
+    private float chargeAttackDuration;
+    private float glitterCooldown;
+    public GameObject glitterParticle;
+    public GameObject shockWave;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -61,6 +77,10 @@ public class PlayerAttack : MonoBehaviour
         comboNumber = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboNumber").GetComponent<Text>();
         comboComment = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboComment").GetComponent<Text>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
+        audio = GetComponent<AudioSource>();
+
+        chargeEffect = GameObject.FindGameObjectWithTag("PlayerEffects/ChargeEffect").GetComponent<Animator>();
+        chargeEffect.transform.SetParent(transform, false);
     }
 
     
@@ -123,6 +143,7 @@ public class PlayerAttack : MonoBehaviour
             cooldownTime = Time.time + lightAttackRate + .25f;
             durationTime = Time.time + lightAttackRate;
 
+            
             anim.SetTrigger("LightAttack");
         }
 
@@ -131,8 +152,12 @@ public class PlayerAttack : MonoBehaviour
             cooldownTime = Time.time + heavyAttackRate + .5f;
             durationTime = Time.time + heavyAttackRate;
 
+
             anim.SetTrigger("HeavyAttack");
         }
+
+
+        
 
         //Light Attack Charge
         if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime))
@@ -143,6 +168,11 @@ public class PlayerAttack : MonoBehaviour
             cooldownTime = Time.time + lightAttackRate + .5f;
             durationTime = Time.time + lightAttackRate;
 
+
+            audio.PlayOneShot(chargeAttackVoice);
+            audio.PlayOneShot(chargeAttackFoley);
+            chargeAttackDuration = Time.time + .5f;
+            Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
             anim.SetTrigger("ChLightAttack");
         }
         if (Input.GetButton("LightAttack")&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit"))&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
@@ -165,6 +195,11 @@ public class PlayerAttack : MonoBehaviour
             cooldownTime = Time.time + heavyAttackRate + .5f;
             durationTime = Time.time + heavyAttackRate;
 
+
+            audio.PlayOneShot(chargeAttackVoice);
+            audio.PlayOneShot(chargeAttackFoley);
+            chargeAttackDuration = Time.time + .5f;
+            Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
             anim.SetTrigger("ChHeavyAttack");
         }
         if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
@@ -174,6 +209,48 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             heavyAttackCharge = 0f;
+        }
+
+        float chargeValue = Mathf.Max(lightAttackCharge / lightAttackChargeTime, heavyAttackCharge / heavyAttackChargeTime);
+        chargeEffect.SetFloat("ChargeValue",chargeValue);
+
+        if(chargeValue>.25f)
+        {
+            if (chargeInitiatePlayed == false)
+            {
+                audio.PlayOneShot(charging);
+                chargeInitiatePlayed = true;
+            }
+            if(chargeValue>.9f)
+            {
+                if(chargeCompletePlayed== false)
+                {
+                    Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
+                    chargeCompletePlayed = true;
+                    audio.PlayOneShot(chargeComplete);
+                    chargePulseTime = Time.time + 1f;
+                }
+                if(Time.time>chargePulseTime)
+                {
+                    Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
+                    chargePulseTime = Time.time + 1f;
+                    audio.PlayOneShot(chargingPulse);
+                }
+            }
+        }
+        else
+        {
+            chargeInitiatePlayed = false;
+            chargeCompletePlayed = false;
+        }
+
+        if (Time.time < chargeAttackDuration)
+        {
+            if (Time.time > glitterCooldown)
+            {
+                glitterCooldown = Time.time + .25f;
+                Instantiate(glitterParticle, transform.position, transform.rotation);
+            }
         }
 
 
@@ -306,7 +383,8 @@ public class PlayerAttack : MonoBehaviour
         {
             float chargeValue = Mathf.Min(1f,Mathf.Max(heavyAttackCharge, lightAttackCharge));
             cameraController.desiredFOV = 60f-(30f*chargeValue * chargeValue);
-            StartCoroutine(cameraShake.Shake(.1f, .125f*chargeValue*chargeValue));
+            //StartCoroutine(cameraShake.Shake(.1f, .0125f));
+            cameraShake.ShakeConstant(.0125f);
         }
         else if(comboChain>2)
         {

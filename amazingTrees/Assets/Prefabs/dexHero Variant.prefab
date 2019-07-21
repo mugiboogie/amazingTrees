@@ -2317,7 +2317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99b5796f20750a42a93389554cb7ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 2
+  attackRange: 3.5
   attackAngle: 90
   affectedLayers:
     serializedVersion: 2
@@ -2336,6 +2336,16 @@ MonoBehaviour:
   trail1: {fileID: 8549646579989068981}
   trail2: {fileID: 7145476118735384556}
   damageDealt: 0
+  chargeCompleteEffect: {fileID: 1759241351872106, guid: c3bc2bf87abeeab478db689a7c076758,
+    type: 3}
+  chargeComplete: {fileID: 8300000, guid: a22098c825033f845856a0edc78d2a23, type: 3}
+  charging: {fileID: 8300000, guid: 09f7380b4b5cd5749a648cee72e24d55, type: 3}
+  chargingPulse: {fileID: 8300000, guid: 29b019432f08da7419e85e0ae84ac830, type: 3}
+  chargeAttackVoice: {fileID: 8300000, guid: b6bdb98e547aad244ba08fc0c9b5f2dd, type: 3}
+  chargeAttackFoley: {fileID: 8300000, guid: 11180b07038e8f541bb6c3634801eabd, type: 3}
+  glitterParticle: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49,
+    type: 3}
+  shockWave: {fileID: 1602197966606650, guid: 03257f374d42eca4989ce047676ecc78, type: 3}
 --- !u!114 &3362423211027367083
 MonoBehaviour:
   m_ObjectHideFlags: 0

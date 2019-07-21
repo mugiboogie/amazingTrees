@@ -17,6 +17,14 @@ public class MagicPickup : MonoBehaviour
         magic = FindObjectOfType<PlayerAttack>();
     }
 
+    private void FixedUpdate()
+    {
+        if (magic.mana < magic.manaMax)
+        {
+            followPlayer();
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if(magic.mana < magic.manaMax)
@@ -33,6 +41,15 @@ public class MagicPickup : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    private void followPlayer()
+    {
+        float distanceNeeded = 5f;
+        if(Vector3.Distance(transform.position,player.transform.position)<distanceNeeded)
+        {
+            transform.position += (player.transform.position - transform.position) * 2f * Time.deltaTime;
         }
     }
 }
