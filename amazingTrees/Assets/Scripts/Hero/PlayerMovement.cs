@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject dashTrail;
     public GameObject shockWave;
     private AudioSource audio;
+    private float glitterCooldown;
+    public GameObject glitterParticle;
 
     //Movement Parameters
     public float charSpeed = 5f; //Default speed the player traverses.
@@ -207,6 +209,14 @@ public class PlayerMovement : MonoBehaviour
             audio.PlayOneShot(dashSound, 1f);
         }
 
+        if (Time.time < dashDuration)
+        {
+            if (Time.time > glitterCooldown)
+            {
+                glitterCooldown = Time.time + .1f;
+                Instantiate(glitterParticle, transform.position, transform.rotation);
+            }
+        }
         //--Once the player exhausts their dash duration, they stop dashing.
         if(dashDuration < Time.time)
         {
