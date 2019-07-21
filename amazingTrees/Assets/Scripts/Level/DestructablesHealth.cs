@@ -14,7 +14,6 @@ public class DestructablesHealth : MonoBehaviour
 
     private AudioClipController audioClipController;
     private bool deathPlayed;
-    private Animator anim;
     private PlayerMovement playerMovement;
     private bool playerDead;
     private AudioSource audio;
@@ -24,7 +23,6 @@ public class DestructablesHealth : MonoBehaviour
 
     void Start()
     {
-        //anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audio = GetComponent<AudioSource>();
         currentHealth = maxHealth;
@@ -55,7 +53,7 @@ public class DestructablesHealth : MonoBehaviour
 
     public void TakeDamage(float damageValue, string effect, Vector3 origin)
     {
-
+       
         if (!canDamage)
         {
             currentHealth -= 0;
@@ -66,25 +64,20 @@ public class DestructablesHealth : MonoBehaviour
             {
                 currentHealth -= damageValue;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
-                audioClipController.PlayHit(transform.position);
-                PlayHits(transform.position);
             }
         }
+
+        audioClipController.PlayHit(transform.position);
+        PlayHits(transform.position);
     }
 
     void ObjDying()
     {
         playerDead = true;
-        //anim.SetBool("isDead", true);
     }
 
     void Dead()
     {
-        if (anim.GetBool("isDead"))
-        {
-          anim.SetBool("isDead", false);
-        }
         Destroy(gameObject);
         Instantiate(destroyedObj, transform.position, transform.rotation);
     }
@@ -100,5 +93,6 @@ public class DestructablesHealth : MonoBehaviour
         AudioClip clip = hits[Random.Range(0, hits.Length)];
         //audio.PlayOneShot(clip, 1f);
         AudioSource.PlayClipAtPoint(clip, position);
+        
     }
 }
