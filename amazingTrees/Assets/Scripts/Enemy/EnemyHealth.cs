@@ -38,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
-        CapCol = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CapsuleCollider>();
+        CapCol = GetComponent<CapsuleCollider>();
     }
 
     void Update()
