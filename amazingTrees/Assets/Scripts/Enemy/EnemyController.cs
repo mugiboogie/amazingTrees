@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour {
     private float startMoving;
     private EnemyHealth enemyHealth;
     public GameObject drop;
-    public AudioClip[] aggro;
 
     private EnemyDirector enemyDirector;
 
@@ -29,8 +28,6 @@ public class EnemyController : MonoBehaviour {
     private float maxX;
     private float minZ;
     private float maxZ;
-    private AudioClipController audioClipController;
-    private AudioSource audio;
 
     void Awake()
     {
@@ -47,8 +44,6 @@ public class EnemyController : MonoBehaviour {
         maxX = combatZone.transform.position.x + ((combatZone.size.x - margin)/2f);
         minZ = combatZone.transform.position.z - ((combatZone.size.z - margin)/2f);
         maxZ = combatZone.transform.position.z + ((combatZone.size.z - margin)/2f);
-        audio = GetComponent<AudioSource>();
-        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
 
         enemyDirector.AddEnemy(this.gameObject);
         
@@ -223,7 +218,7 @@ public class EnemyController : MonoBehaviour {
         }
         direction.y = 0;
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
-        PlayAggro(transform.position);
+        
     }
 
     void faceDamageOrigin()
@@ -254,13 +249,6 @@ public class EnemyController : MonoBehaviour {
             transform.position = position;
         }
 
-    }
-
-    public void PlayAggro(Vector3 position)
-    {
-        AudioClip clip = aggro[Random.Range(0, aggro.Length)];
-        //audio.PlayOneShot(clip, 1f);
-        AudioSource.PlayClipAtPoint(clip, position);
     }
 
 }

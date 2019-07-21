@@ -31,6 +31,9 @@ public class EnemyAttack : MonoBehaviour
     public Animator warningIndicator;
     private string status;
     public string[] attacks = new string[2];
+    private AudioClipController audioClipController;
+    private AudioSource audio;
+    public AudioClip[] angery;
 
     void Awake()
     {
@@ -40,6 +43,8 @@ public class EnemyAttack : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         col = GetComponent<CapsuleCollider>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        audio = GetComponent<AudioSource>();
+        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
     }
 
     void Update()
@@ -69,6 +74,7 @@ public class EnemyAttack : MonoBehaviour
                 index = 0;
             }
 
+            PlayAngery(transform.position);
             warningIndicator.SetTrigger("Warning");
             string[] propertyArray = attacks[index].Split(char.Parse("/"));
             baseDamage = float.Parse(propertyArray[0]);
@@ -146,5 +152,11 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    public void PlayAngery(Vector3 position)
+    {
+        AudioClip clip = angery[Random.Range(0, angery.Length)];
+        //audio.PlayOneShot(clip, 1f);
+        AudioSource.PlayClipAtPoint(clip, position);
+    }
 
 }
