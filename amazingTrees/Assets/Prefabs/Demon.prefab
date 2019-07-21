@@ -3510,6 +3510,12 @@ MonoBehaviour:
   stopDistance: 1
   charSpeed: 6
   drop: {fileID: 7078931794856879547, guid: 745c6cac9a4cc4e4fb1218f7df1ecf95, type: 3}
+  aggro:
+  - {fileID: 8300000, guid: e736c7e37c5417641b1f1464227168c4, type: 3}
+  - {fileID: 8300000, guid: 419d6f60b4813a0439e2633678b8669a, type: 3}
+  - {fileID: 8300000, guid: d8f67ddd60774d04c96d11a8c91d88ff, type: 3}
+  - {fileID: 8300000, guid: 1153e0c6f3f11c14b85305fb15c0acb7, type: 3}
+  - {fileID: 8300000, guid: 20aff2b53c1879246a043538424cf485, type: 3}
   damageOrigin: {x: 0, y: 0, z: 0}
   knockUpVelocity: 0
   gravity: 10
