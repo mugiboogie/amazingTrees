@@ -120,7 +120,12 @@ public class EnemyHealth : MonoBehaviour
 
                 particleController.CreateParticle(transform.position + Vector3.up, damageValue);
                 audioClipController.PlayHit(transform.position);
-                PlayHits(transform.position);
+
+                if (currentHealth >0f)
+                {
+                    PlayHits(transform.position);
+                }
+                
             }
         }
     }
