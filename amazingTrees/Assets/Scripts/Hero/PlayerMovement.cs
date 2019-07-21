@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerHealth playerHealth;
     private TimeManager timeManager;
     public GameObject dashTrail;
+    public GameObject shockWave;
     private AudioSource audio;
 
     //Movement Parameters
@@ -195,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
+            Instantiate(shockWave, transform.position, transform.rotation);
             GameObject trailrender = Instantiate(dashTrail, transform.position, transform.rotation);
             trailrender.transform.SetParent(this.transform);
             trailrender.transform.localPosition = new Vector3(0f, 1f, 0f);
