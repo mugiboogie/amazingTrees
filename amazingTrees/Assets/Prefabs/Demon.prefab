@@ -3545,6 +3545,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: edb592cf095cce842ace9c7a75a57b41, type: 3}
   - {fileID: 8300000, guid: 18627cd61b9eaa74d98056873392a934, type: 3}
   - {fileID: 8300000, guid: 4b0adc7d2a7b3984d9e9e87aabe12e88, type: 3}
+  deathParticle: {fileID: 153554, guid: 540fd69bf32da894db0578a114b45af1, type: 3}
+  deathPSound: {fileID: 8300000, guid: c2ec368eb7c96ba44a84153caf639a72, type: 3}
 --- !u!195 &5672407910452476211
 NavMeshAgent:
   m_ObjectHideFlags: 0
