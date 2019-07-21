@@ -74,6 +74,8 @@ public class EnemyAttack : MonoBehaviour
                 index = 0;
             }
 
+            anim.SetInteger("AttackSkill", index);
+
             PlayAngery(transform.position);
             warningIndicator.SetTrigger("Warning");
             string[] propertyArray = attacks[index].Split(char.Parse("/"));
