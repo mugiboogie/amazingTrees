@@ -2351,7 +2351,7 @@ MonoBehaviour:
   dashTrail: {fileID: 6920609417809815651, guid: 226224795e3c91d4f9027b5caf43d8a1,
     type: 3}
   shockWave: {fileID: 1602197966606650, guid: 03257f374d42eca4989ce047676ecc78, type: 3}
-  glitterParticle: {fileID: 188088, guid: 68a79288e24239243ba89a31c3708702, type: 3}
+  glitterParticle: {fileID: 100004, guid: cd2cff588faa37e438a670cdf2ccd46f, type: 3}
   charSpeed: 5
   turnSmoothing: 15
   gravity: 20

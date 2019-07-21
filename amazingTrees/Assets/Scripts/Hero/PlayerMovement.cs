@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
-            Instantiate(shockWave, transform.position, transform.rotation);
+            Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
             GameObject trailrender = Instantiate(dashTrail, transform.position, transform.rotation);
             trailrender.transform.SetParent(this.transform);
             trailrender.transform.localPosition = new Vector3(0f, 1f, 0f);
@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
             if (Time.time > glitterCooldown)
             {
                 glitterCooldown = Time.time + .1f;
-                Instantiate(glitterParticle, transform.position, transform.rotation);
+                Instantiate(glitterParticle, transform.position + Vector3.up, transform.rotation);
             }
         }
         //--Once the player exhausts their dash duration, they stop dashing.
