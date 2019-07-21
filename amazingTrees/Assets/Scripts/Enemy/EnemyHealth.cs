@@ -13,6 +13,8 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector] public bool isDead = false;
     public AudioClip[] hits;
     public AudioClip[] dead;
+    public GameObject deathParticle;
+    public AudioClip deathPSound;
 
     private bool deathPlayed;
     private Animator anim;
@@ -118,7 +120,12 @@ public class EnemyHealth : MonoBehaviour
 
                 particleController.CreateParticle(transform.position + Vector3.up, damageValue);
                 audioClipController.PlayHit(transform.position);
-                PlayHits(transform.position);
+
+                if (currentHealth >0f)
+                {
+                    PlayHits(transform.position);
+                }
+                
             }
         }
     }
@@ -127,7 +134,8 @@ public class EnemyHealth : MonoBehaviour
     {
         AudioClip clip = dead[Random.Range(0, hits.Length)];
         AudioSource.PlayClipAtPoint(clip, position);
-        CapCol.enabled = false;
+        CapCol.enabled = false;Instantiate(deathParticle, transform.position + Vector3.up, transform.rotation);
+        AudioSource.PlayClipAtPoint(deathPSound, position);
     }
 
     public void PlayHits(Vector3 position)

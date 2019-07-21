@@ -170,6 +170,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d78f81d70149c7e489beccadd378ce4c, type: 3}
   - {fileID: 8300000, guid: 904fc3ed4f6e22a4fa02819108732362, type: 3}
   - {fileID: 8300000, guid: 38973f4e52c45e145b8fd7eda87c78f6, type: 3}
+  deathParticle: {fileID: 153554, guid: 540fd69bf32da894db0578a114b45af1, type: 3}
+  deathPSound: {fileID: 8300000, guid: c2ec368eb7c96ba44a84153caf639a72, type: 3}
 --- !u!195 &6788247689097028906
 NavMeshAgent:
   m_ObjectHideFlags: 0

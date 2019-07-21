@@ -3542,9 +3542,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6ff7e939715f4e84c96e9c89372c8702, type: 3}
   - {fileID: 8300000, guid: ec876c5879ed36044bc34af3db1d1a18, type: 3}
   dead:
-  - {fileID: 8300000, guid: edb592cf095cce842ace9c7a75a57b41, type: 3}
-  - {fileID: 8300000, guid: 18627cd61b9eaa74d98056873392a934, type: 3}
-  - {fileID: 8300000, guid: 4b0adc7d2a7b3984d9e9e87aabe12e88, type: 3}
+  - {fileID: 8300000, guid: 1f4917c6805498a4fa223852882412c5, type: 3}
+  - {fileID: 8300000, guid: 19f28a1eadeb60b4cbaed659a4bd9399, type: 3}
+  - {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
+  - {fileID: 8300000, guid: d6ef6a5c0ecf46f47a4f788147df5999, type: 3}
+  deathParticle: {fileID: 153554, guid: 540fd69bf32da894db0578a114b45af1, type: 3}
+  deathPSound: {fileID: 8300000, guid: c2ec368eb7c96ba44a84153caf639a72, type: 3}
 --- !u!195 &5672407910452476211
 NavMeshAgent:
   m_ObjectHideFlags: 0
