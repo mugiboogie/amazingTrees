@@ -19507,5 +19507,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3362423211027367083, guid: cf693adc7effccd408dea9e09a3f60c3,
+        type: 3}
+      propertyPath: shockWave
+      value: 
+      objectReference: {fileID: 1602197966606650, guid: 03257f374d42eca4989ce047676ecc78,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf693adc7effccd408dea9e09a3f60c3, type: 3}
