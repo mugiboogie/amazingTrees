@@ -40,10 +40,10 @@ public class EnemyController : MonoBehaviour {
         col = GetComponent<CapsuleCollider>();
         combatZone = transform.parent.GetComponent<BoxCollider>();
         float margin = 2f;
-        minX = combatZone.transform.position.x - ((combatZone.size.x - margin)/2f);
-        maxX = combatZone.transform.position.x + ((combatZone.size.x - margin)/2f);
-        minZ = combatZone.transform.position.z - ((combatZone.size.z - margin)/2f);
-        maxZ = combatZone.transform.position.z + ((combatZone.size.z - margin)/2f);
+        minX = combatZone.transform.position.x - ((combatZone.size.x/2f) - margin);
+        maxX = combatZone.transform.position.x + ((combatZone.size.x/2f) - margin);
+        minZ = combatZone.transform.position.z - ((combatZone.size.z/2f) - margin);
+        maxZ = combatZone.transform.position.z + ((combatZone.size.z/2f) - margin);
 
         enemyDirector.AddEnemy(this.gameObject);
         

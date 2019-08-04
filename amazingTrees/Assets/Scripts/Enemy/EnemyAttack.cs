@@ -12,7 +12,9 @@ public class EnemyAttack : MonoBehaviour
     public bool ranged;
     public bool hitscan;
     public string attackEffect;
-    public GameObject projectile;
+    public GameObject weakProjectile;
+    public GameObject heavyProjectile;
+    private GameObject currentProjectile;
     public bool setAttack;
     public float cooldownTime;
     private float nextAttack;
@@ -68,10 +70,12 @@ public class EnemyAttack : MonoBehaviour
             if (chooseAttack < heavyAttackChance)
             {
                 index = 1;
+                currentProjectile = heavyProjectile;
             }
             else
             {
                 index = 0;
+                currentProjectile = weakProjectile;
             }
 
             anim.SetInteger("AttackSkill", index);
@@ -132,8 +136,9 @@ public class EnemyAttack : MonoBehaviour
             if (hitscan == false)
             {
                 float projectileHeight = col.height / 2f;
-                GameObject projectileObj = Instantiate(projectile, transform.position + Vector3.up * projectileHeight, transform.rotation);
+                GameObject projectileObj = Instantiate(currentProjectile, transform.position + Vector3.up * projectileHeight, transform.rotation);
                 projectileObj.GetComponent<EnemyProjectile>().damage = appliedDamage;
+                projectileObj.GetComponent<EnemyProjectile>().effect = status;
             }
             else
             {
