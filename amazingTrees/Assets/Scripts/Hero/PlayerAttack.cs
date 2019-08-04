@@ -218,7 +218,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (chargeInitiatePlayed == false)
             {
-                audio.PlayOneShot(charging);
+                //audio.PlayOneShot(charging);
                 chargeInitiatePlayed = true;
             }
             if(chargeValue>.9f)
@@ -388,7 +388,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if(comboChain>2)
         {
-            cameraController.desiredFOV = 40f;
+            cameraController.desiredFOV = 45f;
         }
     }
 
