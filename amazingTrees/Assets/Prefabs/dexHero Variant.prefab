@@ -2338,7 +2338,7 @@ MonoBehaviour:
   damageDealt: 0
   chargeCompleteEffect: {fileID: 1759241351872106, guid: c3bc2bf87abeeab478db689a7c076758,
     type: 3}
-  chargeComplete: {fileID: 8300000, guid: a22098c825033f845856a0edc78d2a23, type: 3}
+  chargeComplete: {fileID: 8300000, guid: 30b32009639b62340a74cd67ac8aa4d5, type: 3}
   charging: {fileID: 8300000, guid: 09f7380b4b5cd5749a648cee72e24d55, type: 3}
   chargingPulse: {fileID: 8300000, guid: 29b019432f08da7419e85e0ae84ac830, type: 3}
   chargeAttackVoice: {fileID: 8300000, guid: b6bdb98e547aad244ba08fc0c9b5f2dd, type: 3}

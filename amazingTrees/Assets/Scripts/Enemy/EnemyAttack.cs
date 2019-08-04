@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     private float baseDamage;
-    private float heavyAttackChance = 0.15f;
+    public float heavyAttackChance;
     public float damageVariance;
     public float attackRange;
     public float passiveRange;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform lookAt;
+    private Vector3 lookAtPosition;
     public Transform camTransform;
     public float sensitivityX;
     public float sensitivityY;
@@ -56,19 +57,37 @@ public class CameraController : MonoBehaviour
             Vector3 dir = new Vector3(0, 0, -distance);
             Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
             setPosition = lookAt.position + (Vector3.up*2f) + rotation * dir;
+            lookAtPosition = lookAt.position + (Vector3.up * 1f);
             //camTransform.LookAt(lookAt.position);
-            
+
         }
         else
         {
-            setPosition = anchor.position;
+            //setPosition = anchor.position;
+
+            float distance = Vector3.Distance(new Vector3(target.position.x, 0f, target.position.z), new Vector3(transform.position.x, 0f, transform.position.z));
+            if (distance > 10f)
+            {
+                setPosition += (target.position - transform.position) * Time.deltaTime;
+               
+            }
+
+            setPosition.y = (target.position.y +1f) - transform.forward.y*6f;
+            
+            
+
+
             lookAt = target;
+
+            
+                lookAtPosition = lookAt.position;
+            
             //camTransform.LookAt(lookAt.position);
         }
 
         transform.position = Vector3.Lerp(transform.position, setPosition, 5f * Time.unscaledDeltaTime);
 
-        targetPosition = Vector3.Lerp(targetPosition, lookAt.position, 4f * Time.unscaledDeltaTime);
+        targetPosition = Vector3.Lerp(targetPosition, lookAtPosition, 4f * Time.unscaledDeltaTime);
         camTransform.LookAt(targetPosition);
 
 

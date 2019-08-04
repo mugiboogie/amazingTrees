@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce84fb860691a047aed0a23a8548fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heavyAttackChance: 0.15
   damageVariance: 5
   attackRange: 15
   passiveRange: 20
