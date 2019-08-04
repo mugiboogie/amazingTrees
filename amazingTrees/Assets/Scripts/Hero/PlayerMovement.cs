@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     //References
     private Animator anim;
     private Rigidbody rb;
-    private CharacterController charCon;
+    public CharacterController charCon;
     private Transform camera;
     private PlayerTargetting playerTargetting;
     private PlayerAttack playerAttack;
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Get Jump Input. A jump can only be performed when the character controller is grounded AND the input of jump is given. Otherwise, begin descending.
 
-        if (charCon.isGrounded && (Input.GetButtonDown("Jump")) && (!playerHealth.playerDead) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+        if ((!playerAttack.isCharging) && charCon.isGrounded && (Input.GetButtonDown("Jump")) && (!playerHealth.playerDead) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             //Character is jumping.
             verticalVelocity = jumpForce;
@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         //---The dash key is tapped
         //---The dash key is passed it's cooldown
         //---And the player has a dash ready
-        if ((dash==false)&&(Input.GetButtonDown("Dash"))&&(dashCooldown<Time.time) && (canDash==true) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+        if ((!playerAttack.isCharging)&&(dash==false)&&(Input.GetButtonDown("Dash"))&&(dashCooldown<Time.time) && (canDash==true) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             //dashDirection by default where the player is facing. However, this can be overwritten if the player is holding down a direction.
 

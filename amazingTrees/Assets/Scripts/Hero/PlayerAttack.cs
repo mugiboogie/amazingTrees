@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     public float mana;
     public float manaMax;
     public float manaRegenTime;
+    private bool attackReloadAfterAirborne;
     
 
     public float comboChain;
@@ -48,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
     private Text comboNumber;
     private Text comboComment;
 
-
+    public bool isCharging;
     private Animator chargeEffect;
     private bool chargeCompletePlayed;
     private bool chargeInitiatePlayed;
@@ -137,6 +138,16 @@ public class PlayerAttack : MonoBehaviour
         anim.SetBool("ChLightAttack", false);
         anim.SetBool("ChHeavyAttack", false);
 
+        if(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")&&playerMovement.charCon.isGrounded==false)
+        {
+            attackReloadAfterAirborne = false;
+        }
+        if(playerMovement.charCon.isGrounded == true)
+        {
+            attackReloadAfterAirborne = true;
+        }
+
+
 
         if (Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
         {
@@ -213,6 +224,8 @@ public class PlayerAttack : MonoBehaviour
 
         float chargeValue = Mathf.Max(lightAttackCharge / lightAttackChargeTime, heavyAttackCharge / heavyAttackChargeTime);
         chargeEffect.SetFloat("ChargeValue",chargeValue);
+
+        isCharging = chargeValue > 0f;
 
         if(chargeValue>.25f)
         {
