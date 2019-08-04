@@ -10,11 +10,14 @@ public class HealthPickup : MonoBehaviour
     private GameObject player;
     private PlayerHealth health;
 
+    private float expirationTime;
+
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         health = FindObjectOfType<PlayerHealth>();
+        expirationTime = Time.time + 30f;
     }
 
     private void FixedUpdate()
@@ -24,6 +27,12 @@ public class HealthPickup : MonoBehaviour
             followPlayer();
         }
     }
+
+    private void Update()
+    {
+        if (Time.time > expirationTime) { Destroy(gameObject); }
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -49,7 +58,7 @@ public class HealthPickup : MonoBehaviour
         float distanceNeeded = 5f;
         if (Vector3.Distance(transform.position, player.transform.position) < distanceNeeded)
         {
-            transform.position += (player.transform.position - transform.position) * 2f * Time.deltaTime;
+            transform.position += (player.transform.position - transform.position) * 8f * Time.deltaTime;
         }
     }
 }

@@ -10,11 +10,13 @@ public class MagicPickup : MonoBehaviour
     private GameObject player;
     private PlayerAttack magic;
 
+    private float expirationTime;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         magic = FindObjectOfType<PlayerAttack>();
+        expirationTime = Time.time + 30f;
     }
 
     private void FixedUpdate()
@@ -23,6 +25,11 @@ public class MagicPickup : MonoBehaviour
         {
             followPlayer();
         }
+    }
+
+    private void Update()
+    {
+        if (Time.time > expirationTime) { Destroy(gameObject); }
     }
 
     void OnTriggerEnter(Collider other)
@@ -49,7 +56,7 @@ public class MagicPickup : MonoBehaviour
         float distanceNeeded = 5f;
         if(Vector3.Distance(transform.position,player.transform.position)<distanceNeeded)
         {
-            transform.position += (player.transform.position - transform.position) * 2f * Time.deltaTime;
+            transform.position += (player.transform.position - transform.position) * 8f * Time.deltaTime;
         }
     }
 }
