@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
-
+    public RuntimeAnimatorController AC;
     public float attackRange;
     public float attackAngle;
     private Vector3 attackOrigin;
@@ -68,6 +68,8 @@ public class PlayerAttack : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = AC;
+
         cameraShake = Camera.main.GetComponent<CameraShake>();
         playerTargetting = GetComponent<PlayerTargetting>();
         cameraController = GameObject.FindGameObjectWithTag("CameraHolder").GetComponent<CameraController>();

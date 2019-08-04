@@ -2317,6 +2317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99b5796f20750a42a93389554cb7ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AC: {fileID: 9100000, guid: f3ff3211153c13142a21510bdac1d3f5, type: 2}
   attackRange: 3.5
   attackAngle: 90
   affectedLayers:
@@ -2336,6 +2337,7 @@ MonoBehaviour:
   trail1: {fileID: 8549646579989068981}
   trail2: {fileID: 7145476118735384556}
   damageDealt: 0
+  isCharging: 0
   chargeCompleteEffect: {fileID: 1759241351872106, guid: c3bc2bf87abeeab478db689a7c076758,
     type: 3}
   chargeComplete: {fileID: 8300000, guid: 30b32009639b62340a74cd67ac8aa4d5, type: 3}
@@ -2358,6 +2360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa45f5a82fddc3a418e2689e4ce0c5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charCon: {fileID: 0}
   dashTrail: {fileID: 6920609417809815651, guid: 226224795e3c91d4f9027b5caf43d8a1,
     type: 3}
   shockWave: {fileID: 1602197966606650, guid: 03257f374d42eca4989ce047676ecc78, type: 3}
