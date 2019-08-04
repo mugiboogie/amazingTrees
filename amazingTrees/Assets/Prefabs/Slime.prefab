@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce84fb860691a047aed0a23a8548fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heavyAttackChance: 0.15
+  heavyAttackChance: 0.2
   damageVariance: 5
   attackRange: 15
   passiveRange: 20
@@ -110,7 +110,8 @@ MonoBehaviour:
   attackEffect: 
   weakProjectile: {fileID: 8024722315556182740, guid: 29ecc3cbb120dbc46936ca81aad7dabe,
     type: 3}
-  heavyProjectile: {fileID: 0}
+  heavyProjectile: {fileID: 8024722315556182740, guid: b9393cde3a5ba0b44914d1d55e8a42df,
+    type: 3}
   setAttack: 0
   cooldownTime: 0
   affectedLayers:
