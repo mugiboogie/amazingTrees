@@ -3508,8 +3508,8 @@ MonoBehaviour:
   - {fileID: 1798173428634114, guid: 6b5d0a6176259624ab334336fcf46dd3, type: 3}
   - {fileID: 1710113590964352, guid: 3a1353a9f06ae6a47abcaee49b87781a, type: 3}
   hitWeakSFX:
-  - {fileID: 8300000, guid: c03727e3a5fb51144bd8e3c7c51e32ce, type: 3}
-  - {fileID: 8300000, guid: 6a79e72bd81954144b544a14c4bca8a9, type: 3}
+  - {fileID: 8300000, guid: 0f0dc18b503cb3b4bb1dbd2b9947a0a7, type: 3}
+  - {fileID: 8300000, guid: da530e7eebb47e24f939984d8e4b6290, type: 3}
   hitHeavyVFX:
   - {fileID: 1739205390092530, guid: 2078f3597a3daab428fe4f0d849b3243, type: 3}
   - {fileID: 1386863584468592, guid: b45e7a69e3434ad4caf13ca67391210d, type: 3}
