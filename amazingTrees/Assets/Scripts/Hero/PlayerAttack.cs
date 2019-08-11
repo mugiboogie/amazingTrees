@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public RuntimeAnimatorController AC;
+    private PlayerController playerController;
+
+    
     public float attackRange;
     public float attackAngle;
     private Vector3 attackOrigin;
@@ -65,10 +67,22 @@ public class PlayerAttack : MonoBehaviour
     public GameObject glitterParticle;
     public GameObject shockWave;
 
+    public void SummonHero()
+    {
+        anim = playerController.anim;
+        chargeAttackVoice = playerController.hero.chargeAttackVoice;
+        attackRange = playerController.hero.attackRange;
+        lightAttackRate = playerController.hero.lightAttackRate;
+        heavyAttackRate = playerController.hero.heavyAttackRate;
+        trail1 = playerController.avatar.GetComponent<PlayerAvatarDefinition>().EmitterStart;
+        trail2 = playerController.avatar.GetComponent<PlayerAvatarDefinition>().EmitterEnd;
+    }
+
     void Awake()
     {
-        anim = GetComponent<Animator>();
-        anim.runtimeAnimatorController = AC;
+        playerController = GetComponent<PlayerController>();
+        
+        //anim.runtimeAnimatorController = AC;
 
         cameraShake = Camera.main.GetComponent<CameraShake>();
         playerTargetting = GetComponent<PlayerTargetting>();
@@ -89,211 +103,212 @@ public class PlayerAttack : MonoBehaviour
     
     void Update()
     {
-
-        comboCounter.SetBool("ShowCombo", Time.time < comboChainReset);
-        if (comboChain > 0)
+        if (anim != null)
         {
-            comboNumber.text = comboChain + " Hits";
-
-            if(comboChain>100) { comboComment.text = "KWEEEEN!!!"; }
-            else if ((comboChain > 90) && (comboChain <= 100)) { comboComment.text = "R.I.P.!!"; }
-            else if ((comboChain > 80) && (comboChain <= 90)) { comboComment.text = "Wicked!!"; }
-            else if ((comboChain > 69) && (comboChain <= 80)) { comboComment.text = "Freaky!!"; }
-            else if (comboChain == 69) { comboComment.text = "nice."; }
-            else if ((comboChain > 60) && (comboChain <= 68)) { comboComment.text = "OMG!!"; }
-            else if ((comboChain > 50) && (comboChain <= 60)) { comboComment.text = "Killer!!"; }
-            else if ((comboChain > 40) && (comboChain <=50)) { comboComment.text = "Witchin'!!"; }
-            else if ((comboChain > 30) && (comboChain <= 40)) { comboComment.text = "Slay!!"; }
-            else if ((comboChain > 20) && (comboChain <= 30)) { comboComment.text = "Yaass!"; }
-            else if ((comboChain > 10) && (comboChain <= 20)) { comboComment.text = "Beautiful!"; }
-            else { comboComment.text = "Cool!"; }
-        }
-
-
-        if((Time.time>manaRegenTime) && (enemyDirector.enemies.Count>0))
-        {
-            AddSpAttack(25f * Time.deltaTime);
-        }
-
-        bool emitTrail = ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
-
-        if (trail1 != null)
-        {
-            trail1.Emit = emitTrail;
-        }
-        if (trail2 != null)
-        {
-            trail2.Emit = emitTrail;
-        }
-
-        CameraFOV();
-
-        if(Time.time>comboChainReset)
-        {
-            comboChain = 0f;
-        }
-
-        attackOrigin = transform.position + Vector3.up;
-
-        anim.SetBool("LightAttack", false);
-        anim.SetBool("HeavyAttack", false);
-        anim.SetBool("ChLightAttack", false);
-        anim.SetBool("ChHeavyAttack", false);
-
-        if(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")&&playerMovement.charCon.isGrounded==false)
-        {
-            attackReloadAfterAirborne = false;
-        }
-        if(playerMovement.charCon.isGrounded == true)
-        {
-            attackReloadAfterAirborne = true;
-        }
-
-
-
-        if (Input.GetButtonDown("LightAttack") && (Time.time> durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
-        {
-            cooldownTime = Time.time + lightAttackRate + .25f;
-            durationTime = Time.time + lightAttackRate;
-
-            
-            anim.SetTrigger("LightAttack");
-        }
-
-        if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
-        {
-            cooldownTime = Time.time + heavyAttackRate + .5f;
-            durationTime = Time.time + heavyAttackRate;
-
-
-            anim.SetTrigger("HeavyAttack");
-        }
-
-
-        
-
-        //Light Attack Charge
-        if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime))
-        {
-            //Unleash attack
-            lightAttackCharge = 0f;
-
-            cooldownTime = Time.time + lightAttackRate + .5f;
-            durationTime = Time.time + lightAttackRate;
-
-
-            audio.PlayOneShot(chargeAttackVoice);
-            audio.PlayOneShot(chargeAttackFoley);
-            chargeAttackDuration = Time.time + .5f;
-            Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
-            anim.SetTrigger("ChLightAttack");
-        }
-        if (Input.GetButton("LightAttack")&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit"))&& (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
-        {
-            lightAttackCharge += Time.deltaTime;
-        }
-        else
-        {
-            lightAttackCharge = 0f;
-        }
-
-
-
-        //Heavy Attack Charge
-        if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime))
-        {
-            //Unleash attack
-            heavyAttackCharge = 0f;
-
-            cooldownTime = Time.time + heavyAttackRate + .5f;
-            durationTime = Time.time + heavyAttackRate;
-
-
-            audio.PlayOneShot(chargeAttackVoice);
-            audio.PlayOneShot(chargeAttackFoley);
-            chargeAttackDuration = Time.time + .5f;
-            Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
-            anim.SetTrigger("ChHeavyAttack");
-        }
-        if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
-        {
-            heavyAttackCharge += Time.deltaTime;
-        }
-        else
-        {
-            heavyAttackCharge = 0f;
-        }
-
-        float chargeValue = Mathf.Max(lightAttackCharge / lightAttackChargeTime, heavyAttackCharge / heavyAttackChargeTime);
-        chargeEffect.SetFloat("ChargeValue",chargeValue);
-
-        isCharging = chargeValue > 0f;
-
-        if(chargeValue>.25f)
-        {
-            if (chargeInitiatePlayed == false)
+            comboCounter.SetBool("ShowCombo", Time.time < comboChainReset);
+            if (comboChain > 0)
             {
-                //audio.PlayOneShot(charging);
-                chargeInitiatePlayed = true;
+                comboNumber.text = comboChain + " Hits";
+
+                if (comboChain > 100) { comboComment.text = "KWEEEEN!!!"; }
+                else if ((comboChain > 90) && (comboChain <= 100)) { comboComment.text = "R.I.P.!!"; }
+                else if ((comboChain > 80) && (comboChain <= 90)) { comboComment.text = "Wicked!!"; }
+                else if ((comboChain > 69) && (comboChain <= 80)) { comboComment.text = "Freaky!!"; }
+                else if (comboChain == 69) { comboComment.text = "nice."; }
+                else if ((comboChain > 60) && (comboChain <= 68)) { comboComment.text = "OMG!!"; }
+                else if ((comboChain > 50) && (comboChain <= 60)) { comboComment.text = "Killer!!"; }
+                else if ((comboChain > 40) && (comboChain <= 50)) { comboComment.text = "Witchin'!!"; }
+                else if ((comboChain > 30) && (comboChain <= 40)) { comboComment.text = "Slay!!"; }
+                else if ((comboChain > 20) && (comboChain <= 30)) { comboComment.text = "Yaass!"; }
+                else if ((comboChain > 10) && (comboChain <= 20)) { comboComment.text = "Beautiful!"; }
+                else { comboComment.text = "Cool!"; }
             }
-            if(chargeValue>.9f)
+
+
+            if ((Time.time > manaRegenTime) && (enemyDirector.enemies.Count > 0))
             {
-                if(chargeCompletePlayed== false)
+                AddSpAttack(25f * Time.deltaTime);
+            }
+
+            bool emitTrail = ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack")));
+
+            if (trail1 != null)
+            {
+                trail1.Emit = emitTrail;
+            }
+            if (trail2 != null)
+            {
+                trail2.Emit = emitTrail;
+            }
+
+            CameraFOV();
+
+            if (Time.time > comboChainReset)
+            {
+                comboChain = 0f;
+            }
+
+            attackOrigin = transform.position + Vector3.up;
+
+            anim.SetBool("LightAttack", false);
+            anim.SetBool("HeavyAttack", false);
+            anim.SetBool("ChLightAttack", false);
+            anim.SetBool("ChHeavyAttack", false);
+
+            if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack") && playerMovement.charCon.isGrounded == false)
+            {
+                attackReloadAfterAirborne = false;
+            }
+            if (playerMovement.charCon.isGrounded == true)
+            {
+                attackReloadAfterAirborne = true;
+            }
+
+
+
+            if (Input.GetButtonDown("LightAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+            {
+                cooldownTime = Time.time + lightAttackRate + .25f;
+                durationTime = Time.time + lightAttackRate;
+
+
+                anim.SetTrigger("LightAttack");
+            }
+
+            if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+            {
+                cooldownTime = Time.time + heavyAttackRate + .5f;
+                durationTime = Time.time + heavyAttackRate;
+
+
+                anim.SetTrigger("HeavyAttack");
+            }
+
+
+
+
+            //Light Attack Charge
+            if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            {
+                //Unleash attack
+                lightAttackCharge = 0f;
+
+                cooldownTime = Time.time + lightAttackRate + .5f;
+                durationTime = Time.time + lightAttackRate;
+
+
+                audio.PlayOneShot(chargeAttackVoice);
+                audio.PlayOneShot(chargeAttackFoley);
+                chargeAttackDuration = Time.time + .5f;
+                Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
+                anim.SetTrigger("ChLightAttack");
+            }
+            if (Input.GetButton("LightAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+            {
+                lightAttackCharge += Time.deltaTime;
+            }
+            else
+            {
+                lightAttackCharge = 0f;
+            }
+
+
+
+            //Heavy Attack Charge
+            if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            {
+                //Unleash attack
+                heavyAttackCharge = 0f;
+
+                cooldownTime = Time.time + heavyAttackRate + .5f;
+                durationTime = Time.time + heavyAttackRate;
+
+
+                audio.PlayOneShot(chargeAttackVoice);
+                audio.PlayOneShot(chargeAttackFoley);
+                chargeAttackDuration = Time.time + .5f;
+                Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
+                anim.SetTrigger("ChHeavyAttack");
+            }
+            if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+            {
+                heavyAttackCharge += Time.deltaTime;
+            }
+            else
+            {
+                heavyAttackCharge = 0f;
+            }
+
+            float chargeValue = Mathf.Max(lightAttackCharge / lightAttackChargeTime, heavyAttackCharge / heavyAttackChargeTime);
+            chargeEffect.SetFloat("ChargeValue", chargeValue);
+
+            isCharging = chargeValue > 0f;
+
+            if (chargeValue > .25f)
+            {
+                if (chargeInitiatePlayed == false)
                 {
-                    Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
-                    chargeCompletePlayed = true;
-                    audio.PlayOneShot(chargeComplete);
-                    chargePulseTime = Time.time + 1f;
+                    //audio.PlayOneShot(charging);
+                    chargeInitiatePlayed = true;
                 }
-                if(Time.time>chargePulseTime)
+                if (chargeValue > .9f)
                 {
-                    Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
-                    chargePulseTime = Time.time + 1f;
-                    audio.PlayOneShot(chargingPulse);
+                    if (chargeCompletePlayed == false)
+                    {
+                        Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
+                        chargeCompletePlayed = true;
+                        audio.PlayOneShot(chargeComplete);
+                        chargePulseTime = Time.time + 1f;
+                    }
+                    if (Time.time > chargePulseTime)
+                    {
+                        Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
+                        chargePulseTime = Time.time + 1f;
+                        audio.PlayOneShot(chargingPulse);
+                    }
                 }
             }
-        }
-        else
-        {
-            chargeInitiatePlayed = false;
-            chargeCompletePlayed = false;
-        }
-
-        if (Time.time < chargeAttackDuration)
-        {
-            if (Time.time > glitterCooldown)
+            else
             {
-                glitterCooldown = Time.time + .25f;
-                Instantiate(glitterParticle, transform.position, transform.rotation);
+                chargeInitiatePlayed = false;
+                chargeCompletePlayed = false;
             }
-        }
+
+            if (Time.time < chargeAttackDuration)
+            {
+                if (Time.time > glitterCooldown)
+                {
+                    glitterCooldown = Time.time + .25f;
+                    Instantiate(glitterParticle, transform.position, transform.rotation);
+                }
+            }
 
 
-        anim.SetBool("Melee", Time.time< cooldownTime);
-        anim.SetBool("Charging", (heavyAttackCharge> heavyAttackChargeTime/2f) ||(lightAttackCharge> lightAttackChargeTime / 2f));
-        if(anim.GetBool("Charging"))
-        {
-            AttackCancel();
-        }
+            anim.SetBool("Melee", Time.time < cooldownTime);
+            anim.SetBool("Charging", (heavyAttackCharge > heavyAttackChargeTime / 2f) || (lightAttackCharge > lightAttackChargeTime / 2f));
+            if (anim.GetBool("Charging"))
+            {
+                AttackCancel();
+            }
 
-        if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit"))|| (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
-        {
-            AttackCancel();
-        }
+            if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
+            {
+                AttackCancel();
+            }
 
 
 
 
             if (lastHitEnemy != null)
-        {
-            Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
-
-            if ((Vector3.Distance(lastHitEnemy.transform.position, transform.position) > 3f) || (Vector3.Angle(targetDir, transform.forward) > 45f))
             {
-                playerTargetting.overrideEnemy = null;
+                Vector3 targetDir = lastHitEnemy.transform.position - transform.position;
+
+                if ((Vector3.Distance(lastHitEnemy.transform.position, transform.position) > 3f) || (Vector3.Angle(targetDir, transform.forward) > 45f))
+                {
+                    playerTargetting.overrideEnemy = null;
+                }
             }
         }
-
     }
 
     public void Melee(string property)
@@ -364,7 +379,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     StartCoroutine(cameraShake.Shake(.1f, .00625f));
                 }
-                playerMovement.stutterTime = Time.time + .25f;
+                playerMovement.stutterTime = Time.time + (lightAttackRate*2f);
             }
             damageDealt += damage;
         }
@@ -378,32 +393,37 @@ public class PlayerAttack : MonoBehaviour
 
     public void AttackCancel()
     {
-        cooldownTime = Time.time;
-        durationTime = Time.time;
-        //lightAttackCharge = 0f;
-        //heavyAttackCharge = 0f;
+        if (anim != null)
+        {
+            cooldownTime = Time.time;
+            durationTime = Time.time;
+            //lightAttackCharge = 0f;
+            //heavyAttackCharge = 0f;
 
-        anim.SetBool("Melee", false);
-        anim.SetBool("LightAttack", false);
-        anim.SetBool("HeavyAttack", false);
-        anim.SetBool("ChLightAttack", false);
-        anim.SetBool("ChHeavyAttack", false);
-
+            anim.SetBool("Melee", false);
+            anim.SetBool("LightAttack", false);
+            anim.SetBool("HeavyAttack", false);
+            anim.SetBool("ChLightAttack", false);
+            anim.SetBool("ChHeavyAttack", false);
+        }
     }
 
     void CameraFOV()
     {
-        cameraController.desiredFOV = 60f;
-        if (anim.GetBool("Charging"))
+        if (anim != null)
         {
-            float chargeValue = Mathf.Min(1f,Mathf.Max(heavyAttackCharge, lightAttackCharge));
-            cameraController.desiredFOV = 60f-(30f*chargeValue * chargeValue);
-            //StartCoroutine(cameraShake.Shake(.1f, .0125f));
-            cameraShake.ShakeConstant(.0125f);
-        }
-        else if(comboChain>2)
-        {
-            cameraController.desiredFOV = 45f;
+            cameraController.desiredFOV = 60f;
+            if (anim.GetBool("Charging"))
+            {
+                float chargeValue = Mathf.Min(1f, Mathf.Max(heavyAttackCharge, lightAttackCharge));
+                cameraController.desiredFOV = 60f - (30f * chargeValue * chargeValue);
+                //StartCoroutine(cameraShake.Shake(.1f, .0125f));
+                cameraShake.ShakeConstant(.0125f);
+            }
+            else if (comboChain > 2)
+            {
+                cameraController.desiredFOV = 45f;
+            }
         }
     }
 

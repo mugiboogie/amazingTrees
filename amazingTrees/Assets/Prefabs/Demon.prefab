@@ -1157,7 +1157,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300002, guid: b225ce571e5a2924491fb090cd60f5a1, type: 3}
   m_Bones:
@@ -1451,7 +1451,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: b225ce571e5a2924491fb090cd60f5a1, type: 3}
   m_Bones:
@@ -3484,7 +3484,8 @@ MonoBehaviour:
   ranged: 0
   hitscan: 0
   attackEffect: 
-  projectile: {fileID: 0}
+  weakProjectile: {fileID: 0}
+  heavyProjectile: {fileID: 0}
   setAttack: 0
   cooldownTime: 0
   affectedLayers:

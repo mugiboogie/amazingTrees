@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86df23c1a68d5294585e5b731586eed0, type: 3}
+  m_Name: DexHero
+  m_EditorClassIdentifier: 
+  heroName: Dex
+  heroPortraitImg: {fileID: 21300000, guid: 138f84090b967d046a16ce7a87e2b880, type: 3}
+  heroNameImg: {fileID: 21300000, guid: 451682d0f48ae014aa271b8de45360b3, type: 3}
+  attackRange: 3.5
+  lightAttackRate: 0.125
+  heavyAttackRate: 0.25
+  movementSpeed: 5
+  dashTime: 1
+  damageReduction: 1
+  summonSfx:
+  - {fileID: 8300000, guid: 0ff669cbe25461e4e8320bbcb070ccfc, type: 3}
+  - {fileID: 8300000, guid: e37b1ec60ae23b44babc7f21476aa757, type: 3}
+  injuredSfx:
+  - {fileID: 8300000, guid: f3c412f6d057dd341984ca5cf52de261, type: 3}
+  - {fileID: 8300000, guid: 7d4e4010c69114447ba09aab6b34dcbd, type: 3}
+  deathSfx: {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
+  chargeAttackVoice: {fileID: 8300000, guid: b6bdb98e547aad244ba08fc0c9b5f2dd, type: 3}
+  spell: {fileID: 7822770006620496233, guid: 168a8050f6d41b64ea9300cc990320c4, type: 3}
+  avatar: {fileID: 1692139940321090014, guid: b0799a6a1c47dae42803becb45237f93, type: 3}
+  decoy: {fileID: 1977986245746955056, guid: c00a70673309e2a42a2682dcba669975, type: 3}
+  animatorController: {fileID: 9100000, guid: f3ff3211153c13142a21510bdac1d3f5, type: 2}
+  bishoujoEyes: {fileID: 7671737758535665035, guid: 84def4c1e399fe84fb4b9505c5ef531a,
+    type: 3}

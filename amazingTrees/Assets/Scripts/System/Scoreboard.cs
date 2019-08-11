@@ -10,6 +10,7 @@ public class Scoreboard : MonoBehaviour
     private PlayerAttack playerAttack;
     private Text text;
     public CombatZoneController combatZone;
+    private string defaultText;
 
     public GameObject prize;
 
@@ -19,6 +20,7 @@ public class Scoreboard : MonoBehaviour
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         combatZone = GetComponent<CombatZoneController>();
+        defaultText = "Press F to swap heroes.";
     }
     void Update()
     {
@@ -32,7 +34,12 @@ public class Scoreboard : MonoBehaviour
         result = result + "Damage Taken: " + playerHealth.damageTaken.ToString("F2") + "\n";
         result = result + "Damage Dealt: " + playerAttack.damageDealt.ToString("F2") + "\n";
 
-        text.text = "";
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            defaultText = "";
+        }
+
+        text.text = defaultText;
 
         bool success = true;
 

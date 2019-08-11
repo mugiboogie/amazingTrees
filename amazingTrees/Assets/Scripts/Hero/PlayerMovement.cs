@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //References
+    private PlayerController playerController;
     private Animator anim;
     private Rigidbody rb;
     public CharacterController charCon;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalVelocity = 0f; //The value in which the jumpVector changes. (in Movement)
     private Quaternion targetRotation; //Rotation that the player aligns to when movement is applied. (in Turning)
     private bool dash; //True if the player is in a dash.
+    public float dashTime; //The value of time in which the dash will end.
     [HideInInspector] public float dashDuration; //The end time of the player's dash.
     private float dashCooldown; //The cooldown for the time the player's next dash can begin.
     private bool canDash; //A check to ensure that the player can dash. It is only true when the player is grounded, so an airborne player must touch the ground before dashing again.
@@ -41,11 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerDecoyController playerDecoyController;
 
-
+    public void SummonHero()
+    {
+        anim = playerController.anim;
+        playerDecoyController = playerController.decoy.GetComponent<PlayerDecoyController>();
+        charSpeed = playerController.hero.movementSpeed;
+        dashTime = playerController.hero.dashTime;
+    }
 
     void Awake()
     {
-        anim = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
+        
         rb = GetComponent<Rigidbody>();
         charCon = GetComponent<CharacterController>();
         //camera = Camera.main.transform;
@@ -55,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         audio = GetComponent<AudioSource>();
 
-        playerDecoyController = GameObject.FindGameObjectWithTag("PlayerEffects/PlayerDecoy").GetComponent<PlayerDecoyController>();
+        
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
 
     }
@@ -63,50 +72,53 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //Get Inputs
-        //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        //--Get Camera Vectors: Takes the Vertical (Tilt) and Horizontal (Pan) vectors of the camera and multiplies them by the input values.
-        Vector3 cameraVertical = (camera.up + camera.forward)*moveVertical;
-        Vector3 cameraHorizontal = (camera.right)*moveHorizontal;
-        Vector3 cameraVector = cameraVertical + cameraHorizontal;
+        if (anim != null)
+        {
+            //Get Inputs
+            //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+            //--Get Camera Vectors: Takes the Vertical (Tilt) and Horizontal (Pan) vectors of the camera and multiplies them by the input values.
+            Vector3 cameraVertical = (camera.up + camera.forward) * moveVertical;
+            Vector3 cameraHorizontal = (camera.right) * moveHorizontal;
+            Vector3 cameraVector = cameraVertical + cameraHorizontal;
 
-        
-        //--Calculate Input: Gets the final Vector for input. This will be the cameraVector's X and Z. It is normalized to prevent diagonals being faster than straights.
-        Vector3 inputDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized;
 
-        //Apply Movement
-        Movement(inputDirection);
-        if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit"))|| (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
-        {
-            Vector3 hitDirection = hitPosition - transform.position;
-            Turning(hitDirection);
-        }
-        else if ((!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")))&& (!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))))
-        {
-            //If the player is not in an attack, face the direction the joystick is pulled.
-            Turning(inputDirection);
-        }
-        else
-        {
-            //If the player is attacking, automatically face the lock-on target.
-            if (playerTargetting.enemyTarget != null)
+            //--Calculate Input: Gets the final Vector for input. This will be the cameraVector's X and Z. It is normalized to prevent diagonals being faster than straights.
+            Vector3 inputDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized;
+
+            //Apply Movement
+            Movement(inputDirection);
+            if ((anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("KnockUp")))
             {
-                Turning(playerTargetting.enemyTarget.transform.position - transform.position);
+                Vector3 hitDirection = hitPosition - transform.position;
+                Turning(hitDirection);
+            }
+            else if ((!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack"))) && (!(anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))))
+            {
+                //If the player is not in an attack, face the direction the joystick is pulled.
+                Turning(inputDirection);
             }
             else
             {
-                Turning(inputDirection);
+                //If the player is attacking, automatically face the lock-on target.
+                if (playerTargetting.enemyTarget != null)
+                {
+                    Turning(playerTargetting.enemyTarget.transform.position - transform.position);
+                }
+                else
+                {
+                    Turning(inputDirection);
+                }
             }
+
+            //Apply Animation Parameters
+            anim.SetFloat("Speed", inputDirection.magnitude, .05f, Time.deltaTime); //"Speed" in anim is 0=idle to 1=running. A dampening time was added to make the locomotion feel smoother.
+            anim.SetBool("isGrounded", charCon.isGrounded); //"isGrounded" in anim is true=grounded or false=in air.
+            anim.SetBool("Dashing", (dashDuration > Time.time));
+
+            anim.enabled = (Time.time > stutterTime);
         }
-
-        //Apply Animation Parameters
-        anim.SetFloat("Speed", inputDirection.magnitude, .05f, Time.deltaTime); //"Speed" in anim is 0=idle to 1=running. A dampening time was added to make the locomotion feel smoother.
-        anim.SetBool("isGrounded", charCon.isGrounded); //"isGrounded" in anim is true=grounded or false=in air.
-        anim.SetBool("Dashing", (dashDuration > Time.time));
-
-        anim.enabled = (Time.time > stutterTime);
 
     }
 
@@ -193,8 +205,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 dashDirection = inputDirection;
             }
-            dashCooldown = Time.time + 1f;
-            dashDuration = Time.time + .5f;
+            dashCooldown = Time.time + dashTime;
+            dashDuration = Time.time + (dashTime/2f);
             dash = true;
             canDash = false;
             playerDecoyController.SetPosition();
@@ -239,15 +251,31 @@ public class PlayerMovement : MonoBehaviour
 
         anim.applyRootMotion = (((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")));
 
+        if (anim.applyRootMotion == false)
+        {
+            playerController.avatar.transform.position = transform.position;
+            playerController.avatar.transform.rotation = transform.rotation;
+            charCon.enabled = true;
+        }
+        else
+        {
+            transform.position = anim.rootPosition;
+            transform.rotation = anim.rootRotation;
+            charCon.enabled = false;
+        }
         
 
         if (((!anim.applyRootMotion) && (anim.GetBool("Charging")==false)))
         {
             charCon.Move((inputDirection * charSpeed * Time.deltaTime) + (jumpDirection * Time.deltaTime));
         }
-        else
+        else if (((!anim.applyRootMotion) && (anim.GetBool("Charging") == true)))
         {
-                charCon.Move(jumpDirection * Time.deltaTime);
+            charCon.Move(jumpDirection * Time.deltaTime);
+        }
+        else 
+        {
+            //charCon.Move(jumpDirection * Time.deltaTime);
         }
 
         //Flinch Negate

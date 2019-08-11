@@ -13,11 +13,15 @@ public class PlayerDecoyController : MonoBehaviour
 
     public Color visibleColor;
 
+    public void SummonHero()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().avatar;
+        playerBones = player.GetComponentInChildren<SkinnedMeshRenderer>().bones;
+    }
+
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         decoyBones = GetComponentInChildren<SkinnedMeshRenderer>().bones;
-        playerBones = player.GetComponentInChildren<SkinnedMeshRenderer>().bones;
     }
 
     void Update()
@@ -37,10 +41,13 @@ public class PlayerDecoyController : MonoBehaviour
 
     public void SetPosition()
     {
-        for (int i = 0; i < decoyBones.Length; i++)
+        if (player != null)
         {
-            decoyBones[i].SetPositionAndRotation(playerBones[i].position, playerBones[i].rotation);
+            for (int i = 0; i < decoyBones.Length; i++)
+            {
+                decoyBones[i].SetPositionAndRotation(playerBones[i].position, playerBones[i].rotation);
+            }
+            visibility = 1f;
         }
-        visibility = 1f;
     }
 }
