@@ -175,7 +175,7 @@ public class PlayerHealth : MonoBehaviour
 
                 if ((hitSFX == null) || (hitSFX.Length == 0))
                 {
-                    audioClipController.PlayHit(transform.position + Vector3.up, damageValue);
+                    audioClipController.PlayHit(transform.position + Vector3.up);
 
                 }
                 else
