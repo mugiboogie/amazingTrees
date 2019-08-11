@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86df23c1a68d5294585e5b731586eed0, type: 3}
+  m_Name: RikaHero
+  m_EditorClassIdentifier: 
+  heroName: Rika
+  heroPortraitImg: {fileID: 21300000, guid: 17f64011c41a38c4a83b60318359216b, type: 3}
+  heroNameImg: {fileID: 21300000, guid: 0261e0bc3f34224449ef82df957d886e, type: 3}
+  attackRange: 2
+  lightAttackRate: 0.0625
+  heavyAttackRate: 0.125
+  movementSpeed: 7
+  dashTime: 0.5
+  damageReduction: 1.2
+  summonSfx:
+  - {fileID: 8300000, guid: 3f0636567c4803049aa5172b2308b156, type: 3}
+  - {fileID: 8300000, guid: 16ece081491c8eb44993b1a3a1d4502a, type: 3}
+  injuredSfx:
+  - {fileID: 8300000, guid: fc0ad333f119f90428539af1ae669a30, type: 3}
+  - {fileID: 8300000, guid: 02585a0317f9efe47bcd0b918ce16cdf, type: 3}
+  - {fileID: 8300000, guid: 2e86e374f382519429603c7876c8a12d, type: 3}
+  - {fileID: 8300000, guid: f63d2094725dccf48a0e20529bc29339, type: 3}
+  - {fileID: 8300000, guid: e2ce68dd5b5e3de44964b839196c51d4, type: 3}
+  - {fileID: 8300000, guid: 566ee1221d8b2f44784cc7ba8973ff1e, type: 3}
+  deathSfx: {fileID: 8300000, guid: b476075c78fdc434bb1fd3e6e14d1ebb, type: 3}
+  chargeAttackVoice: {fileID: 8300000, guid: 214d6b8eff748df4aac7f28e6531ff6f, type: 3}
+  spell: {fileID: 7730668750658584556, guid: bf02b3c16aea91546bcc56095a24df6f, type: 3}
+  avatar: {fileID: 1931637549261350904, guid: 811a3fb3fb89f9d48866dcca455f5312, type: 3}
+  decoy: {fileID: 4091948247487601073, guid: 7a42e4791a2ab9e43b7db7e9d23ea438, type: 3}
+  animatorController: {fileID: 9100000, guid: f3ff3211153c13142a21510bdac1d3f5, type: 2}
+  bishoujoEyes: {fileID: 4787136789783332926, guid: ea33f37ae704cea46ab4949a3c5192fe,
+    type: 3}
