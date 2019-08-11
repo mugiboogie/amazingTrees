@@ -7,6 +7,7 @@ public class UISpellMeter : MonoBehaviour
 {
     private Image spellMeter;
     private Image spellIcon;
+    private Image fullMeter;
     private PlayerAttack playerAttack;
 
     private float spellRatio;
@@ -15,6 +16,7 @@ public class UISpellMeter : MonoBehaviour
     {
         spellMeter = transform.Find("SpellMeterFill").GetComponent<Image>();
         spellIcon = transform.Find("SpellIcon").GetComponent<Image>();
+        fullMeter = transform.Find("SpellMeterFull").GetComponent<Image>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
     }
 
@@ -27,6 +29,7 @@ public class UISpellMeter : MonoBehaviour
         spellMeter.fillAmount = spellRatio;
 
         spellIcon.enabled = (spellRatio >= 1f);
+        fullMeter.enabled = (spellRatio >= 1f);
 
     }
 }
