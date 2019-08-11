@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RikaHero
   m_EditorClassIdentifier: 
   heroName: Rika
-  heroPortraitImg: {fileID: 21300000, guid: 138f84090b967d046a16ce7a87e2b880, type: 3}
-  heroNameImg: {fileID: 21300000, guid: 451682d0f48ae014aa271b8de45360b3, type: 3}
+  heroPortraitImg: {fileID: 21300000, guid: 17f64011c41a38c4a83b60318359216b, type: 3}
+  heroNameImg: {fileID: 21300000, guid: 0261e0bc3f34224449ef82df957d886e, type: 3}
   attackRange: 2
   lightAttackRate: 0.0625
   heavyAttackRate: 0.125

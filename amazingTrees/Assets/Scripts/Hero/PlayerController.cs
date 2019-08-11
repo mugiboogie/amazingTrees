@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     private int selection;
     public Hero[] heroes;
     public Hero hero;
+    private Image charPort;
+    private Image charName;
 
     public GameObject avatar;
     public GameObject spell;
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
         audio = GetComponent<AudioSource>();
         UI = GameObject.FindGameObjectWithTag("UI").transform;
         autoSpawnTime = Time.time + .1f;
+        charPort = GameObject.FindGameObjectWithTag("HeathBar").transform.Find("CharacterPort").transform.Find("charPort").GetComponent<Image>();
+        charName = GameObject.FindGameObjectWithTag("HeathBar").transform.Find("CharacterName").transform.Find("charName").GetComponent<Image>();
+
 
 
     }
@@ -86,6 +92,8 @@ public class PlayerController : MonoBehaviour
         playerMovement.SummonHero();
         playerHealth.SummonHero();
         decoy.GetComponent<PlayerDecoyController>().SummonHero();
+        charPort.sprite = hero.heroPortraitImg;
+        charName.sprite = hero.heroNameImg;
     }
 
 }
