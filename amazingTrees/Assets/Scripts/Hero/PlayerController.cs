@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
         audio = GetComponent<AudioSource>();
         UI = GameObject.FindGameObjectWithTag("UI").transform;
         autoSpawnTime = Time.time + .1f;
-        charPort = GameObject.FindGameObjectWithTag("HeathBar").transform.Find("CharacterPort").transform.Find("charPort").GetComponent<Image>();
-        charName = GameObject.FindGameObjectWithTag("HeathBar").transform.Find("CharacterName").transform.Find("charName").GetComponent<Image>();
+        charPort = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterPort").transform.Find("charPort").GetComponent<Image>();
+        charName = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterName").transform.Find("charName").GetComponent<Image>();
 
 
 
