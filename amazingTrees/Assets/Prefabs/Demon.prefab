@@ -3507,7 +3507,9 @@ MonoBehaviour:
   - {fileID: 173094, guid: c4c246947415325428ae30438860f0cf, type: 3}
   - {fileID: 1798173428634114, guid: 6b5d0a6176259624ab334336fcf46dd3, type: 3}
   - {fileID: 1710113590964352, guid: 3a1353a9f06ae6a47abcaee49b87781a, type: 3}
-  hitWeakSFX: []
+  hitWeakSFX:
+  - {fileID: 8300000, guid: c03727e3a5fb51144bd8e3c7c51e32ce, type: 3}
+  - {fileID: 8300000, guid: 6a79e72bd81954144b544a14c4bca8a9, type: 3}
   hitHeavyVFX:
   - {fileID: 1739205390092530, guid: 2078f3597a3daab428fe4f0d849b3243, type: 3}
   - {fileID: 1386863584468592, guid: b45e7a69e3434ad4caf13ca67391210d, type: 3}
@@ -3515,7 +3517,9 @@ MonoBehaviour:
   - {fileID: 1028757127096146, guid: 7cef54b64731a754e96acc803eca057d, type: 3}
   - {fileID: 1404532012057798, guid: c3d6aceda71cc394396ebd88183ca337, type: 3}
   - {fileID: 172572, guid: aa6355cc66c1f874fa3592bc4caced89, type: 3}
-  hitHeavySFX: []
+  hitHeavySFX:
+  - {fileID: 8300000, guid: 1939c027bda6826418c1578c4c43746b, type: 3}
+  - {fileID: 8300000, guid: 30f61e455c5d97a48972acc82e2dec30, type: 3}
 --- !u!114 &5672407910452476209
 MonoBehaviour:
   m_ObjectHideFlags: 0

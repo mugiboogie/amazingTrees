@@ -157,7 +157,8 @@ public class EnemyAttack : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("Player"))
                     {
                         GameObject[] hitVFXSelected = (index == 0 ? hitWeakVFX : hitHeavyVFX);
-                        playerHealth.TakeDamage(appliedDamage, status, transform.position, hitVFXSelected);
+                        AudioClip[] hitSFXSelected = (index == 0 ? hitWeakSFX : hitHeavySFX);
+                        playerHealth.TakeDamage(appliedDamage, status, transform.position, hitVFXSelected, hitSFXSelected);
                         StartCoroutine(cameraShake.Shake(.1f, .005f * appliedDamage));
                         stutterTime = Time.time + .125f;
                     }
