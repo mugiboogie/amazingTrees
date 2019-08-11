@@ -36,6 +36,11 @@ public class EnemyAttack : MonoBehaviour
     private AudioClipController audioClipController;
     private AudioSource audio;
     public AudioClip[] angery;
+    public GameObject[] hitWeakVFX;
+    public AudioClip[] hitWeakSFX;
+    public GameObject[] hitHeavyVFX;
+    public AudioClip[] hitHeavySFX;
+    private int index;
 
     void Awake()
     {
@@ -53,7 +58,6 @@ public class EnemyAttack : MonoBehaviour
     {
 
         float chooseAttack = Random.value;
-        int index;
         anim.SetBool("Attack", false);
 
         if (setAttack)
@@ -123,7 +127,9 @@ public class EnemyAttack : MonoBehaviour
             {
                 if (hitcollider[i].gameObject.CompareTag("Player"))
                 {
-                    playerHealth.TakeDamage(appliedDamage, status, transform.position);
+                    GameObject[] hitVFXSelected = (index == 0 ? hitWeakVFX : hitHeavyVFX);
+                    AudioClip[] hitSFXSelected = (index == 0 ? hitWeakSFX : hitHeavySFX);
+                    playerHealth.TakeDamage(appliedDamage, status, transform.position, hitVFXSelected, hitSFXSelected);
                     StartCoroutine(cameraShake.Shake(.1f, .005f * appliedDamage));
                     stutterTime = Time.time + .125f;
                 }
@@ -150,7 +156,9 @@ public class EnemyAttack : MonoBehaviour
                 {
                     if (hit.collider.gameObject.CompareTag("Player"))
                     {
-                        playerHealth.TakeDamage(appliedDamage, "H", transform.position);
+                        GameObject[] hitVFXSelected = (index == 0 ? hitWeakVFX : hitHeavyVFX);
+                        playerHealth.TakeDamage(appliedDamage, status, transform.position, hitVFXSelected);
+                        StartCoroutine(cameraShake.Shake(.1f, .005f * appliedDamage));
                         stutterTime = Time.time + .125f;
                     }
                 }

@@ -56,12 +56,12 @@ MonoBehaviour:
   - {fileID: 1822451596522066, guid: fa9a3f9a8006d8b40b1164c2c91ee3bc, type: 3}
   - {fileID: 1760920807038068, guid: db50ad2a73e328a4ea71c415c0c62739, type: 3}
   enemyWeakHit:
-  - {fileID: 188946, guid: f2fd3d1d97b106c42a962f6dcf074ccd, type: 3}
-  - {fileID: 173094, guid: c4c246947415325428ae30438860f0cf, type: 3}
+  - {fileID: 1602197966606650, guid: 639ffe8a2dcaab14fa53988d89810e9d, type: 3}
+  - {fileID: 1496462002064370, guid: 89f21bbcc5cb3ea418e1be51775f9548, type: 3}
   enemyMedHit:
-  - {fileID: 1739205390092530, guid: 2078f3597a3daab428fe4f0d849b3243, type: 3}
-  - {fileID: 1386863584468592, guid: b45e7a69e3434ad4caf13ca67391210d, type: 3}
-  - {fileID: 1625315462354166, guid: bd3d5a9489b3a004d86399694b134bdc, type: 3}
+  - {fileID: 1295152798636446, guid: 36ce92b00d043ba4c859539c4698af88, type: 3}
+  - {fileID: 1602197966606650, guid: 639ffe8a2dcaab14fa53988d89810e9d, type: 3}
+  - {fileID: 1090515636613164, guid: 306e7743e5cc81f4b9e82b22a0e8bf62, type: 3}
   enemyHeavyHit:
   - {fileID: 1883552001520024, guid: a30cd0ba5c00c6d459196515ec56574a, type: 3}
   - {fileID: 1602197966606650, guid: 639ffe8a2dcaab14fa53988d89810e9d, type: 3}

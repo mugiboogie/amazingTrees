@@ -11,6 +11,8 @@ public class EnemyProjectile : MonoBehaviour
     private GameObject player;
     private PlayerHealth playerHealth;
     private Rigidbody rb;
+    public GameObject[] hitVFX;
+    public AudioClip[] hitSFX;
 
     private float lifetime;
 
@@ -45,7 +47,7 @@ public class EnemyProjectile : MonoBehaviour
         else if(other.gameObject == player)
         {
            
-            playerHealth.TakeDamage(damage, effect, origin);
+            playerHealth.TakeDamage(damage, effect, origin, hitVFX, hitSFX);
 
             if (playerHealth.canDamage == true)
             {

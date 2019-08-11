@@ -3502,6 +3502,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d8f67ddd60774d04c96d11a8c91d88ff, type: 3}
   - {fileID: 8300000, guid: 1153e0c6f3f11c14b85305fb15c0acb7, type: 3}
   - {fileID: 8300000, guid: 20aff2b53c1879246a043538424cf485, type: 3}
+  hitWeakVFX:
+  - {fileID: 188946, guid: f2fd3d1d97b106c42a962f6dcf074ccd, type: 3}
+  - {fileID: 173094, guid: c4c246947415325428ae30438860f0cf, type: 3}
+  - {fileID: 1798173428634114, guid: 6b5d0a6176259624ab334336fcf46dd3, type: 3}
+  - {fileID: 1710113590964352, guid: 3a1353a9f06ae6a47abcaee49b87781a, type: 3}
+  hitWeakSFX: []
+  hitHeavyVFX:
+  - {fileID: 1739205390092530, guid: 2078f3597a3daab428fe4f0d849b3243, type: 3}
+  - {fileID: 1386863584468592, guid: b45e7a69e3434ad4caf13ca67391210d, type: 3}
+  - {fileID: 1625315462354166, guid: bd3d5a9489b3a004d86399694b134bdc, type: 3}
+  - {fileID: 1028757127096146, guid: 7cef54b64731a754e96acc803eca057d, type: 3}
+  - {fileID: 1404532012057798, guid: c3d6aceda71cc394396ebd88183ca337, type: 3}
+  - {fileID: 172572, guid: aa6355cc66c1f874fa3592bc4caced89, type: 3}
+  hitHeavySFX: []
 --- !u!114 &5672407910452476209
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,9 @@ public class PlayerHealth : MonoBehaviour
     private TimeManager timeManager;
     private ParticleController particleController;
 
+    private AudioClipController audioClipController;
+
+
     private float damageReduction; //1 = all damage taken is taken at full damage, 0 = invulnerable.
 
     public void SummonHero()
@@ -60,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
+        audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
     }
 
     void Update()
@@ -110,7 +114,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void TakeDamage(float damageValue, string effect, Vector3 hitOrigin)
+    public void TakeDamage(float damageValue, string effect, Vector3 hitOrigin, GameObject[] hitVFX, AudioClip[] hitSFX)
     {
         damageValue = damageValue * damageReduction;
         if (anim != null)
@@ -159,7 +163,26 @@ public class PlayerHealth : MonoBehaviour
 
                 damageTaken += damageValue;
 
-                particleController.CreateEnemyParticle(transform.position + Vector3.up, damageValue);
+                if ((hitVFX == null) || (hitVFX.Length==0))
+                {
+                    particleController.CreateEnemyParticle(transform.position + Vector3.up, damageValue);
+                    
+                }
+                else
+                {
+                    particleController.CreateEnemyParticleSpecific(transform.position + Vector3.up, hitVFX);
+                }
+
+                if ((hitSFX == null) || (hitSFX.Length == 0))
+                {
+                    audioClipController.PlayHit(transform.position + Vector3.up, damageValue);
+
+                }
+                else
+                {
+                    audioClipController.PlayHitSpecific(transform.position + Vector3.up, hitSFX);
+                }
+
                 PlayHits(transform.position);
                 //playerMovement.stutterTime = Time.time + .125f;
             }
