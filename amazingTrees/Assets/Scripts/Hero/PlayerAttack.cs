@@ -379,7 +379,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     StartCoroutine(cameraShake.Shake(.1f, .00625f));
                 }
-                playerMovement.stutterTime = Time.time + (lightAttackRate*2f);
+                playerMovement.stutterTime = Time.time + Mathf.Min(.25f,(lightAttackRate*1.5f));
             }
             damageDealt += damage;
         }
