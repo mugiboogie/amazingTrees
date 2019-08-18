@@ -67,6 +67,8 @@ public class PlayerAttack : MonoBehaviour
     public GameObject glitterParticle;
     public GameObject shockWave;
 
+    [HideInInspector] public Animator HUDparent;
+
     public void SummonHero()
     {
         anim = playerController.anim;
@@ -98,6 +100,8 @@ public class PlayerAttack : MonoBehaviour
 
         chargeEffect = GameObject.FindGameObjectWithTag("PlayerEffects/ChargeEffect").GetComponent<Animator>();
         chargeEffect.transform.SetParent(transform, false);
+
+        HUDparent = GameObject.FindGameObjectWithTag("HUDParent").GetComponent<Animator>();
     }
 
     

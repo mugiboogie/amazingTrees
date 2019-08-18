@@ -48,6 +48,8 @@ public class HealthPickup : MonoBehaviour
                 {
                     health.currentHealth = health.maxHealth;
                 }
+
+                health.HUDparent.SetTrigger("HPUp");
             }
         }
 

@@ -42,6 +42,8 @@ public class PlayerHealth : MonoBehaviour
 
     private float damageReduction; //1 = all damage taken is taken at full damage, 0 = invulnerable.
 
+    [HideInInspector] public Animator HUDparent;
+
     public void SummonHero()
     {
         anim = playerController.anim;
@@ -64,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
+        HUDparent = GameObject.FindGameObjectWithTag("HUDParent").GetComponent<Animator>();
     }
 
     void Update()
@@ -139,6 +142,7 @@ public class PlayerHealth : MonoBehaviour
                 currentHealth -= damageValue;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
                 playerMovement.hitPosition = hitOrigin;
+                
 
                 switch (effect)
                 {
@@ -184,6 +188,8 @@ public class PlayerHealth : MonoBehaviour
                 }
 
                 PlayHits(transform.position);
+
+                HUDparent.SetTrigger("Hit");
                 //playerMovement.stutterTime = Time.time + .125f;
             }
         }

@@ -3492,7 +3492,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   tauntTime: 0
-  warningIndicator: {fileID: 873460779971196575}
+  warningIndicator: {fileID: 5828927543879152782}
   attacks:
   - 8/H
   - 20/S
@@ -4976,6 +4976,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 8.5
       objectReference: {fileID: 0}
+    - target: {fileID: 455001717410574826, guid: d56cd59ee55cc1149b87902e076756ae,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 5672407910452767281}
+    - target: {fileID: 7360585817375066027, guid: d56cd59ee55cc1149b87902e076756ae,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 5672407910452767281}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56cd59ee55cc1149b87902e076756ae, type: 3}
 --- !u!224 &8677804689173037247 stripped
@@ -5008,9 +5018,9 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &873460779971196575 stripped
+--- !u!95 &5828927543879152782 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 4241731733745583547, guid: d56cd59ee55cc1149b87902e076756ae,
+  m_CorrespondingSourceObject: {fileID: 7360585817375066026, guid: d56cd59ee55cc1149b87902e076756ae,
     type: 3}
   m_PrefabInstance: {fileID: 3945873979239265060}
   m_PrefabAsset: {fileID: 0}

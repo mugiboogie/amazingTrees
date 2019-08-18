@@ -36,11 +36,14 @@ public class EnemyAttack : MonoBehaviour
     private AudioClipController audioClipController;
     private AudioSource audio;
     public AudioClip[] angery;
+    private float angeryCooldown;
     public GameObject[] hitWeakVFX;
     public AudioClip[] hitWeakSFX;
     public GameObject[] hitHeavyVFX;
     public AudioClip[] hitHeavySFX;
     private int index;
+
+    [HideInInspector] public float alertCooldown; //This is a cooldown for if the enemy is assigned to attack but gets interrupted, they'll have to wait a brief moment before getting angry again.
 
     void Awake()
     {
@@ -52,6 +55,7 @@ public class EnemyAttack : MonoBehaviour
         cameraShake = Camera.main.GetComponent<CameraShake>();
         audio = GetComponent<AudioSource>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
+        
     }
 
     void Update()
@@ -69,7 +73,7 @@ public class EnemyAttack : MonoBehaviour
             enemyController.desiredDistance = passiveRange;
         }
 
-        if ((setAttack==true) && (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
+        if ((setAttack==true) &&(Time.time>alertCooldown) && (Vector3.Distance(transform.position, player.position)<=(attackRange+1f))&&(anim.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("Attack")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("KnockUp")))
         {
             if (chooseAttack < heavyAttackChance)
             {
@@ -83,13 +87,17 @@ public class EnemyAttack : MonoBehaviour
             }
 
             anim.SetInteger("AttackSkill", index);
-
-            PlayAngery(transform.position);
-            warningIndicator.SetTrigger("Warning");
+            if (Time.time > angeryCooldown)
+            {
+                angeryCooldown = Time.time + .125f;
+                PlayAngery(transform.position);
+            }
+            
             string[] propertyArray = attacks[index].Split(char.Parse("/"));
             baseDamage = float.Parse(propertyArray[0]);
             status = propertyArray[1];
             anim.SetTrigger("Attack");
+            warningIndicator.SetTrigger("Active");
         }
 
 
@@ -107,7 +115,7 @@ public class EnemyAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        warningIndicator.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+        //warningIndicator.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
     }
 
     void Attack()
@@ -173,6 +181,7 @@ public class EnemyAttack : MonoBehaviour
         AudioClip clip = angery[Random.Range(0, angery.Length)];
         //audio.PlayOneShot(clip, 1f);
         AudioSource.PlayClipAtPoint(clip, position);
+        audioClipController.PlayWarning();
     }
 
 }

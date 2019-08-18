@@ -18,6 +18,7 @@ public class CombatZoneController : MonoBehaviour
     private Animator AreaClearImage;
 
     private TimeManager timeManager;
+    private bool encountered;
     
 
     void Awake()
@@ -49,8 +50,9 @@ public class CombatZoneController : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             camController.anchor = cameraAnchor;
-            if(completed==false)
+            if((completed==false) && (encountered == false))
             {
+                encountered = true;
                 BeginBattle();
             }
         }
@@ -75,7 +77,8 @@ public class CombatZoneController : MonoBehaviour
 
         for (int j = 0; j < enemies.Count; j++)
         {
-            enemies[j].SetActive(true);
+                enemies[j].SetActive(true);
+            
         }
     }
 

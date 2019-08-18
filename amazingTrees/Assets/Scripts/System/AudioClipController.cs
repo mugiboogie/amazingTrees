@@ -6,6 +6,8 @@ public class AudioClipController : MonoBehaviour
 {
     public AudioClip[] hit;
     public AudioClip[] swing;
+    public AudioClip warning;
+
     private AudioSource audio;
 
     void Awake()
@@ -30,5 +32,10 @@ public class AudioClipController : MonoBehaviour
     {
         AudioClip clip = swing[Random.Range(0, swing.Length)];
         AudioSource.PlayClipAtPoint(clip, position);
+    }
+
+    public void PlayWarning()
+    {
+        audio.PlayOneShot(warning);
     }
 }

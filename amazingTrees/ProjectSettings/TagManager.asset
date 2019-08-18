@@ -21,6 +21,8 @@ TagManager:
   - PlayerEffects/BishoujoEyes
   - Destructables
   - PlayerEffects/ChargeEffect
+  - AudioListener
+  - HUDParent
   layers:
   - Default
   - TransparentFX

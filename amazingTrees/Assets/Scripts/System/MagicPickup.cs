@@ -47,6 +47,7 @@ public class MagicPickup : MonoBehaviour
                     magic.mana = magic.manaMax;
                 }
 
+                magic.HUDparent.SetTrigger("MPUp");
             }
         }
     }

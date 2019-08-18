@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
     private PlayerAttack playerAttack;
     private float healthBarBurnTime;
     private CapsuleCollider CapCol;
-
+    private EnemyAttack enemyAttack;
 
      
     
@@ -34,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         enemyController = GetComponent<EnemyController>();
+        enemyAttack = GetComponent<EnemyAttack>();
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
@@ -121,6 +122,8 @@ public class EnemyHealth : MonoBehaviour
                 particleController.CreateParticle(transform.position + Vector3.up, damageValue);
                 audioClipController.PlayHit(transform.position);
 
+                enemyAttack.alertCooldown = Time.time + 1.5f;
+
                 if (currentHealth >0f)
                 {
                     PlayHits(transform.position);
@@ -132,7 +135,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void PlayDead(Vector3 position)
     {
-        AudioClip clip = dead[Random.Range(0, hits.Length)];
+        AudioClip clip = dead[Random.Range(0, dead.Length)];
         AudioSource.PlayClipAtPoint(clip, position);
         CapCol.enabled = false;Instantiate(deathParticle, transform.position + Vector3.up, transform.rotation);
         AudioSource.PlayClipAtPoint(deathPSound, position);

@@ -188,7 +188,7 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForSeconds(5f);
         this.gameObject.SetActive(false);//destroy the dead enemy after 5 secondsz
         Instantiate(drop, transform.position, drop.transform.rotation);
-
+        //Destroy(this.gameObject);
     }
 
     void isAttacking()

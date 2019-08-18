@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     private int selection;
+
     public Hero[] heroes;
     public Hero hero;
     private Image charPort;
@@ -29,6 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private Transform UI;
 
+    private AudioListener audioListener;
+    private Transform camera;
+    
+
     private void Awake()
     {
         playerAttack = GetComponent<PlayerAttack>();
@@ -39,24 +44,36 @@ public class PlayerController : MonoBehaviour
         autoSpawnTime = Time.time + .1f;
         charPort = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterPortrait").transform.Find("charPort").GetComponent<Image>();
         charName = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterName").transform.Find("charName").GetComponent<Image>();
-
-
+        audioListener = GameObject.FindGameObjectWithTag("AudioListener").GetComponent<AudioListener>();
+        camera = Camera.main.transform;
 
     }
 
-    private void Update()
+    void FixedUpdate()
+    {
+        audioListener.transform.position = transform.position;
+        audioListener.transform.rotation = camera.transform.rotation;
+    }
+
+    void Update()
     {
         if((Time.time>autoSpawnTime) && (autoSpawned==false))
         {
             autoSpawned = true;
+
             hero = heroes[0];
             selection++;
             if (selection >= heroes.Length) { selection = 0; }
+
+
             SummonHero();
         }
         if(Input.GetKeyDown(KeyCode.F))
         {
+
+           
             hero = heroes[selection];
+            
             selection++;
             if(selection>=heroes.Length) { selection = 0; }
             SummonHero();

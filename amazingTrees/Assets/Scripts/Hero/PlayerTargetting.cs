@@ -47,6 +47,10 @@ public class PlayerTargetting : MonoBehaviour
         {
             enemyTargetIndicator.position = Camera.main.WorldToScreenPoint(enemyTarget.transform.position + Vector3.up);
         }
+        else
+        {
+            enemyTargetIndicator.position = new Vector3(0f, 0f, 0f);
+        }
     }
 
 

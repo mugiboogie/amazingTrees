@@ -18,7 +18,7 @@ MonoBehaviour:
   attackRange: 3.5
   lightAttackRate: 0.125
   heavyAttackRate: 0.25
-  movementSpeed: 5
+  movementSpeed: 6
   dashTime: 1
   damageReduction: 1
   summonSfx:
