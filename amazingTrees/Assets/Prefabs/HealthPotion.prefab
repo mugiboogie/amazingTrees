@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af871178833ed5945b0a02e9b1764348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPickup: {fileID: 8300000, guid: d9a5c3e8c26831c4aae98d5132ed6a1c, type: 3}
+  healthPickup: {fileID: 8300000, guid: e1b0f766673745f40810657537204c3f, type: 3}
   healthBonus: 15
 --- !u!1001 &5456628953443257412
 PrefabInstance:
@@ -324,11 +324,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4682059598094859738}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 9b065845a07738249a65c2d8f74d3d5f,
-        type: 3}
-      propertyPath: m_Name
-      value: propPotionA
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9b065845a07738249a65c2d8f74d3d5f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,6 +393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 200.00015
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9b065845a07738249a65c2d8f74d3d5f,
+        type: 3}
+      propertyPath: m_Name
+      value: propPotionA
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 9b065845a07738249a65c2d8f74d3d5f,
         type: 3}

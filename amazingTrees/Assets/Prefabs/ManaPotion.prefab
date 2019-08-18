@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d44cf5ee6debf94eab2356a8368bf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicPickup: {fileID: 8300000, guid: ee18640e69d5f384fa1bdcded8c7f98f, type: 3}
+  magicPickup: {fileID: 8300000, guid: fb7297740c0465d41ac00fb8e4414786, type: 3}
   magicBonus: 15
 --- !u!1 &7499579065046085143
 GameObject:
@@ -324,11 +324,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8592111032524485741}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 9b065845a07738249a65c2d8f74d3d5f,
-        type: 3}
-      propertyPath: m_Name
-      value: propPotionA
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9b065845a07738249a65c2d8f74d3d5f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -393,6 +388,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 100.00003
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9b065845a07738249a65c2d8f74d3d5f,
+        type: 3}
+      propertyPath: m_Name
+      value: propPotionA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b065845a07738249a65c2d8f74d3d5f, type: 3}
