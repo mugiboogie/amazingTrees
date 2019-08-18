@@ -131,6 +131,7 @@ MonoBehaviour:
   hitWeakSFX: []
   hitHeavyVFX: []
   hitHeavySFX: []
+  alertCooldown: 0
 --- !u!114 &6788247689097028916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,6 +937,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7360585817375066027, guid: d56cd59ee55cc1149b87902e076756ae,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 6788247689319896678}
     - target: {fileID: 4761185753053060996, guid: d56cd59ee55cc1149b87902e076756ae,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -947,11 +953,6 @@ PrefabInstance:
       value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 455001717410574826, guid: d56cd59ee55cc1149b87902e076756ae,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 6788247689319896678}
-    - target: {fileID: 7360585817375066027, guid: d56cd59ee55cc1149b87902e076756ae,
         type: 3}
       propertyPath: target
       value: 
