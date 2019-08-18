@@ -4219,10 +4219,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa45f5a82fddc3a418e2689e4ce0c5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charCon: {fileID: 0}
+  dashTrail: {fileID: 0}
+  shockWave: {fileID: 0}
+  glitterParticle: {fileID: 0}
   charSpeed: 5
   turnSmoothing: 15
   gravity: 20
   jumpForce: 10
+  dashTime: 0
   dashDuration: 0
   dashSound: {fileID: 0}
   stutterTime: 0
@@ -4274,6 +4279,16 @@ MonoBehaviour:
   trail1: {fileID: 0}
   trail2: {fileID: 0}
   damageDealt: 0
+  isCharging: 0
+  chargeCompleteEffect: {fileID: 0}
+  chargeComplete: {fileID: 0}
+  charging: {fileID: 0}
+  chargingPulse: {fileID: 0}
+  chargeAttackVoice: {fileID: 0}
+  chargeAttackFoley: {fileID: 0}
+  glitterParticle: {fileID: 0}
+  shockWave: {fileID: 0}
+  HUDparent: {fileID: 0}
 --- !u!114 &503665196448764525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4307,14 +4322,14 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   canDamage: 1
-  Dashing: {fileID: 8300000, guid: 2642ba66036fbac45a1b9cc92606a562, type: 3}
+  Dashing: {fileID: 8300000, guid: f8f3d8b4def422d408b9478fca7f6901, type: 3}
   hits: []
-  Dead:
-  - {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
+  dead: {fileID: 0}
   resetAfterDeathTime: 5
   playerDead: 0
   damageTaken: 0
   invinciblityDebug: {fileID: 0}
+  HUDparent: {fileID: 0}
 --- !u!82 &4399365503773501706
 AudioSource:
   m_ObjectHideFlags: 0
