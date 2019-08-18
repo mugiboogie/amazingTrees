@@ -67,6 +67,8 @@ public class PlayerAttack : MonoBehaviour
     public GameObject glitterParticle;
     public GameObject shockWave;
 
+    public bool activeHand; //For Vivi's guns. True = righthanded, False = lefthanded.
+
     [HideInInspector] public Animator HUDparent;
 
     public void SummonHero()
@@ -439,5 +441,10 @@ public class PlayerAttack : MonoBehaviour
     public void Swing()
     {
         audioClipController.PlaySwing(transform.position);
+    }
+
+    public void SwitchHands(string side)
+    {
+        activeHand = (side == "Right");   
     }
 }
