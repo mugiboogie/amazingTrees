@@ -685,6 +685,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EmitterStart: {fileID: 3653716331778945243}
   EmitterEnd: {fileID: 3653716331778945243}
+  rightHandWeapon: {fileID: 4884006035555988612}
+  leftHandWeapon: {fileID: 5135079838611495363}
+  muzzleFlash: {fileID: 1310281885280906, guid: 0c40977000e704e449eea37b1da9d98f,
+    type: 3}
   playerAttack: {fileID: 0}
 --- !u!143 &335001610380320586
 CharacterController:
