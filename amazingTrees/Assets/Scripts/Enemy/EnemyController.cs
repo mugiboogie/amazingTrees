@@ -59,11 +59,14 @@ public class EnemyController : MonoBehaviour {
         if ((!enemyHealth.isDead))
             {
 
+            rb.isKinematic = true;
+
             if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockBack"))
             {
                 nav.updatePosition = false;
                 nav.updateRotation = false;
                 nav.nextPosition = transform.position;
+                rb.isKinematic = false;
             }
 
             else if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp")))
