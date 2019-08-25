@@ -50,6 +50,7 @@ public class CombatZoneController : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             camController.anchor = cameraAnchor;
+            camController.combatZone = this;
             if((completed==false) && (encountered == false))
             {
                 encountered = true;
@@ -62,6 +63,10 @@ public class CombatZoneController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (completed == true)
+            {
+                camController.combatZone = null;
+            }
             camController.anchor = null;
         }
     }
@@ -88,6 +93,7 @@ public class CombatZoneController : MonoBehaviour
         completed = true;
         AreaClearImage.SetTrigger("Activate");
         timeManager.DoSlowmotion();
+        
 
         for (int i = 0; i < walls.Count; i++)
         {

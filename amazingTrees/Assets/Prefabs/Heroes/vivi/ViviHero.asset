@@ -36,6 +36,6 @@ MonoBehaviour:
   spell: {fileID: 7730668750658584556, guid: bf02b3c16aea91546bcc56095a24df6f, type: 3}
   avatar: {fileID: 1478248591796316172, guid: e5545f1f7afcd6e468d9d959ad4d16b6, type: 3}
   decoy: {fileID: 2413696287304222496, guid: 04faa6a1f0b26064ca570ddbc9f5342c, type: 3}
-  animatorController: {fileID: 9100000, guid: f3ff3211153c13142a21510bdac1d3f5, type: 2}
+  animatorController: {fileID: 9100000, guid: 7d8daabb11502234fa10107b6e29c5ed, type: 2}
   bishoujoEyes: {fileID: 4787136789783332926, guid: ea33f37ae704cea46ab4949a3c5192fe,
     type: 3}

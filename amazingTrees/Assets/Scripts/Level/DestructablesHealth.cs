@@ -19,6 +19,7 @@ public class DestructablesHealth : MonoBehaviour
     private float timer;
 
     private ParticleController particleController;
+    private DestructablesChips destructableChips;
 
     private Transform player;
 
@@ -29,6 +30,7 @@ public class DestructablesHealth : MonoBehaviour
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
         particleController = GameObject.FindGameObjectWithTag("ParticleController").GetComponent<ParticleController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        destructableChips = GetComponent<DestructablesChips>();
     }
 
     void Update()
@@ -71,6 +73,8 @@ public class DestructablesHealth : MonoBehaviour
         particleController.CreateDestructableParticle(transform.position);
         audioClipController.PlayHit(transform.position);
         PlayHits(transform.position);
+
+        if (destructableChips != null) { destructableChips.EmitChips(); }
     }
 
     void ObjDying()

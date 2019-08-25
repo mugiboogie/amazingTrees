@@ -31,6 +31,8 @@ public class CameraController : MonoBehaviour
 
     public LayerMask levelLayers;
 
+    private float trackTime;
+    public CombatZoneController combatZone;
 
     private void Start()
     {
@@ -43,6 +45,11 @@ public class CameraController : MonoBehaviour
     {
 
         distance = CalculateDistance();
+
+        if(combatZone==null)
+        {
+            trackTime = Time.time + 5f;
+        }
 
         follow = (anchor==null);
         
@@ -64,17 +71,27 @@ public class CameraController : MonoBehaviour
         else
         {
             //setPosition = anchor.position;
+            currentY = transform.eulerAngles.x;
+            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+            currentX = transform.eulerAngles.y;
 
-            float distance = Vector3.Distance(new Vector3(target.position.x, 0f, target.position.z), new Vector3(transform.position.x, 0f, transform.position.z));
-            if (distance > 10f)
+            if (Time.time > trackTime)
             {
-                setPosition += (target.position - transform.position) * Time.deltaTime;
-               
-            }
+                float distance = Vector3.Distance(new Vector3(target.position.x, 0f, target.position.z), new Vector3(transform.position.x, 0f, transform.position.z));
+                if (distance > 10f)
+                {
+                    setPosition += (target.position - transform.position) * Time.deltaTime;
 
-            setPosition.y = (target.position.y +1f) - transform.forward.y*6f;
-            
-            
+                }
+
+                setPosition.y = (target.position.y + 1f) - transform.forward.y * 6f;
+
+            }
+            else if(combatZone!=null)
+            {
+                setPosition = Vector3.Lerp(transform.position,combatZone.transform.position,5f*Time.deltaTime);
+                setPosition.y = (target.position.y + 1f) - transform.forward.y * 6f;
+            }
 
 
             lookAt = target;
@@ -89,7 +106,6 @@ public class CameraController : MonoBehaviour
 
         targetPosition = Vector3.Lerp(targetPosition, lookAtPosition, 4f * Time.unscaledDeltaTime);
         camTransform.LookAt(targetPosition);
-
 
         currentFOV = Mathf.Lerp(currentFOV, desiredFOV, 4f * Time.unscaledDeltaTime);
         cam.fieldOfView = currentFOV;

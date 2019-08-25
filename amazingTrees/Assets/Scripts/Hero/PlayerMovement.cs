@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 dashDirection; //The direction of the dash. This is the inputDirection as it is on the frame the dash button was pushed.
     private float airborneTime;
     public AudioClip dashSound;
+    private Vector3 cameraVector;
 
     public float stutterTime;
 
@@ -81,11 +82,15 @@ public class PlayerMovement : MonoBehaviour
             //--Get Camera Vectors: Takes the Vertical (Tilt) and Horizontal (Pan) vectors of the camera and multiplies them by the input values.
             Vector3 cameraVertical = (camera.up + camera.forward) * moveVertical;
             Vector3 cameraHorizontal = (camera.right) * moveHorizontal;
-            Vector3 cameraVector = cameraVertical + cameraHorizontal;
+
+            //if (Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(camera.transform.position.x, 0f, camera.transform.position.z)) > 2f)
+            {
+                cameraVector = cameraVertical + cameraHorizontal;
+            }
 
 
             //--Calculate Input: Gets the final Vector for input. This will be the cameraVector's X and Z. It is normalized to prevent diagonals being faster than straights.
-            Vector3 inputDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized;
+            Vector3 inputDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized * (new Vector2(moveHorizontal,moveVertical).magnitude);
 
             //Apply Movement
             Movement(inputDirection);

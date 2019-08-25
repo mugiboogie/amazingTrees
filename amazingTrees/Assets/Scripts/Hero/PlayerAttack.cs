@@ -330,7 +330,7 @@ public class PlayerAttack : MonoBehaviour
 
         for (int i = 0; i < targets.Length; i++)
         {
-            Vector3 targetDir = targets[i].transform.position - attackOrigin;
+            Vector3 targetDir = (targets[i].transform.position + Vector3.up)- attackOrigin;
             if(Vector3.Angle(targetDir,transform.forward)<attackAngle)
             {
                 //Debug.Log(targets[i]);
@@ -373,9 +373,28 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-                targets[i].attachedRigidbody.AddForce(targetDir*damage*50f);
-
                 
+                float impact = 50f;
+
+                switch (effect)
+                {
+                    case "H":
+                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                        break;
+                    case "S":
+                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                        break;
+                    case "U":
+                        targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact *.5f));
+                        break;
+                    case "D":
+                        targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
+                        break;
+                    case "B":
+                        targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f));
+                        break;
+                }
+
                 if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))
                 {
                     //StartCoroutine(cameraShake.Shake(.1f, .005f * damage));
