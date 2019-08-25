@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private int selection;
 
     public Hero[] heroes;
+    public float[] heroHealth;
     public Hero hero;
     private Image charPort;
     private Image charName;
@@ -46,6 +47,11 @@ public class PlayerController : MonoBehaviour
         charName = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterName").transform.Find("charName").GetComponent<Image>();
         audioListener = GameObject.FindGameObjectWithTag("AudioListener").GetComponent<AudioListener>();
         camera = Camera.main.transform;
+        heroHealth = new float[heroes.Length];
+        for(int i=0; i<heroHealth.Length; i++)
+        {
+            heroHealth[i] = playerHealth.maxHealth;
+        }
 
     }
 
@@ -73,11 +79,16 @@ public class PlayerController : MonoBehaviour
 
            
             hero = heroes[selection];
+            playerHealth.currentHealth = heroHealth[selection];
             
             selection++;
             if(selection>=heroes.Length) { selection = 0; }
             SummonHero();
         }
+
+        int currentCharacter = selection - 1;
+        if (currentCharacter < 0) { currentCharacter = heroes.Length - 1; }
+        heroHealth[currentCharacter] = playerHealth.currentHealth;
     }
 
     private void SummonHero()

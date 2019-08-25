@@ -9,6 +9,8 @@ public class HealthPickup : MonoBehaviour
 
     private GameObject player;
     private PlayerHealth health;
+    private PlayerController playerController;
+    private bool allMax;
 
     private float expirationTime;
 
@@ -16,13 +18,14 @@ public class HealthPickup : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         health = FindObjectOfType<PlayerHealth>();
         expirationTime = Time.time + 30f;
     }
 
     private void FixedUpdate()
     {
-        if (health.currentHealth < health.maxHealth)
+        if (allMax == false)
         {
             followPlayer();
         }
@@ -31,17 +34,34 @@ public class HealthPickup : MonoBehaviour
     private void Update()
     {
         if (Time.time > expirationTime) { Destroy(gameObject); }
+        allMax = true;
+        for (int i = 0; i < playerController.heroHealth.Length; i++)
+        {
+            if(playerController.heroHealth[i] < health.maxHealth)
+            {
+                allMax = false;
+            }
+
+        }
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-        if (health.currentHealth < health.maxHealth)
+        if (allMax == false)
         {
             if (other.gameObject == player)
             {
                 AudioSource.PlayClipAtPoint(healthPickup, transform.position);
                 Destroy(gameObject);
+                for(int i=0; i<playerController.heroHealth.Length; i++)
+                {
+                    playerController.heroHealth[i] = playerController.heroHealth[i] + healthBonus;
+                    if(playerController.heroHealth[i] + healthBonus > health.maxHealth)
+                    {
+                        playerController.heroHealth[i] = health.maxHealth;
+                    }
+                }
                 health.currentHealth = health.currentHealth + healthBonus;
 
                 if(health.currentHealth > health.maxHealth)
