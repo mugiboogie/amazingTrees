@@ -373,27 +373,10 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-                
-                float impact = 50f;
 
-                switch (effect)
-                {
-                    case "H":
-                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                        break;
-                    case "S":
-                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                        break;
-                    case "U":
-                        targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact *.5f));
-                        break;
-                    case "D":
-                        targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
-                        break;
-                    case "B":
-                        targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f));
-                        break;
-                }
+                StartCoroutine(ApplyForce(effect, damage, targets));
+
+                
 
                 if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))
                 {
@@ -407,6 +390,33 @@ public class PlayerAttack : MonoBehaviour
                 playerMovement.stutterTime = Time.time + Mathf.Min(.25f,(lightAttackRate*1.5f));
             }
             damageDealt += damage;
+        }
+    }
+
+    IEnumerator ApplyForce(string effect, float damage, Collider[] targets)
+    {
+        yield return new WaitForSeconds(.0625f);
+        float impact = 50f;
+        for (int i = 0; i < targets.Length; i++)
+        {
+            switch (effect)
+            {
+                case "H":
+                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                    break;
+                case "S":
+                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                    break;
+                case "U":
+                    targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact * .5f));
+                    break;
+                case "D":
+                    targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
+                    break;
+                case "B":
+                    targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f));
+                    break;
+            }
         }
     }
 
