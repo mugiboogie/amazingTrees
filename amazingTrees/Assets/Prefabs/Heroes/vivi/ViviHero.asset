@@ -16,8 +16,8 @@ MonoBehaviour:
   heroPortraitImg: {fileID: 21300000, guid: b29b5ad8e6fbb9148a5e270500783dc6, type: 3}
   heroNameImg: {fileID: 21300000, guid: cc03b4930a7390d4aa9977d86faf44a4, type: 3}
   attackRange: 2.5
-  lightAttackRate: 0.2
-  heavyAttackRate: 0.3
+  lightAttackRate: 0.125
+  heavyAttackRate: 0.25
   movementSpeed: 5
   dashTime: 0.75
   damageReduction: 1.2

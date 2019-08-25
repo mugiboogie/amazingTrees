@@ -58,13 +58,23 @@ public class EnemyController : MonoBehaviour {
 
         if ((!enemyHealth.isDead))
             {
-            if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp")))
+
+            if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockBack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp")))
+            {
+                nav.updatePosition = false;
+                nav.updateRotation = false;
+                nav.nextPosition = transform.position;
+                rb.isKinematic = false;
+            }
+
+            else if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")))
             {
                 assignRandomTimer = 0f;
                 faceDamageOrigin();
                 nav.updatePosition = false;
                 nav.updateRotation = false;
                 nav.nextPosition = anim.rootPosition;
+                rb.isKinematic = true;
             }
             else if (anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack"))
             {
@@ -72,11 +82,15 @@ public class EnemyController : MonoBehaviour {
                 assignRandomTimer = 0f;
                 lookAt();
                 isAttacking();
+                rb.isKinematic = true;
             }
+
+            
             else
             {
                 nav.updatePosition = true;
                 nav.updateRotation = true;
+                rb.isKinematic = true;
 
                 if (assignRandomTimer == 0f)
                 {
@@ -147,7 +161,7 @@ public class EnemyController : MonoBehaviour {
         anim.applyRootMotion = ((anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack"))|| (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")));
         anim.SetBool("isGrounded", isGrounded);
 
-        anim.SetBool("Falling", ((knockUpVelocity < 0f) && (!isGrounded)));
+        anim.SetBool("Falling", ((rb.velocity.y < 0f) && (!isGrounded)));
         knockUpVelocity -= gravity * Time.deltaTime;
 
     }
@@ -230,18 +244,8 @@ public class EnemyController : MonoBehaviour {
 
     void OnAnimatorMove()
     {
-        
 
-        if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp"))
-        {
-            Vector3 knockUpVector = new Vector3(0f, knockUpVelocity * Time.deltaTime, 0f);
-            float position = transform.position.y + (knockUpVector.y);
-            //position.y += 1f*Time.deltaTime;
-            transform.position = new Vector3(transform.position.x,position,transform.position.z);
-
-        }
-
-        else if ((anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")))
+        if ((anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")))
         {
             //Debug.Log("AnimatorMove");
             Vector3 position = anim.rootPosition;

@@ -1182,7 +1182,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: d24071d0fa0ca3a46ba7829af65a050c, type: 2}
-  m_Tag: Hit
+  m_Tag: KnockBack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -1429,7 +1429,7 @@ AnimatorStateMachine:
     m_Position: {x: 84, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102514956438516396}
-    m_Position: {x: 324, y: 120, z: 0}
+    m_Position: {x: 320, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102773334480283604}
     m_Position: {x: 444, y: 192, z: 0}
