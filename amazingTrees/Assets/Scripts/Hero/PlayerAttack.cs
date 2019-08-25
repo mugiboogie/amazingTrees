@@ -462,8 +462,5 @@ public class PlayerAttack : MonoBehaviour
         audioClipController.PlaySwing(transform.position);
     }
 
-    public void SwitchHands(string side)
-    {
-        activeHand = (side == "Right");   
-    }
+
 }

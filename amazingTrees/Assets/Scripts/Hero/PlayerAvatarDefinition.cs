@@ -26,4 +26,9 @@ public class PlayerAvatarDefinition : MonoBehaviour
         Transform selectedHand = (playerAttack.activeHand?rightHandWeapon:leftHandWeapon);
         Instantiate(muzzleFlash, selectedHand.position, selectedHand.rotation);
     }
+
+    public void SwitchHands(string side)
+    {
+        playerAttack.activeHand = (side == "Right");
+    }
 }
