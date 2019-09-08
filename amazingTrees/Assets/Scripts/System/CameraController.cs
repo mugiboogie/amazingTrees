@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour
     private float currentY = 0.0f;
 
     public LayerMask levelLayers;
+    private PlayerTargetting playerTargetting;
 
     private float trackTime;
     public CombatZoneController combatZone;
@@ -39,6 +40,7 @@ public class CameraController : MonoBehaviour
         camTransform = transform;
         cam = Camera.main;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTargetting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerTargetting>();
     }
 
     void Update()
@@ -51,14 +53,29 @@ public class CameraController : MonoBehaviour
             trackTime = Time.time + 5f;
         }
 
-        follow = (anchor==null);
+        //follow = (anchor==null);
         
-        if(follow)
+        //if(follow)
         {
             lookAt = target;
-            currentX += Input.GetAxis("Mouse X") * sensitivityX;
-            currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
+            if (playerTargetting.lockedOn == false)
+            {
+                currentX += Input.GetAxis("Mouse X") * sensitivityX;
+            }
 
+            else
+            {
+                Vector3 PlayerPosition = target.transform.position;
+                PlayerPosition.y = 0f;
+                Vector3 EnemyPosition = playerTargetting.enemyTarget.transform.position;
+                EnemyPosition.y = 0f;
+                Vector3 TargetDirection = EnemyPosition - PlayerPosition;
+                float lockOnAngle = Vector3.SignedAngle(TargetDirection, Vector3.back, Vector3.up);
+                currentX = lockOnAngle;
+            }
+               
+            currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
+            
             currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 
             Vector3 dir = new Vector3(0, 0, -distance);
@@ -68,7 +85,7 @@ public class CameraController : MonoBehaviour
             //camTransform.LookAt(lookAt.position);
 
         }
-        else
+        /*else
         {
             //setPosition = anchor.position;
             currentY = transform.eulerAngles.x;
@@ -100,7 +117,7 @@ public class CameraController : MonoBehaviour
                 lookAtPosition = lookAt.position;
             
             //camTransform.LookAt(lookAt.position);
-        }
+        }*/
 
         transform.position = Vector3.Lerp(transform.position, setPosition, 5f * Time.unscaledDeltaTime);
 
