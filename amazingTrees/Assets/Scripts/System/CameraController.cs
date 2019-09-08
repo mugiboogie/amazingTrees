@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
                 Vector3 EnemyPosition = playerTargetting.enemyTarget.transform.position;
                 EnemyPosition.y = 0f;
                 Vector3 TargetDirection = EnemyPosition - PlayerPosition;
-                float lockOnAngle = Vector3.SignedAngle(TargetDirection, Vector3.back, Vector3.up);
+                float lockOnAngle = -Vector3.SignedAngle(TargetDirection, Vector3.forward, Vector3.up);
                 currentX = lockOnAngle;
             }
                
