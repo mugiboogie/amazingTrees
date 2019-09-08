@@ -19,10 +19,12 @@ public class PlayerController : MonoBehaviour
     public GameObject bishoujoEyes;
     public PlayerAvatarDefinition avatarDefinition;
     public Animator anim;
+    public bool manaAllMax;
 
     private PlayerAttack playerAttack;
     private PlayerMovement playerMovement;
     private PlayerHealth playerHealth;
+    public float[] heroMana;
 
     private AudioSource audio;
 
@@ -48,9 +50,16 @@ public class PlayerController : MonoBehaviour
         audioListener = GameObject.FindGameObjectWithTag("AudioListener").GetComponent<AudioListener>();
         camera = Camera.main.transform;
         heroHealth = new float[heroes.Length];
+        heroMana = new float[heroes.Length];
+        
         for(int i=0; i<heroHealth.Length; i++)
         {
             heroHealth[i] = playerHealth.maxHealth;
+        }
+
+        for (int i=0; i<heroMana.Length; i++)
+        {
+            heroMana[i] = 0f;
         }
 
     }
@@ -80,6 +89,7 @@ public class PlayerController : MonoBehaviour
            
             hero = heroes[selection];
             playerHealth.currentHealth = heroHealth[selection];
+            playerAttack.mana = heroMana[selection];
             
             selection++;
             if(selection>=heroes.Length) { selection = 0; }
@@ -89,6 +99,19 @@ public class PlayerController : MonoBehaviour
         int currentCharacter = selection - 1;
         if (currentCharacter < 0) { currentCharacter = heroes.Length - 1; }
         heroHealth[currentCharacter] = playerHealth.currentHealth;
+        heroMana[currentCharacter] = playerAttack.mana;
+
+        manaAllMax = true;
+
+        for (int i = 0; i < heroMana.Length; i++)
+        {
+            if(heroMana[i] < playerAttack.manaMax)
+            {
+                manaAllMax = false;
+            }
+
+        }
+
     }
 
     private void SummonHero()
@@ -124,4 +147,8 @@ public class PlayerController : MonoBehaviour
         charName.sprite = hero.heroNameImg;
     }
 
+}
+
+internal class PlayerMana
+{
 }
