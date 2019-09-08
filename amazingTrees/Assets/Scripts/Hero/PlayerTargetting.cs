@@ -12,6 +12,7 @@ public class PlayerTargetting : MonoBehaviour
     private List<GameObject> enemies;
     public float overrideTime; //
     public GameObject overrideEnemy;
+    public bool lockedOn;
 
     void Awake()
     {
@@ -40,7 +41,15 @@ public class PlayerTargetting : MonoBehaviour
                 {
                     enemyTarget = null;
                 }
+
             }
+
+            lockedOn = false;
+        }
+
+        else
+        {
+            lockedOn = true;
         }
 
         if (enemyTarget != null)
