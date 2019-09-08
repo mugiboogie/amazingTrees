@@ -13,20 +13,24 @@ public class PlayerTargetting : MonoBehaviour
     public float overrideTime; //
     public GameObject overrideEnemy;
     public bool lockedOn;
+    private Transform camera;
 
     void Awake()
     {
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         enemyTargetIndicator = GameObject.FindGameObjectWithTag("UI").transform.Find("EnemyTarget").GetComponent<RectTransform>();
         enemies = enemyDirector.enemies;
+        camera = Camera.main.transform;
     }
 
     void Update()
     {
 
-        if (!Input.GetButton("LockOn"))
+        enemyTarget = findForwardEnemy();
+
+        if ((!Input.GetButton("LockOn")) || (enemyTarget == null))
         {
-            if ((Time.time > overrideTime)||(overrideEnemy == null))
+            /*if ((Time.time > overrideTime)||(overrideEnemy == null))
             {
                 enemyTarget = findForwardEnemy();
             }
@@ -42,7 +46,7 @@ public class PlayerTargetting : MonoBehaviour
                     enemyTarget = null;
                 }
 
-            }
+            }*/
 
             lockedOn = false;
         }
@@ -68,12 +72,16 @@ public class PlayerTargetting : MonoBehaviour
         GameObject result = null;
         float angle = 180f;
 
-        for (int i = 0; i < enemies.Count/2; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            Vector3 targetDir = enemies[i].transform.position - transform.position;
-            if (Vector3.Angle(targetDir, transform.forward) < angle)
+            Vector3 enemyPosition = enemies[i].transform.position;
+            enemyPosition.y = 0f;
+            Vector3 cameraPosition = camera.position;
+            cameraPosition.y = 0f;
+            Vector3 targetDir = enemyPosition - cameraPosition;
+            if (Vector3.Angle(targetDir, camera.forward) < angle)
             {
-                angle = Vector3.Angle(targetDir, transform.forward);
+                angle = Vector3.Angle(targetDir, camera.forward);
                 result = enemies[i];
             }
         }

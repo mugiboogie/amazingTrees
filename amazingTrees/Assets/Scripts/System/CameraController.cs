@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
                 EnemyPosition.y = 0f;
                 Vector3 TargetDirection = EnemyPosition - PlayerPosition;
                 float lockOnAngle = -Vector3.SignedAngle(TargetDirection, Vector3.forward, Vector3.up);
-                currentX = lockOnAngle;
+                currentX = Mathf.Lerp(currentX, lockOnAngle, 10f * Time.deltaTime);
             }
                
             currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
