@@ -28,7 +28,7 @@ public class PlayerTargetting : MonoBehaviour
 
         enemyTarget = findForwardEnemy();
 
-        if ((!Input.GetButton("LockOn")) && (enemyTarget != null))
+        if ((!Input.GetButton("LockOn")) || (enemyTarget == null))
         {
             /*if ((Time.time > overrideTime)||(overrideEnemy == null))
             {
