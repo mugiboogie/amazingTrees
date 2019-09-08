@@ -14,6 +14,17 @@ public class PlayerAvatarDefinition : MonoBehaviour
 
     public PlayerAttack playerAttack;
 
+    private bool isShooting;
+
+    private AudioSource audio;
+
+    public AudioClip[] shotSounds;
+
+    private void Awake()
+    {
+        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+    }
+
     public void Swing()
     {
         playerAttack.Swing();
@@ -21,14 +32,23 @@ public class PlayerAvatarDefinition : MonoBehaviour
 
     public void Melee(string property)
     {
-        playerAttack.Melee(property);
+        playerAttack.Melee(property, isShooting);
 
-        Transform selectedHand = (playerAttack.activeHand?rightHandWeapon:leftHandWeapon);
-        Instantiate(muzzleFlash, selectedHand.position, selectedHand.rotation);
+        if (isShooting)
+        {
+            Transform selectedHand = (playerAttack.activeHand ? rightHandWeapon : leftHandWeapon);
+            Instantiate(muzzleFlash, selectedHand.position, selectedHand.rotation);
+
+            audio.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
+
+        }
+
+
     }
 
     public void SwitchHands(string side)
     {
         playerAttack.activeHand = (side == "Right");
+        isShooting = (side != "");
     }
 }

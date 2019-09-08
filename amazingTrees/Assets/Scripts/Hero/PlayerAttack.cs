@@ -76,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
         anim = playerController.anim;
         chargeAttackVoice = playerController.hero.chargeAttackVoice;
         attackRange = playerController.hero.attackRange;
+        attackAngle = playerController.hero.attackAngle;
         lightAttackRate = playerController.hero.lightAttackRate;
         heavyAttackRate = playerController.hero.heavyAttackRate;
         trail1 = playerController.avatar.GetComponent<PlayerAvatarDefinition>().EmitterStart;
@@ -317,16 +318,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void Melee(string property)
+    public void Melee(string property, bool isShooting)
     {
 
         string[] propertyArray = property.Split(char.Parse("/"));
         float damage = float.Parse(propertyArray[0]);
         string effect = propertyArray[1];
 
-
+        
         //Debug.Log("Attack");
-        Collider[] targets = Physics.OverlapSphere(attackOrigin, attackRange, affectedLayers);
+        Collider[] targets = Physics.OverlapSphere(attackOrigin, isShooting?attackRange + 3f:attackRange, affectedLayers);
 
         for (int i = 0; i < targets.Length; i++)
         {
@@ -374,7 +375,7 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-                StartCoroutine(ApplyForce(effect, damage, targets));
+                
 
                 
 
@@ -391,31 +392,38 @@ public class PlayerAttack : MonoBehaviour
             }
             damageDealt += damage;
         }
+
+        StartCoroutine(ApplyForce(effect, damage, targets, isShooting));
     }
 
-    IEnumerator ApplyForce(string effect, float damage, Collider[] targets)
+    IEnumerator ApplyForce(string effect, float damage, Collider[] targets, bool isShooting)
     {
         yield return new WaitForSeconds(.0625f);
         float impact = 50f;
         for (int i = 0; i < targets.Length; i++)
         {
-            switch (effect)
+            Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
+            if (Vector3.Angle(targetDir, transform.forward) < attackAngle)
             {
-                case "H":
-                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                    break;
-                case "S":
-                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                    break;
-                case "U":
-                    targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact * .5f));
-                    break;
-                case "D":
-                    targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
-                    break;
-                case "B":
-                    targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f));
-                    break;
+                switch (effect)
+                {
+                    case "H":
+                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                        break;
+                    case "S":
+                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                        break;
+                    case "U":
+                        targets[i].attachedRigidbody.AddExplosionForce(damage * (impact * .5f), targets[i].transform.position + Vector3.down, attackRange * 2f);
+                        //targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact * .5f));
+                        break;
+                    case "D":
+                        targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
+                        break;
+                    case "B":
+                        targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f) + Vector3.up);
+                        break;
+                }
             }
         }
     }

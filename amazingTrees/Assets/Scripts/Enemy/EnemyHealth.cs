@@ -96,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
                         case "U":
                             anim.SetTrigger("KnockUp");
                             //playerMovement.KnockUp(10f);
-                            enemyController.knockUpVelocity = 10f;
+                            enemyController.knockUpVelocity = damageValue*.325f * Random.Range(.8f,1.2f);
                             //rb.AddForce(Vector3.up * 10f);
                             break;
                         case "D":

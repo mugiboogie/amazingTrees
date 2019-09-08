@@ -11,6 +11,7 @@ public class Hero : ScriptableObject
     public Sprite heroNameImg;
 
     public float attackRange;
+    public float attackAngle;
     public float lightAttackRate;
     public float heavyAttackRate;
     public float movementSpeed;

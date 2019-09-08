@@ -16,6 +16,7 @@ MonoBehaviour:
   heroPortraitImg: {fileID: 21300000, guid: 17f64011c41a38c4a83b60318359216b, type: 3}
   heroNameImg: {fileID: 21300000, guid: 0261e0bc3f34224449ef82df957d886e, type: 3}
   attackRange: 2
+  attackAngle: 120
   lightAttackRate: 0.0625
   heavyAttackRate: 0.125
   movementSpeed: 7

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
+    public LayerMask levelLayers;
+    public bool isGrounded;
     private Transform player;
     private NavMeshAgent nav;
     private Animator anim;
@@ -51,23 +53,38 @@ public class EnemyController : MonoBehaviour {
         nav.destination = FindRandomPoint();
     }
 
+    void FixedUpdate()
+    {
+        isGrounded = checkGrounded();
+
+        if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp"))
+        {
+            Vector3 knockUpVector = new Vector3(0f, knockUpVelocity * Time.deltaTime, 0f);
+            
+            if ((isGrounded) && (knockUpVelocity <= 0f)) { knockUpVector = Vector3.zero; }
+            float position = transform.position.y + (knockUpVector.y);
+            //position.y += 1f*Time.deltaTime;
+            transform.position = new Vector3(transform.position.x, position, transform.position.z);
+
+        }
+    }
+
     void Update()
     {
-        
-        
-
         if ((!enemyHealth.isDead))
             {
 
-            if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockBack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp")))
+            if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockBack")))
             {
+                assignRandomTimer = 0f;
                 nav.updatePosition = false;
                 nav.updateRotation = false;
                 nav.nextPosition = transform.position;
                 rb.isKinematic = false;
+                faceDamageOrigin();
             }
 
-            else if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")))
+            else if ((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("KnockUp")))
             {
                 assignRandomTimer = 0f;
                 faceDamageOrigin();
@@ -156,12 +173,14 @@ public class EnemyController : MonoBehaviour {
         {
             isDead();
         }
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (col.bounds.extents.y) + 0.1f);
-        Debug.DrawLine(transform.position, (transform.position + Vector3.down) * ((col.bounds.extents.y) + 0.1f));
+        //bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (col.bounds.extents.y) + 0.1f);
+        //Debug.DrawLine(transform.position, (transform.position + Vector3.down) * ((col.bounds.extents.y) + 0.1f));
+        
+        
         anim.applyRootMotion = ((anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack"))|| (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")));
         anim.SetBool("isGrounded", isGrounded);
 
-        anim.SetBool("Falling", ((rb.velocity.y < 0f) && (!isGrounded)));
+        anim.SetBool("Falling", (((knockUpVelocity <= 0f) && (!isGrounded))||isGrounded));
         knockUpVelocity -= gravity * Time.deltaTime;
 
     }
@@ -244,6 +263,7 @@ public class EnemyController : MonoBehaviour {
 
     void OnAnimatorMove()
     {
+        
 
         if ((anim.GetCurrentAnimatorStateInfo(0).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Hit")))
         {
@@ -251,8 +271,25 @@ public class EnemyController : MonoBehaviour {
             Vector3 position = anim.rootPosition;
             position.y = nav.nextPosition.y;
             transform.position = position;
+            transform.rotation = anim.rootRotation;
         }
 
     }
+
+    private bool checkGrounded()
+    {
+        RaycastHit hit;
+        Vector3 p1 = transform.position + Vector3.up * (col.height);
+
+        Debug.DrawLine(p1, p1 + Vector3.down * (col.height+1f), Color.green);
+        //if(Physics.SphereCast(p1, col.radius, Vector3.down, out hit, col.height))
+        if(Physics.Raycast(transform.position + Vector3.up*(col.height),Vector3.down, out hit, col.height + .125f,levelLayers))
+        {
+                return true;   
+        }
+        return false;
+    }
+
+
 
 }
