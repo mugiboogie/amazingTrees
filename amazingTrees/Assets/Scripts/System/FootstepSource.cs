@@ -18,7 +18,7 @@ public class FootstepSource : MonoBehaviour
     private bool rightFootCanPlay; //When true, the script waits for the right foot to play and plays it. This is disabled immediately when the right foot plays, but will become available when the left foot is about to land.
     private bool leftFootCanPlay; //When true, the script waits for the left foot to play and plays it. This is disabled immediately when the left foot plays, but will become available when the right foot is about to land.
 
-    public AudioClip clip; //The sound effect that plays when the foot lands.
+    public AudioClip[] clip; //The sound effect that plays when the foot lands.
     private AudioSource audio; //Reference to this gameObject's audioSource component. Remember that the hero's AudioSource should be set to 2D so you're not hearing footsteps ping left and right in your headphones.
 
     private float footstepCooldown; //the Cooldown timer to ensure that the footsteps don't play immediately one after another.
@@ -33,8 +33,9 @@ public class FootstepSource : MonoBehaviour
     {
         //Get the progress percentage that the animation has gone through so far.
         //Note that we're only pulling from the animator layer "Base Locomotion".
-        float animationFrame = anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex("Base Locomotion")).normalizedTime % 1;
+        float animationFrame = anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex("Base Layer")).normalizedTime % 1;
         bool playFoosteps = anim.GetBool("PlayFootsteps");
+        AudioClip selectedClip = clip[Random.Range(0,clip.Length)];
 
         //the Animator's "PlayFootsteps" should be enabled for this to operate properly.
         if (playFoosteps)
@@ -46,7 +47,7 @@ public class FootstepSource : MonoBehaviour
                 if (rightFootCanPlay && (Time.time > footstepCooldown))
                 {
                     rightFootCanPlay = false;
-                    audio.PlayOneShot(clip, 1f);
+                    audio.PlayOneShot(selectedClip, 1f);
                     footstepCooldown = Time.time + .125f;
                 }
             }
@@ -58,7 +59,7 @@ public class FootstepSource : MonoBehaviour
                 if (leftFootCanPlay && (Time.time > footstepCooldown))
                 {
                     leftFootCanPlay = false;
-                    audio.PlayOneShot(clip, 1f);
+                    audio.PlayOneShot(selectedClip, 1f);
                     footstepCooldown = Time.time + .125f;
                 }
             }

@@ -569,6 +569,8 @@ GameObject:
   - component: {fileID: 5499617912220022629}
   - component: {fileID: 8614442259526460282}
   - component: {fileID: 335001610380320586}
+  - component: {fileID: -8603966460889292191}
+  - component: {fileID: -4448196332960366305}
   m_Layer: 11
   m_Name: viviAvatar
   m_TagString: Untagged
@@ -652,6 +654,119 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!82 &-8603966460889292191
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478248591796316172}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &-4448196332960366305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478248591796316172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079494219d95dca418cf465ed53546b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip:
+  - {fileID: 8300000, guid: cf7d8217942606342849f156c16e385b, type: 3}
+  - {fileID: 8300000, guid: 378643c1a62019d439a122c0080d5b00, type: 3}
+  - {fileID: 8300000, guid: 1a71a631d54bdd8428840f196791236a, type: 3}
+  - {fileID: 8300000, guid: c1c8fb258978ffe4fa3643ab5bc35b88, type: 3}
 --- !u!1 &1520254078724596068
 GameObject:
   m_ObjectHideFlags: 0
@@ -5224,14 +5339,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4884006035555988612}
     m_Modifications:
-    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00008
@@ -5288,6 +5395,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.0075
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5307,14 +5422,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5135079838611495363}
     m_Modifications:
-    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00008
@@ -5370,6 +5477,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.0075
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 015e158f44ebe0448a2b22e89d4980f7, type: 3}
       propertyPath: m_Materials.Array.data[0]

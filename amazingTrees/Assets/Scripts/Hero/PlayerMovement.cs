@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (anim != null)
+            
         {
             //Get Inputs
             //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
@@ -123,6 +124,9 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Dashing", (dashDuration > Time.time));
 
             anim.enabled = (Time.time > stutterTime);
+
+            bool playFootsteps = (charCon.isGrounded && (Time.time > dashDuration) && (inputDirection.magnitude > .1f));
+            anim.SetBool("PlayFootsteps", playFootsteps);
         }
 
         
