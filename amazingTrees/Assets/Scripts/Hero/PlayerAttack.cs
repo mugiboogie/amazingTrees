@@ -175,6 +175,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (Input.GetButtonDown("LightAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + lightAttackRate + .25f;
                 durationTime = Time.time + lightAttackRate;
 
@@ -184,6 +185,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + heavyAttackRate + .5f;
                 durationTime = Time.time + heavyAttackRate;
 
@@ -197,6 +199,7 @@ public class PlayerAttack : MonoBehaviour
             //Light Attack Charge
             if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //Unleash attack
                 lightAttackCharge = 0f;
 
@@ -212,6 +215,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if (Input.GetButton("LightAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 lightAttackCharge += Time.deltaTime;
             }
             else
@@ -224,6 +228,7 @@ public class PlayerAttack : MonoBehaviour
             //Heavy Attack Charge
             if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //Unleash attack
                 heavyAttackCharge = 0f;
 
@@ -239,6 +244,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
+                if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 heavyAttackCharge += Time.deltaTime;
             }
             else
@@ -478,6 +484,23 @@ public class PlayerAttack : MonoBehaviour
     public void Swing()
     {
         audioClipController.PlaySwing(transform.position);
+    }
+
+    private Quaternion lookAtTarget(Transform target)
+    {
+        Quaternion result = transform.rotation;
+        Vector3 targetPosition = target.position;
+        targetPosition.y = 0f;
+
+        Vector3 fromPosition = transform.position;
+        fromPosition.y = 0f;
+
+        Vector3 targetDir = targetPosition - fromPosition;
+        float currentX = -Vector3.SignedAngle(targetDir, Vector3.forward, Vector3.up);
+
+        result = Quaternion.Euler(0, currentX, 0);
+
+        return result;
     }
 
 

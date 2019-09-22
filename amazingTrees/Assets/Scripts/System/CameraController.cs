@@ -46,6 +46,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
 
+        if (currentX > 360f) { currentX = 0f; }
+
         distance = CalculateDistance();
 
         if(combatZone==null)
@@ -60,7 +62,7 @@ public class CameraController : MonoBehaviour
             lookAt = target;
             if (playerTargetting.lockedOn == false)
             {
-                currentX += Input.GetAxis("Mouse X") * sensitivityX;
+                currentX += Mathf.Clamp(Input.GetAxis("Mouse X"),-5f,5f) * sensitivityX;
             }
 
             else
@@ -71,7 +73,9 @@ public class CameraController : MonoBehaviour
                 EnemyPosition.y = 0f;
                 Vector3 TargetDirection = EnemyPosition - PlayerPosition;
                 float lockOnAngle = -Vector3.SignedAngle(TargetDirection, Vector3.forward, Vector3.up);
-                currentX = Mathf.Lerp(currentX, lockOnAngle, 10f * Time.deltaTime);
+                currentX = Mathf.Lerp(currentX, lockOnAngle, Mathf.Min(10f * Time.deltaTime,.0325f));
+
+                //currentX += 180f * Time.deltaTime * (lockOnAngle<currentX?-1f:1f);
             }
                
             currentY -= Input.GetAxis("Mouse Y") * sensitivityY;

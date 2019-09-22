@@ -15,18 +15,24 @@ public class PlayerTargetting : MonoBehaviour
     public bool lockedOn;
     private Transform camera;
 
+    private AudioSource audio;
+    public AudioClip lockOnSound;
+    public AudioClip lockOffSound;
+    private bool lockOnPlayed;
+
     void Awake()
     {
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         enemyTargetIndicator = GameObject.FindGameObjectWithTag("UI").transform.Find("EnemyTarget").GetComponent<RectTransform>();
         enemies = enemyDirector.enemies;
         camera = Camera.main.transform;
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
     {
 
-        enemyTarget = findForwardEnemy();
+        
 
         if ((!Input.GetButton("LockOn")) || (enemyTarget == null))
         {
@@ -48,12 +54,31 @@ public class PlayerTargetting : MonoBehaviour
 
             }*/
 
+            enemyTarget = findForwardEnemy();
             lockedOn = false;
+
+            if (lockOnPlayed == true)
+            {
+                audio.PlayOneShot(lockOffSound);
+                lockOnPlayed = false;
+            }
+        }
+
+        else if(enemyTarget!=null)
+        {
+            lockedOn = true;
+
+            if (lockOnPlayed == false)
+            {
+                audio.PlayOneShot(lockOnSound);
+                lockOnPlayed = true;
+
+            }
         }
 
         else
         {
-            lockedOn = true;
+            lockedOn = false;
         }
 
         if (enemyTarget != null)

@@ -287,6 +287,8 @@ MonoBehaviour:
   bishoujoEyes: {fileID: 0}
   avatarDefinition: {fileID: 0}
   anim: {fileID: 0}
+  manaAllMax: 0
+  heroMana: []
 --- !u!114 &7386615764869028853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +377,9 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   overrideTime: 0
   overrideEnemy: {fileID: 0}
+  lockedOn: 0
+  lockOnSound: {fileID: 8300000, guid: 349ca5c58ce1f1a4881891336d4a6932, type: 3}
+  lockOffSound: {fileID: 8300000, guid: 19f52a2a821750d4dbd86a58a350428d, type: 3}
 --- !u!114 &7386615764869028848
 MonoBehaviour:
   m_ObjectHideFlags: 0
