@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
             anim.enabled = (Time.time > stutterTime);
         }
 
+        
     }
 
     void Movement(Vector3 inputDirection)

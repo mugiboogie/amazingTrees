@@ -4288,6 +4288,7 @@ MonoBehaviour:
   chargeAttackFoley: {fileID: 0}
   glitterParticle: {fileID: 0}
   shockWave: {fileID: 0}
+  activeHand: 0
   HUDparent: {fileID: 0}
 --- !u!114 &503665196448764525
 MonoBehaviour:
@@ -4307,6 +4308,9 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   overrideTime: 0
   overrideEnemy: {fileID: 0}
+  lockedOn: 0
+  lockOnSound: {fileID: 0}
+  lockOffSound: {fileID: 0}
 --- !u!114 &1061604079808855437
 MonoBehaviour:
   m_ObjectHideFlags: 0
