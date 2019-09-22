@@ -16,6 +16,7 @@ public class CombatZoneController : MonoBehaviour
     private EnemyDirector enemyDirector;
     private Scoreboard scoreboard;
     private Animator AreaClearImage;
+    private PlayerAttack playerAttack;
 
     private TimeManager timeManager;
     private bool encountered;
@@ -29,7 +30,7 @@ public class CombatZoneController : MonoBehaviour
         scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Scoreboard>();
         AreaClearImage = GameObject.FindGameObjectWithTag("AreaClearImage").GetComponent<Animator>();
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
-
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -37,6 +38,7 @@ public class CombatZoneController : MonoBehaviour
         if(inCombat)
         {
             combatTimer += Time.deltaTime;
+            playerAttack.weaponVisibleTime = Time.time + 2f;
         }
 
         if((combatTimer > 5f) && (enemyDirector.enemies.Count==0) && (completed == false))

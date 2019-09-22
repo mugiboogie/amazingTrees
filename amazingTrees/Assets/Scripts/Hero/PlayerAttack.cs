@@ -69,6 +69,8 @@ public class PlayerAttack : MonoBehaviour
 
     public bool activeHand; //For Vivi's guns. True = righthanded, False = lefthanded.
 
+    public float weaponVisibleTime;
+
     [HideInInspector] public Animator HUDparent;
 
     public void SummonHero()
@@ -128,7 +130,7 @@ public class PlayerAttack : MonoBehaviour
                 else if ((comboChain > 30) && (comboChain <= 40)) { comboComment.text = "Slay!!"; }
                 else if ((comboChain > 20) && (comboChain <= 30)) { comboComment.text = "Yaass!"; }
                 else if ((comboChain > 10) && (comboChain <= 20)) { comboComment.text = "Beautiful!"; }
-                else { comboComment.text = "Cool!"; }
+                else { comboComment.text = "Caca Girl!"; }
             }
 
 
@@ -178,7 +180,7 @@ public class PlayerAttack : MonoBehaviour
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + lightAttackRate + .25f;
                 durationTime = Time.time + lightAttackRate;
-
+                weaponVisibleTime = Time.time + 2f;
 
                 anim.SetTrigger("LightAttack");
             }
@@ -188,7 +190,7 @@ public class PlayerAttack : MonoBehaviour
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + heavyAttackRate + .5f;
                 durationTime = Time.time + heavyAttackRate;
-
+                weaponVisibleTime = Time.time + 2f;
 
                 anim.SetTrigger("HeavyAttack");
             }
@@ -205,7 +207,7 @@ public class PlayerAttack : MonoBehaviour
 
                 cooldownTime = Time.time + lightAttackRate + .5f;
                 durationTime = Time.time + lightAttackRate;
-
+                weaponVisibleTime = Time.time + 2f;
 
                 audio.PlayOneShot(chargeAttackVoice);
                 audio.PlayOneShot(chargeAttackFoley);
@@ -234,7 +236,7 @@ public class PlayerAttack : MonoBehaviour
 
                 cooldownTime = Time.time + heavyAttackRate + .5f;
                 durationTime = Time.time + heavyAttackRate;
-
+                weaponVisibleTime = Time.time + 2f;
 
                 audio.PlayOneShot(chargeAttackVoice);
                 audio.PlayOneShot(chargeAttackFoley);
@@ -309,8 +311,15 @@ public class PlayerAttack : MonoBehaviour
                 AttackCancel();
             }
 
+            if(Time.time > weaponVisibleTime)
+            {
+                anim.SetLayerWeight(anim.GetLayerIndex("Unarmed"), 1f);
+            }
 
-
+            else
+            {
+                anim.SetLayerWeight(anim.GetLayerIndex("Unarmed"), 0f);
+            }
 
             if (lastHitEnemy != null)
             {
