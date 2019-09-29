@@ -17,6 +17,7 @@ public class Hero : ScriptableObject
     public float movementSpeed;
     public float dashTime;
     public float damageReduction;
+    public float jumpForce;
 
     public AudioClip[] summonSfx;
     public AudioClip[] injuredSfx;

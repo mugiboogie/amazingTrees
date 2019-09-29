@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         playerDecoyController = playerController.decoy.GetComponent<PlayerDecoyController>();
         charSpeed = playerController.hero.movementSpeed;
         dashTime = playerController.hero.dashTime;
+        jumpForce = playerController.hero.jumpForce;
     }
 
     void Awake()

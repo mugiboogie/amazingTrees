@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerTargetting : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerTargetting : MonoBehaviour
     public AudioClip lockOnSound;
     public AudioClip lockOffSound;
     private bool lockOnPlayed;
+
+    private List<GameObject> sortedEnemies;
 
     void Awake()
     {
@@ -53,8 +56,11 @@ public class PlayerTargetting : MonoBehaviour
                 }
 
             }*/
+            sortedEnemies = enemies.OrderBy(x => Vector3.Angle((new Vector3(x.transform.position.x, 0f, x.transform.position.z) - new Vector3(camera.position.x, 0f, camera.position.z)), camera.forward)).ToList();
 
-            enemyTarget = findForwardEnemy();
+            //enemyTarget = findForwardEnemy();
+            enemyTarget = sortedEnemies[0];
+
             lockedOn = false;
 
             if (lockOnPlayed == true)
@@ -74,6 +80,15 @@ public class PlayerTargetting : MonoBehaviour
                 lockOnPlayed = true;
 
             }
+
+            if(enemyTarget.GetComponent<EnemyHealth>().currentHealth<=0f)
+            {
+                lockedOn = false;
+                lockOnPlayed = false;
+                enemyTarget = null;
+            }
+
+
         }
 
         else
@@ -110,8 +125,15 @@ public class PlayerTargetting : MonoBehaviour
                 result = enemies[i];
             }
         }
+        
 
         return result;
+    }
+
+    private void sortEnemies()
+    {
+        
+        
     }
     
 

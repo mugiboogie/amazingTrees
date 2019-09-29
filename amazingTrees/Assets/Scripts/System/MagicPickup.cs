@@ -57,7 +57,7 @@ public class MagicPickup : MonoBehaviour
         float distanceNeeded = 5f;
         if(Vector3.Distance(transform.position,player.transform.position)<distanceNeeded)
         {
-            transform.position += (player.transform.position - transform.position) * 8f * Time.deltaTime;
+            transform.position += (player.transform.position - transform.position) * 12f * Time.deltaTime;
         }
     }
 }

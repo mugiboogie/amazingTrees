@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DexMatWeapon
-  m_Shader: {fileID: 4800000, guid: 26c6e56cd2da2ae4dbcd2e57858cdfca, type: 3}
-  m_ShaderKeywords: TCP2_NONE
+  m_Shader: {fileID: 4800000, guid: 3e7899f24eae03e43910c579b8481df4, type: 3}
+  m_ShaderKeywords: EDGE_COLOR TCP2_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,12 +35,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 2800000, guid: 8b8c0d2a94fa4d540af8c62c70c48cd6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EdgeAroundRamp:
+        m_Texture: {fileID: 2800000, guid: 6e6ee1f34b0234741b0b85bb5a5fd843, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a477ea5a888e2e14f9cb558d0dbc378a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 36c511f64b3f28d4c9100dfcf45dfe53, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask1:
@@ -73,11 +81,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _CullMode: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendOutline: 10
     - _DstBlendTCP2: 10
+    - _Edge: 0.107
+    - _EdgeAround: 0.157
+    - _EdgeAroundHDR: 3
+    - _EdgeAroundPower: 3.26
+    - _EdgeDistortion: 0.3003
     - _EnableConstSizeOutline: 0
     - _EnableTexturedOutline: 0
     - _EnableZSmooth: 0
@@ -92,6 +106,7 @@ Material:
     - _Offset2: 9.7
     - _Outline: 0
     - _Parallax: 0.02
+    - _Progress: 1
     - _RampSmooth: 1
     - _RampThreshold: 0
     - _ShadowMultiplier: 1
@@ -103,6 +118,7 @@ Material:
     - _StencilRef: 1
     - _TexLod: 4.5
     - _UVSec: 0
+    - _UseEdgeColor: 1
     - _ZSmooth: -0.79
     - _ZWrite: 1
     - __dummy__: 0

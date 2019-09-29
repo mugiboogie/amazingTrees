@@ -22,6 +22,7 @@ MonoBehaviour:
   movementSpeed: 5
   dashTime: 0.75
   damageReduction: 1.2
+  jumpForce: 8
   summonSfx:
   - {fileID: 8300000, guid: 262e83360a5e4f54e8374189a3e2b23c, type: 3}
   - {fileID: 8300000, guid: dbf620b09c82650438a47260c58e91ec, type: 3}
@@ -38,5 +39,5 @@ MonoBehaviour:
   avatar: {fileID: 1478248591796316172, guid: e5545f1f7afcd6e468d9d959ad4d16b6, type: 3}
   decoy: {fileID: 2413696287304222496, guid: 04faa6a1f0b26064ca570ddbc9f5342c, type: 3}
   animatorController: {fileID: 9100000, guid: 7d8daabb11502234fa10107b6e29c5ed, type: 2}
-  bishoujoEyes: {fileID: 4787136789783332926, guid: ea33f37ae704cea46ab4949a3c5192fe,
+  bishoujoEyes: {fileID: 4787136789783332926, guid: c81c4645aaa72df4e8b3019ec08c0256,
     type: 3}

@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 197525840}
   - component: {fileID: 197525839}
   - component: {fileID: 197525838}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3048,7 +3048,7 @@ GameObject:
   - component: {fileID: 405833070}
   - component: {fileID: 405833069}
   - component: {fileID: 405833068}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7762,7 +7762,7 @@ GameObject:
   - component: {fileID: 897588657}
   - component: {fileID: 897588656}
   - component: {fileID: 897588655}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15366,6 +15366,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: propFountain Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 781445224943549416, guid: f2de1b59f2e5da0459a174259462cb77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4360356980619577851, guid: f2de1b59f2e5da0459a174259462cb77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18559,10 +18564,10 @@ MonoBehaviour:
   follow: 0
   anchor: {fileID: 0}
   desiredFOV: 0
-  distance: 7
+  distance: 12
   levelLayers:
     serializedVersion: 2
-    m_Bits: 1841
+    m_Bits: 1
   combatZone: {fileID: 0}
 --- !u!1001 &1835550665
 PrefabInstance:
@@ -18996,7 +19001,7 @@ GameObject:
   - component: {fileID: 1855942765}
   - component: {fileID: 1855942764}
   - component: {fileID: 1855942763}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21028,7 +21033,7 @@ GameObject:
   - component: {fileID: 1998216743}
   - component: {fileID: 1998216742}
   - component: {fileID: 1998216741}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

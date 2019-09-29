@@ -22,6 +22,7 @@ MonoBehaviour:
   movementSpeed: 6
   dashTime: 1
   damageReduction: 1
+  jumpForce: 9
   summonSfx:
   - {fileID: 8300000, guid: 0ff669cbe25461e4e8320bbcb070ccfc, type: 3}
   - {fileID: 8300000, guid: e37b1ec60ae23b44babc7f21476aa757, type: 3}

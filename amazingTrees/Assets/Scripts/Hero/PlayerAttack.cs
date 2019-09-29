@@ -70,6 +70,7 @@ public class PlayerAttack : MonoBehaviour
     public bool activeHand; //For Vivi's guns. True = righthanded, False = lefthanded.
 
     public float weaponVisibleTime;
+    private float weaponVisibleWeight;
 
     [HideInInspector] public Animator HUDparent;
 
@@ -179,7 +180,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + lightAttackRate + .25f;
-                durationTime = Time.time + lightAttackRate;
+                durationTime = Time.time + lightAttackRate + .0625f;
                 weaponVisibleTime = Time.time + 2f;
 
                 anim.SetTrigger("LightAttack");
@@ -189,7 +190,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 cooldownTime = Time.time + heavyAttackRate + .5f;
-                durationTime = Time.time + heavyAttackRate;
+                durationTime = Time.time + heavyAttackRate + .125f;
                 weaponVisibleTime = Time.time + 2f;
 
                 anim.SetTrigger("HeavyAttack");
@@ -218,6 +219,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("LightAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                weaponVisibleTime = Time.time + 2f;
                 lightAttackCharge += Time.deltaTime;
             }
             else
@@ -247,6 +249,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                weaponVisibleTime = Time.time + 2f;
                 heavyAttackCharge += Time.deltaTime;
             }
             else
@@ -313,13 +316,16 @@ public class PlayerAttack : MonoBehaviour
 
             if(Time.time > weaponVisibleTime)
             {
-                anim.SetLayerWeight(anim.GetLayerIndex("Unarmed"), 1f);
+                weaponVisibleWeight = Mathf.Lerp(weaponVisibleWeight, 1f, 10f * Time.deltaTime);
+                
             }
 
             else
             {
-                anim.SetLayerWeight(anim.GetLayerIndex("Unarmed"), 0f);
+                weaponVisibleWeight = 0f;
             }
+
+            anim.SetLayerWeight(anim.GetLayerIndex("Unarmed"), weaponVisibleWeight);
 
             if (lastHitEnemy != null)
             {
