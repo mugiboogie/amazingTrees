@@ -47094,7 +47094,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.26666668
     functionName: Melee
-    data: 20/H
+    data: 16/H
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -47108,7 +47108,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.36666667
     functionName: Melee
-    data: 20/H
+    data: 16/H
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -47122,7 +47122,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: Melee
-    data: 20/S
+    data: 16/S
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

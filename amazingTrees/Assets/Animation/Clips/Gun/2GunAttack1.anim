@@ -40020,7 +40020,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.3
     functionName: Melee
-    data: 22/H
+    data: 14/H
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
