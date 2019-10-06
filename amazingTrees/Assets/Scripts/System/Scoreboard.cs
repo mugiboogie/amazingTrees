@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Scoreboard : MonoBehaviour
 {
+    
     public List<CombatZoneController> combatZones;
     private PlayerHealth playerHealth;
     private PlayerAttack playerAttack;
@@ -40,11 +41,6 @@ public class Scoreboard : MonoBehaviour
         }
 
         text.text = defaultText;
-
-        if(Time.time > 3f)
-        {
-            defaultText = " ";
-        }
 
         bool success = true;
 

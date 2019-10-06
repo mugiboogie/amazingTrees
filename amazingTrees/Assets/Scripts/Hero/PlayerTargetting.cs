@@ -8,6 +8,7 @@ public class PlayerTargetting : MonoBehaviour
     public GameObject enemyTarget;
     public RectTransform enemyTargetIndicator;
     public GameObject forwardEnemy;
+    public GameObject forwardEnemyFromPlayer;
     public GameObject closestEnemy;
     private EnemyDirector enemyDirector;
     private List<GameObject> enemies;
@@ -35,7 +36,7 @@ public class PlayerTargetting : MonoBehaviour
     void Update()
     {
 
-        
+        forwardEnemyFromPlayer = findForwardEnemyFromPlayer();
 
         if ((!Input.GetButton("LockOn")) || (enemyTarget == null))
         {
@@ -59,7 +60,7 @@ public class PlayerTargetting : MonoBehaviour
             sortedEnemies = enemies.OrderBy(x => Vector3.Angle((new Vector3(x.transform.position.x, 0f, x.transform.position.z) - new Vector3(camera.position.x, 0f, camera.position.z)), camera.forward)).ToList();
 
             //enemyTarget = findForwardEnemy();
-            enemyTarget = sortedEnemies[0];
+            enemyTarget = (sortedEnemies.Count>0?sortedEnemies[0]:null);
 
             lockedOn = false;
 
@@ -135,7 +136,27 @@ public class PlayerTargetting : MonoBehaviour
         
         
     }
-    
+    public GameObject findForwardEnemyFromPlayer()
+    {
+        GameObject result = null;
+        float angle = 180f;
+
+        for (int i=0; i< enemies.Count; i++)
+        {
+            Vector3 enemyPosition = enemies[i].transform.position;
+            enemyPosition.y = 0f;
+            Vector3 playerPosition = transform.position;
+            playerPosition.y = 0f;
+            Vector3 targetDir = enemyPosition - playerPosition;
+            if (Vector3.Angle(targetDir, transform.forward) < angle)
+            {
+                angle = Vector3.Angle(targetDir, transform.forward);
+                result = enemies[i];
+            }
+
+        }
+        return result;
+    }
 
 
 }

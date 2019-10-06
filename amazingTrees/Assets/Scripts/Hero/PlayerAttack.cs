@@ -74,6 +74,8 @@ public class PlayerAttack : MonoBehaviour
 
     [HideInInspector] public Animator HUDparent;
 
+    public LayerMask levelLayers;
+
     public void SummonHero()
     {
         anim = playerController.anim;
@@ -176,24 +178,35 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("LightAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+            if (Input.GetButtonDown("LightAttack") && (Time.time > durationTime))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
-                cooldownTime = Time.time + lightAttackRate + .25f;
-                durationTime = Time.time + lightAttackRate + .0625f;
+                else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 weaponVisibleTime = Time.time + 2f;
 
-                anim.SetTrigger("LightAttack");
+                if ((anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+                {
+                    cooldownTime = Time.time + lightAttackRate + .25f;
+                    durationTime = Time.time + lightAttackRate + .0625f;
+                    anim.SetTrigger("LightAttack");
+                }
+                
+                
             }
 
-            if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime) && (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack")))
+            if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
-                cooldownTime = Time.time + heavyAttackRate + .5f;
-                durationTime = Time.time + heavyAttackRate + .125f;
+                else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 weaponVisibleTime = Time.time + 2f;
 
-                anim.SetTrigger("HeavyAttack");
+                if (anim.GetCurrentAnimatorStateInfo(1).tagHash != Animator.StringToHash("FinalAttack"))
+                {
+                    cooldownTime = Time.time + heavyAttackRate + .5f;
+                    durationTime = Time.time + heavyAttackRate + .125f;
+                    anim.SetTrigger("HeavyAttack");
+                }
+                
             }
 
 
@@ -203,6 +216,7 @@ public class PlayerAttack : MonoBehaviour
             if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 //Unleash attack
                 lightAttackCharge = 0f;
 
@@ -219,6 +233,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("LightAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 weaponVisibleTime = Time.time + 2f;
                 lightAttackCharge += Time.deltaTime;
             }
@@ -233,6 +248,7 @@ public class PlayerAttack : MonoBehaviour
             if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 //Unleash attack
                 heavyAttackCharge = 0f;
 
@@ -249,6 +265,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
+                //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
                 weaponVisibleTime = Time.time + 2f;
                 heavyAttackCharge += Time.deltaTime;
             }
@@ -346,104 +363,135 @@ public class PlayerAttack : MonoBehaviour
         float damage = float.Parse(propertyArray[0]);
         string effect = propertyArray[1];
 
-        
+
         //Debug.Log("Attack");
-        Collider[] targets = Physics.OverlapSphere(attackOrigin, isShooting?attackRange + 3f:attackRange, affectedLayers);
 
-        for (int i = 0; i < targets.Length; i++)
+        Collider[] targets; 
+        if(isShooting)
         {
-            Vector3 targetDir = (targets[i].transform.position + Vector3.up)- attackOrigin;
-            if(Vector3.Angle(targetDir,transform.forward)<attackAngle)
+
+            float radius = 3f;
+            Vector3 origin = transform.position + Vector3.up*(radius) - transform.forward*(radius);
+            
+            Vector3 targetDir = transform.forward;
+            float defaultDistance = attackRange+radius;
+                
+            RaycastHit[] targetHits = Physics.SphereCastAll(origin, radius, targetDir, defaultDistance);
+            targets = new Collider[targetHits.Length];
+            for(int i=0; i<targets.Length; i++)
             {
-                //Debug.Log(targets[i]);
-
-                if (targets[i].CompareTag("Enemy"))
-                {
-                    EnemyHealth enemyHealth = targets[i].GetComponent<EnemyHealth>();
-
-                    if (!enemyHealth.isDead)
-                    {
-                        playerTargetting.overrideTime = Time.time + 2f;
-                        lastHitEnemy = targets[i].gameObject;
-                        playerTargetting.overrideEnemy = lastHitEnemy;
-
-                        comboChain++;
-                        comboChainReset = Time.time + 3f;
-                    }
-
-                    enemyHealth.TakeDamage(damage,effect,transform.position);
-                    
-                }
-
-                if (targets[i].CompareTag("Destructables"))
-                {
-                    DestructablesHealth destructablesHealth = targets[i].GetComponent<DestructablesHealth>();
-
-                    if (!destructablesHealth.isDead)
-                    {
-                        playerTargetting.overrideTime = Time.time + 2f;
-                        lastHitEnemy = targets[i].gameObject;
-                        playerTargetting.overrideEnemy = lastHitEnemy;
-
-                        comboChain++;
-                        comboChainReset = Time.time + 3f;
-                    }
-
-                    destructablesHealth.TakeDamage(damage, effect, transform.position);
-
-                }
-
-
-
-
-                
-
-                
-
-                if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))
-                {
-                    //StartCoroutine(cameraShake.Shake(.1f, .005f * damage));
-                    StartCoroutine(cameraShake.Shake(.1f, .25f));
-                }
-                else
-                {
-                    StartCoroutine(cameraShake.Shake(.1f, .00625f));
-                }
-                playerMovement.stutterTime = Time.time + Mathf.Min(.25f,(lightAttackRate*1.5f));
+                targets[i] = targetHits[i].collider;
             }
-            damageDealt += damage;
         }
+        else
+        {
+            targets = Physics.OverlapSphere(attackOrigin, attackRange, affectedLayers);
+        }
+        
 
-        StartCoroutine(ApplyForce(effect, damage, targets, isShooting));
+            for (int i = 0; i < targets.Length; i++)
+            {
+                Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
+                if (Vector3.Angle(targetDir, transform.forward) < attackAngle)
+                {
+                    //Debug.Log(targets[i]);
+
+                    if (targets[i].CompareTag("Enemy"))
+                    {
+                        EnemyHealth enemyHealth = targets[i].GetComponent<EnemyHealth>();
+
+                        if (!enemyHealth.isDead)
+                        {
+                            playerTargetting.overrideTime = Time.time + 2f;
+                            lastHitEnemy = targets[i].gameObject;
+                            playerTargetting.overrideEnemy = lastHitEnemy;
+
+                            comboChain++;
+                            comboChainReset = Time.time + 3f;
+                        }
+
+                        enemyHealth.TakeDamage(damage, effect, transform.position);
+
+                    }
+
+                    if (targets[i].CompareTag("Destructables"))
+                    {
+                        DestructablesHealth destructablesHealth = targets[i].GetComponent<DestructablesHealth>();
+
+                        if (!destructablesHealth.isDead)
+                        {
+                            playerTargetting.overrideTime = Time.time + 2f;
+                            lastHitEnemy = targets[i].gameObject;
+                            playerTargetting.overrideEnemy = lastHitEnemy;
+
+                            comboChain++;
+                            comboChainReset = Time.time + 3f;
+                        }
+
+                        destructablesHealth.TakeDamage(damage, effect, transform.position);
+
+                    }
+                    
+                    if (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))
+                    {
+                        //StartCoroutine(cameraShake.Shake(.1f, .005f * damage));
+                        StartCoroutine(cameraShake.Shake(.1f, .25f));
+                    }
+                    else
+                    {
+                        StartCoroutine(cameraShake.Shake(.1f, .00625f));
+                    }
+                    playerMovement.stutterTime = Time.time + Mathf.Min(.25f, (lightAttackRate * 1.5f));
+                }
+                damageDealt += damage;
+            }
+            StartCoroutine(ApplyForce(effect, damage, targets, isShooting));
+        
+       
+
+        
     }
 
     IEnumerator ApplyForce(string effect, float damage, Collider[] targets, bool isShooting)
     {
         yield return new WaitForSeconds(.0625f);
         float impact = 50f;
-        for (int i = 0; i < targets.Length; i++)
+        if (targets.Length > 0)
         {
-            Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
-            if (Vector3.Angle(targetDir, transform.forward) < attackAngle)
+            for (int i = 0; i < targets.Length; i++)
             {
-                switch (effect)
+                if (targets[i].attachedRigidbody != null)
                 {
-                    case "H":
-                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                        break;
-                    case "S":
-                        targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
-                        break;
-                    case "U":
-                        targets[i].attachedRigidbody.AddExplosionForce(damage * (impact * .5f), targets[i].transform.position + Vector3.down, attackRange * 2f);
-                        //targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact * .5f));
-                        break;
-                    case "D":
-                        targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
-                        break;
-                    case "B":
-                        targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f) + Vector3.up);
-                        break;
+                    Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
+                    if (isShooting)
+                    {
+                        targets[i].attachedRigidbody.AddForce(transform.forward * damage * impact);
+                    }
+                    else
+                    {
+                        if (Vector3.Angle(targetDir, transform.forward) < attackAngle)
+                        {
+                            switch (effect)
+                            {
+                                case "H":
+                                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                                    break;
+                                case "S":
+                                    targets[i].attachedRigidbody.AddExplosionForce(damage * impact, transform.position + Vector3.up, attackRange * 2f);
+                                    break;
+                                case "U":
+                                    targets[i].attachedRigidbody.AddExplosionForce(damage * (impact * .5f), targets[i].transform.position + Vector3.down, attackRange * 2f);
+                                    //targets[i].attachedRigidbody.AddForce(Vector3.up * damage * (impact * .5f));
+                                    break;
+                                case "D":
+                                    targets[i].attachedRigidbody.AddForce(Vector3.down * damage * impact);
+                                    break;
+                                case "B":
+                                    targets[i].attachedRigidbody.AddForce(transform.forward * damage * (impact * 2f) + Vector3.up);
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
         }

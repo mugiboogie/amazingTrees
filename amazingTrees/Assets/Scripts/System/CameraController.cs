@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     private Vector3 setPosition;
     private Vector3 targetPosition;
 
-    private const float Y_ANGLE_MIN = 0.0f;
+    private const float Y_ANGLE_MIN = -50.0f;
     private const float Y_ANGLE_MAX = 50.0f;
     private Camera cam;
     private float currentX = 0.0f;
@@ -164,7 +164,7 @@ public class CameraController : MonoBehaviour
 
             Vector3 dir = new Vector3(0, 0, -distance);
             Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            setPosition = lookAt.position + (Vector3.up * 2f) + rotation * dir;
+            setPosition = lookAt.position + (Vector3.up * 5f) + rotation * dir;
             lookAtPosition = lookAt.position + (Vector3.up * 1f);
             //camTransform.LookAt(lookAt.position);
 
@@ -215,13 +215,13 @@ public class CameraController : MonoBehaviour
 
     private float CalculateDistance()
     {
-        float defaultDistance = combatZone==null?4f:8f;
+        float defaultDistance = combatZone==null?4f:6f;
 
         
         
         float setDistance = defaultDistance;
 
-        Vector3 origin = lookAt.position + Vector3.up * 2f;
+        Vector3 origin = lookAt.position + Vector3.up * 5f;
         RaycastHit hit;
 
         float radius = .3f;

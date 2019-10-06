@@ -21,8 +21,8 @@ MonoBehaviour:
   heavyAttackRate: 0.125
   movementSpeed: 7
   dashTime: 0.5
-  damageReduction: 1.2
-  jumpForce: 10
+  damageReduction: 0.8
+  jumpForce: 0
   summonSfx:
   - {fileID: 8300000, guid: 3f0636567c4803049aa5172b2308b156, type: 3}
   - {fileID: 8300000, guid: 16ece081491c8eb44993b1a3a1d4502a, type: 3}
