@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private AudioListener audioListener;
     private Transform camera;
+
+    public bool allHeroesDead;
     
 
     private void Awake()
@@ -72,6 +74,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        allHeroesDead = true;
+        for(int i=0; i<heroHealth.Length; i++)
+        {
+            if(heroHealth[i]>0f) { allHeroesDead = false; }
+        }
+
         if((Time.time>autoSpawnTime) && (autoSpawned==false))
         {
             autoSpawned = true;
@@ -83,17 +91,32 @@ public class PlayerController : MonoBehaviour
 
             SummonHero();
         }
-        if(Input.GetKeyDown(KeyCode.F))
-        {
 
-           
-            hero = heroes[selection];
-            playerHealth.currentHealth = heroHealth[selection];
-            playerAttack.mana = heroMana[selection];
+        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)))
+        {
+            bool selected = false;
+            while (selected == false)
+            {
+                if (heroHealth[selection] > 0f)
+                {
+                    hero = heroes[selection];
+                    playerHealth.currentHealth = heroHealth[selection];
+                    playerAttack.mana = heroMana[selection];
+
+                    selection++;
+                    if (selection >= heroes.Length) { selection = 0; }
+
+                    
+                    SummonHero();
+
+                    selected = true;
+                }
+                else
+                {
+                    selection++;
+                }
+            }
             
-            selection++;
-            if(selection>=heroes.Length) { selection = 0; }
-            SummonHero();
         }
 
         int currentCharacter = selection - 1;

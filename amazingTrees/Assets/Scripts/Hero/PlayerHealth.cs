@@ -92,8 +92,14 @@ public class PlayerHealth : MonoBehaviour
                     audio.PlayOneShot(clip, 1f);
                 }
             }
-
             else
+            {
+                playerDead = false;
+                anim.SetBool("isDead", false);
+                deathPlayed = false;
+            }
+
+            if(playerController.allHeroesDead == false)
             {
                 gameOverTime = Time.time + 5f;
             }
