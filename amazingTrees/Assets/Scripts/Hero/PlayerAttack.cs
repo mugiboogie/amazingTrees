@@ -392,7 +392,7 @@ public class PlayerAttack : MonoBehaviour
             for (int i = 0; i < targets.Length; i++)
             {
                 Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
-                if (Vector3.Angle(targetDir, transform.forward) < attackAngle)
+                if ((Vector3.Angle(targetDir, transform.forward) < attackAngle) || (isShooting))
                 {
                     //Debug.Log(targets[i]);
 

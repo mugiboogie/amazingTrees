@@ -44,6 +44,8 @@ public class PlayerHealth : MonoBehaviour
 
     [HideInInspector] public Animator HUDparent;
 
+    private float deadTime;
+
     public void SummonHero()
     {
         anim = playerController.anim;
@@ -80,6 +82,7 @@ public class PlayerHealth : MonoBehaviour
             }
 
 
+            
             if (currentHealth <= 0f)
             {
                 playerDead = true;
@@ -91,12 +94,16 @@ public class PlayerHealth : MonoBehaviour
                     AudioClip clip = dead;
                     audio.PlayOneShot(clip, 1f);
                 }
+                if(deadTime<5f) { deadTime += Time.deltaTime; }
+                else { playerController.TrySummonHero(); }
+                playerAttack.mana = 0f;
             }
             else
             {
                 playerDead = false;
                 anim.SetBool("isDead", false);
                 deathPlayed = false;
+                deadTime = 0f;
             }
 
             if(playerController.allHeroesDead == false)

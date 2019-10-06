@@ -75,9 +75,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         allHeroesDead = true;
+        int numHeroesAlive = 0;
         for(int i=0; i<heroHealth.Length; i++)
         {
-            if(heroHealth[i]>0f) { allHeroesDead = false; }
+            if(heroHealth[i]>0f) { allHeroesDead = false; numHeroesAlive++; }
         }
 
         if((Time.time>autoSpawnTime) && (autoSpawned==false))
@@ -92,31 +93,9 @@ public class PlayerController : MonoBehaviour
             SummonHero();
         }
 
-        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)))
+        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)) && (numHeroesAlive>0))
         {
-            bool selected = false;
-            while (selected == false)
-            {
-                if (heroHealth[selection] > 0f)
-                {
-                    hero = heroes[selection];
-                    playerHealth.currentHealth = heroHealth[selection];
-                    playerAttack.mana = heroMana[selection];
-
-                    selection++;
-                    if (selection >= heroes.Length) { selection = 0; }
-
-                    
-                    SummonHero();
-
-                    selected = true;
-                }
-                else
-                {
-                    selection++;
-                }
-            }
-            
+            TrySummonHero();            
         }
 
         int currentCharacter = selection - 1;
@@ -135,6 +114,32 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    public void TrySummonHero()
+    {
+        bool selected = false;
+        while (selected == false)
+        {
+            if (heroHealth[selection] > 0f)
+            {
+                hero = heroes[selection];
+                playerHealth.currentHealth = heroHealth[selection];
+                playerAttack.mana = heroMana[selection];
+
+                selection++;
+                if (selection >= heroes.Length) { selection = 0; }
+
+
+                SummonHero();
+
+                selected = true;
+            }
+            else
+            {
+                selection++;
+            }
+        }
     }
 
     private void SummonHero()
