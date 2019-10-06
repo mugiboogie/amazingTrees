@@ -374,7 +374,7 @@ public class PlayerAttack : MonoBehaviour
             Vector3 origin = transform.position + Vector3.up*(radius) - transform.forward*(radius);
             
             Vector3 targetDir = transform.forward;
-            float defaultDistance = attackRange+radius;
+            float defaultDistance = 9999f;
                 
             RaycastHit[] targetHits = Physics.SphereCastAll(origin, radius, targetDir, defaultDistance);
             targets = new Collider[targetHits.Length];
