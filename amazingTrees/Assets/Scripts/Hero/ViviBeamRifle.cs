@@ -12,7 +12,7 @@ public class ViviBeamRifle : MonoBehaviour
     private Animator playerAnim;
     private float endTime;
     private EnemyDirector enemyDirector;
-
+    private List<EnemyHealth> enemyTargets;
 
     public LayerMask levelLayers;
     public Transform player;
@@ -74,27 +74,42 @@ public class ViviBeamRifle : MonoBehaviour
     {
         while (Time.time < endTime)
         {
-            if (enemyDirector.enemies.Count > 0)
+            if (enemyTargets.Count > 0)
             {
-                bool soundPlayed = false;
-                for (int i = 0; i < enemyDirector.enemies.Count; i++)
+                for (int i = 0; i < enemyTargets.Count; i++)
                 {
-                    if (Vector3.Distance(enemyDirector.enemies[i].transform.position + Vector3.up, playerAttack.transform.position + Vector3.up) < 3f)
-                    {
-                        enemyDirector.enemies[i].GetComponent<EnemyHealth>().TakeDamage(Random.Range(20f, 30f), "U", playerAttack.transform.position);
-                        if (soundPlayed == false)
-                        {
-                            Instantiate(particleHit, playerAttack.transform.position, Quaternion.identity);
-                            audio.PlayOneShot(hitSound, 1f);
-                            soundPlayed = true;
-                        }
-                    }
+                    EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+
+                    enemyHealth.TakeDamage(9999, "S", transform.position);
                 }
             }
-            Instantiate(particleEffect, playerAttack.transform, false);
             yield return new WaitForSeconds(.25f);
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
 
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyToAdd = other.GetComponent<EnemyHealth>();
+            if (!enemyTargets.Contains(enemyToAdd))
+            {
+                enemyTargets.Add(enemyToAdd);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyToDelete = other.GetComponent<EnemyHealth>();
+            if (enemyTargets.Contains(enemyToDelete))
+            {
+                enemyTargets.Remove(enemyToDelete);
+            }
+        }
+    }
 }
