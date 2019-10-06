@@ -16,13 +16,13 @@ MonoBehaviour:
   heroPortraitImg: {fileID: 21300000, guid: b29b5ad8e6fbb9148a5e270500783dc6, type: 3}
   heroNameImg: {fileID: 21300000, guid: cc03b4930a7390d4aa9977d86faf44a4, type: 3}
   attackRange: 2.5
-  attackAngle: 45
+  attackAngle: 75
   lightAttackRate: 0.1
   heavyAttackRate: 0.005
   movementSpeed: 5
   dashTime: 0.75
   damageReduction: 1.2
-  jumpForce: 8
+  jumpForce: 7
   summonSfx:
   - {fileID: 8300000, guid: 262e83360a5e4f54e8374189a3e2b23c, type: 3}
   - {fileID: 8300000, guid: dbf620b09c82650438a47260c58e91ec, type: 3}
