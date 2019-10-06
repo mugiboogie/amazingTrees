@@ -12,7 +12,7 @@ public class ViviBeamRifle : MonoBehaviour
     private Animator playerAnim;
     private float endTime;
     private EnemyDirector enemyDirector;
-    private List<EnemyHealth> enemyTargets;
+    [SerializeField] private List<EnemyHealth> enemyTargets;
 
     public LayerMask levelLayers;
     public Transform player;
@@ -55,19 +55,21 @@ public class ViviBeamRifle : MonoBehaviour
             endTime = Time.time + 5f;
             StartCoroutine(BeamRifle());
 
-            Vector3 origin = transform.position;
-            float radius = collider.radius;
-            Vector3 targetDir = transform.forward;
-            float defaultDistance = 9999f;
-            RaycastHit hit;
+            
+        }
 
-            if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
-            {
-                collider.height = hit.distance;
-            }
+        Vector3 origin = transform.position;
+        float radius = collider.radius;
+        Vector3 targetDir = transform.forward;
+        float defaultDistance = 9999f;
+        RaycastHit hit;
 
-            collider.center = new Vector3(0, 0, collider.height / 2f);
-        }            
+        if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
+        {
+            collider.height = hit.distance;
+        }
+
+        collider.center = new Vector3(0, 0, collider.height / 2f);
     }
 
     IEnumerator BeamRifle()
@@ -93,9 +95,12 @@ public class ViviBeamRifle : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemyToAdd = other.GetComponent<EnemyHealth>();
-            if (!enemyTargets.Contains(enemyToAdd))
+            if (enemyToAdd != null)
             {
-                enemyTargets.Add(enemyToAdd);
+                if (!enemyTargets.Contains(enemyToAdd))
+                {
+                    enemyTargets.Add(enemyToAdd);
+                }
             }
         }
     }
@@ -106,9 +111,12 @@ public class ViviBeamRifle : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemyToDelete = other.GetComponent<EnemyHealth>();
-            if (enemyTargets.Contains(enemyToDelete))
+            if (enemyToDelete != null)
             {
-                enemyTargets.Remove(enemyToDelete);
+                if (enemyTargets.Contains(enemyToDelete))
+                {
+                    enemyTargets.Remove(enemyToDelete);
+                }
             }
         }
     }
