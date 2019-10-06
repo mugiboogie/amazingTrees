@@ -41,6 +41,11 @@ public class Scoreboard : MonoBehaviour
 
         text.text = defaultText;
 
+        if(Time.time > 3f)
+        {
+            defaultText = " ";
+        }
+
         bool success = true;
 
         for(int j=0; j<combatZones.Count; j++)
