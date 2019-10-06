@@ -30,7 +30,7 @@ public class ViviBeamRifle : MonoBehaviour
 
         if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
         {
-            collider.height = hit.distance / 2f;
+            collider.height = hit.distance;
         }
 
         collider.center = new Vector3(0, 0, collider.height / 2f);
