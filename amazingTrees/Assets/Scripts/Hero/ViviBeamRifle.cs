@@ -12,7 +12,7 @@ public class ViviBeamRifle : MonoBehaviour
     private Animator playerAnim;
     private float endTime;
     private EnemyDirector enemyDirector;
-
+    [SerializeField] private List<EnemyHealth> enemyTargets;
 
     public LayerMask levelLayers;
     public Transform player;
@@ -55,46 +55,69 @@ public class ViviBeamRifle : MonoBehaviour
             endTime = Time.time + 5f;
             StartCoroutine(BeamRifle());
 
-            Vector3 origin = transform.position;
-            float radius = collider.radius;
-            Vector3 targetDir = transform.forward;
-            float defaultDistance = 9999f;
-            RaycastHit hit;
+            
+        }
 
-            if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
-            {
-                collider.height = hit.distance;
-            }
+        Vector3 origin = transform.position;
+        float radius = collider.radius;
+        Vector3 targetDir = transform.forward;
+        float defaultDistance = 9999f;
+        RaycastHit hit;
 
-            collider.center = new Vector3(0, 0, collider.height / 2f);
-        }            
+        if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, levelLayers))
+        {
+            collider.height = hit.distance;
+        }
+
+        collider.center = new Vector3(0, 0, collider.height / 2f);
     }
 
     IEnumerator BeamRifle()
     {
         while (Time.time < endTime)
         {
-            if (enemyDirector.enemies.Count > 0)
+            if (enemyTargets.Count > 0)
             {
-                bool soundPlayed = false;
-                for (int i = 0; i < enemyDirector.enemies.Count; i++)
+                for (int i = 0; i < enemyTargets.Count; i++)
                 {
-                    if (Vector3.Distance(enemyDirector.enemies[i].transform.position + Vector3.up, playerAttack.transform.position + Vector3.up) < 3f)
-                    {
-                        enemyDirector.enemies[i].GetComponent<EnemyHealth>().TakeDamage(Random.Range(20f, 30f), "U", playerAttack.transform.position);
-                        if (soundPlayed == false)
-                        {
-                            Instantiate(particleHit, playerAttack.transform.position, Quaternion.identity);
-                            audio.PlayOneShot(hitSound, 1f);
-                            soundPlayed = true;
-                        }
-                    }
+                    EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+
+                    enemyHealth.TakeDamage(9999, "S", transform.position);
                 }
             }
-            Instantiate(particleEffect, playerAttack.transform, false);
             yield return new WaitForSeconds(.25f);
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
 
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyToAdd = other.GetComponent<EnemyHealth>();
+            if (enemyToAdd != null)
+            {
+                if (!enemyTargets.Contains(enemyToAdd))
+                {
+                    enemyTargets.Add(enemyToAdd);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyToDelete = other.GetComponent<EnemyHealth>();
+            if (enemyToDelete != null)
+            {
+                if (enemyTargets.Contains(enemyToDelete))
+                {
+                    enemyTargets.Remove(enemyToDelete);
+                }
+            }
+        }
+    }
 }
