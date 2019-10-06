@@ -21,6 +21,7 @@ public class ViviBeamRifle : MonoBehaviour
     public AudioClip hitSound;
     public GameObject particleHit;
     public GameObject particleEffect;
+    public GameObject beamRifleLaser;
 
     void Awake()
     {
@@ -80,7 +81,7 @@ public class ViviBeamRifle : MonoBehaviour
             {
                 for (int i = 0; i < enemyTargets.Count; i++)
                 {
-                    EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+                    EnemyHealth enemyHealth = enemyTargets[i].GetComponent<EnemyHealth>();
 
                     enemyHealth.TakeDamage(9999, "S", transform.position);
                 }
