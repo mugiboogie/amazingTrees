@@ -142,7 +142,8 @@ AudioSource:
   m_GameObject: {fileID: 7386615764869028849}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8407870635016844434, guid: f6fe54cdb25f6374a89ceea715cf4c76,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -332,7 +333,11 @@ MonoBehaviour:
     type: 3}
   shockWave: {fileID: 1602197966606650, guid: 03257f374d42eca4989ce047676ecc78, type: 3}
   activeHand: 0
+  weaponVisibleTime: 0
   HUDparent: {fileID: 0}
+  levelLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7386615764869028850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +379,7 @@ MonoBehaviour:
   enemyTarget: {fileID: 0}
   enemyTargetIndicator: {fileID: 0}
   forwardEnemy: {fileID: 0}
+  forwardEnemyFromPlayer: {fileID: 0}
   closestEnemy: {fileID: 0}
   overrideTime: 0
   overrideEnemy: {fileID: 0}
