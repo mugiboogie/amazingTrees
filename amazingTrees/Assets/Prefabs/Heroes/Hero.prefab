@@ -278,7 +278,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroes:
   - {fileID: 11400000, guid: f8c9ac2bfdd6ead48b156d2ad243b4a2, type: 2}
-  - {fileID: 11400000, guid: 055b91ea07d977f4e9f46f0c618510af, type: 2}
   - {fileID: 11400000, guid: 11a3d5f3e7b532e4bb21339f03ed2f88, type: 2}
   heroHealth: []
   hero: {fileID: 11400000, guid: 055b91ea07d977f4e9f46f0c618510af, type: 2}
@@ -290,6 +289,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   manaAllMax: 0
   heroMana: []
+  allHeroesDead: 0
 --- !u!114 &7386615764869028853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +307,9 @@ MonoBehaviour:
   affectedLayers:
     serializedVersion: 2
     m_Bits: 5632
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
   lightAttackRate: 0.125
   heavyAttackRate: 0.25
   cooldownTime: 0

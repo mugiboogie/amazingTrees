@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
             anim.enabled = (Time.time > stutterTime);
 
-            bool playFootsteps = (charCon.isGrounded && (Time.time > dashDuration) && (inputDirection.magnitude > .1f));
+            bool playFootsteps = (charCon.isGrounded && (Time.time > dashDuration) && (inputDirection.magnitude > .1f) && (playerHealth.currentHealth>0f));
             anim.SetBool("PlayFootsteps", playFootsteps);
         }
 

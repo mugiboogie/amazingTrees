@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
             SummonHero();
         }
 
-        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)) && (numHeroesAlive>0))
+        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)) && (numHeroesAlive>1))
         {
             TrySummonHero();            
         }
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     public void TrySummonHero()
     {
         bool selected = false;
-        while (selected == false)
+        while ((selected == false) && (allHeroesDead == false))
         {
             if (heroHealth[selection] > 0f)
             {

@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackAngle;
     private Vector3 attackOrigin;
     public LayerMask affectedLayers;
+    public LayerMask enemyLayers;
 
     public float lightAttackRate;
     public float heavyAttackRate;
@@ -370,26 +371,36 @@ public class PlayerAttack : MonoBehaviour
         if(isShooting)
         {
 
-            float radius = 3f;
-            Vector3 origin = transform.position + Vector3.up*(radius) - transform.forward*(radius);
+            float radius = .5f;
+            Vector3 origin = transform.position + Vector3.up*(radius) + transform.forward*radius;
             
             Vector3 targetDir = transform.forward;
-            float defaultDistance = 9999f;
-                
+            float defaultDistance = 25f;
+
+            RaycastHit hit;
+
+            if (Physics.SphereCast(origin, radius, targetDir.normalized, out hit, defaultDistance, enemyLayers))
+            {
+                defaultDistance = hit.distance + radius;
+            }
+
             RaycastHit[] targetHits = Physics.SphereCastAll(origin, radius, targetDir, defaultDistance);
             targets = new Collider[targetHits.Length];
             for(int i=0; i<targets.Length; i++)
             {
                 targets[i] = targetHits[i].collider;
             }
+
+            
         }
         else
         {
             targets = Physics.OverlapSphere(attackOrigin, attackRange, affectedLayers);
         }
-        
 
-            for (int i = 0; i < targets.Length; i++)
+
+
+        for (int i = 0; i < targets.Length; i++)
             {
                 Vector3 targetDir = (targets[i].transform.position + Vector3.up) - attackOrigin;
                 if ((Vector3.Angle(targetDir, transform.forward) < attackAngle) || (isShooting))

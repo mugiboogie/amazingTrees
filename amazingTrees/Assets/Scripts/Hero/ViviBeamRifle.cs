@@ -22,6 +22,7 @@ public class ViviBeamRifle : MonoBehaviour
     public GameObject particleHit;
     public GameObject particleEffect;
     public GameObject beamRifleLaser;
+    public GameObject visual;
 
     void Awake()
     {
@@ -71,6 +72,8 @@ public class ViviBeamRifle : MonoBehaviour
         }
 
         collider.center = new Vector3(0, 0, collider.height / 2f);
+
+        visual.SetActive(Time.time < endTime);
     }
 
     IEnumerator BeamRifle()
@@ -83,10 +86,10 @@ public class ViviBeamRifle : MonoBehaviour
                 {
                     EnemyHealth enemyHealth = enemyTargets[i].GetComponent<EnemyHealth>();
 
-                    enemyHealth.TakeDamage(9999, "S", transform.position);
+                    enemyHealth.TakeDamage(Random.Range(7f, 15f), "S", transform.position);
                 }
             }
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(.0625f);
         }
     }
 
