@@ -38,7 +38,11 @@ public class CombatZoneController : MonoBehaviour
         if(inCombat)
         {
             combatTimer += Time.deltaTime;
-            playerAttack.weaponVisibleTime = Time.time + 2f;
+
+            if (playerAttack.spellWeaponVisibleTime < Time.time)
+            {
+                playerAttack.weaponVisibleTime = Time.time + 2f;
+            }
         }
 
         if((combatTimer > 5f) && (enemyDirector.enemies.Count==0) && (completed == false))

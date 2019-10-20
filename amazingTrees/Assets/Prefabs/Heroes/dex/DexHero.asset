@@ -32,7 +32,7 @@ MonoBehaviour:
   deathSfx: {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
   chargeAttackVoice: {fileID: 8300000, guid: b6bdb98e547aad244ba08fc0c9b5f2dd, type: 3}
   spell: {fileID: 7822770006620496233, guid: 168a8050f6d41b64ea9300cc990320c4, type: 3}
-  avatar: {fileID: 1692139940321090014, guid: b0799a6a1c47dae42803becb45237f93, type: 3}
+  avatar: {fileID: 7584129048473984635, guid: 5ee71466f0f18af499899dbef2cbcba4, type: 3}
   decoy: {fileID: 1977986245746955056, guid: c00a70673309e2a42a2682dcba669975, type: 3}
   animatorController: {fileID: 9100000, guid: f3ff3211153c13142a21510bdac1d3f5, type: 2}
   bishoujoEyes: {fileID: 7671737758535665035, guid: 84def4c1e399fe84fb4b9505c5ef531a,

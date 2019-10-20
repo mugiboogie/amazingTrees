@@ -27,6 +27,8 @@ public class DexWhispCluster : MonoBehaviour
 
     void Update()
     {
+        playerAttack.spellWeaponVisibleTime = 0f;
+
         if (enemyDirector.enemies.Count > 0)
         {
             AssignTargets();

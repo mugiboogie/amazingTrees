@@ -23,6 +23,9 @@ public class ViviBeamRifle : MonoBehaviour
     public GameObject particleEffect;
     public GameObject beamRifleLaser;
     public GameObject visual;
+    private float animValue;
+
+    private LineRenderer lineRenderer;
 
     void Awake()
     {
@@ -32,6 +35,7 @@ public class ViviBeamRifle : MonoBehaviour
         audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().anim;
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
+        lineRenderer = GetComponent<LineRenderer>();
 
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
     }
@@ -73,7 +77,18 @@ public class ViviBeamRifle : MonoBehaviour
 
         collider.center = new Vector3(0, 0, collider.height / 2f);
 
+        lineRenderer.SetPosition(0, transform.position + transform.forward * 1.25f + transform.up*.5f);
+        lineRenderer.SetPosition(1, transform.position + transform.forward * collider.height + transform.up * .5f);
+
+        lineRenderer.enabled = (Time.time < endTime);
+        
+
         visual.SetActive(Time.time < endTime);
+        animValue = Mathf.Lerp(animValue, Time.time < endTime ? 1f : 0f, 10f * Time.deltaTime);
+        playerAnim.SetLayerWeight(playerAnim.GetLayerIndex("UsingSpell"), animValue);
+
+        float flicker = Random.Range(.5f, .6f);
+        lineRenderer.startWidth = animValue*flicker; lineRenderer.endWidth = animValue * flicker;
     }
 
     IEnumerator BeamRifle()
@@ -89,6 +104,9 @@ public class ViviBeamRifle : MonoBehaviour
                     enemyHealth.TakeDamage(Random.Range(7f, 15f), "S", transform.position);
                 }
             }
+            playerAttack.durationTime = Time.time + .125f;
+            playerAttack.spellWeaponVisibleTime = Time.time + .125f;
+            playerAttack.weaponVisibleTime = 0f;
             yield return new WaitForSeconds(.0625f);
         }
     }

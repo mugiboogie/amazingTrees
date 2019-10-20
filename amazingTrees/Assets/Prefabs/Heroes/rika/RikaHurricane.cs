@@ -34,7 +34,7 @@ public class RikaHurricane : MonoBehaviour
 
     void Update()
     {
-        
+        playerAttack.spellWeaponVisibleTime = 0f;
 
         if ((Input.GetButtonDown("SpellAttack")) && (playerAttack.mana >= playerAttack.manaMax))
         {

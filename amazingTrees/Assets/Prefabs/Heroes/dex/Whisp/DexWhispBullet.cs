@@ -88,7 +88,7 @@ public class DexWhispBullet : MonoBehaviour
                 playerAttack.comboChainReset = Time.time + 3f;
                 target = null;
                 EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-                enemyHealth.TakeDamage(Random.Range(15f, 25f), "S", transform.position);
+                enemyHealth.TakeDamage(Random.Range(45f, 55f), "S", transform.position);
                 this.gameObject.SetActive(false);
             }
         }

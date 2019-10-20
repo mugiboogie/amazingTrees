@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     public float lightAttackRate;
     public float heavyAttackRate;
     public float cooldownTime;
-    private float durationTime;
+    public float durationTime;
     private PlayerTargetting playerTargetting;
     private GameObject lastHitEnemy;
     public float lightAttackChargeTime;
@@ -72,6 +72,7 @@ public class PlayerAttack : MonoBehaviour
 
     public float weaponVisibleTime;
     private float weaponVisibleWeight;
+    public float spellWeaponVisibleTime;
 
     [HideInInspector] public Animator HUDparent;
 
@@ -134,7 +135,7 @@ public class PlayerAttack : MonoBehaviour
                 else if ((comboChain > 30) && (comboChain <= 40)) { comboComment.text = "Slay!!"; }
                 else if ((comboChain > 20) && (comboChain <= 30)) { comboComment.text = "Yaass!"; }
                 else if ((comboChain > 10) && (comboChain <= 20)) { comboComment.text = "Beautiful!"; }
-                else { comboComment.text = "Caca Girl!"; }
+                else { comboComment.text = "Great!"; }
             }
 
 
