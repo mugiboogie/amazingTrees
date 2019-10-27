@@ -18905,7 +18905,7 @@ PrefabInstance:
     - target: {fileID: 5185955168424354249, guid: 9fe06f1d51fb5a744be506b98b9e4e8c,
         type: 3}
       propertyPath: m_Name
-      value: Music
+      value: Music 1
       objectReference: {fileID: 0}
     - target: {fileID: 5185955168424354251, guid: 9fe06f1d51fb5a744be506b98b9e4e8c,
         type: 3}
@@ -18960,6 +18960,11 @@ PrefabInstance:
     - target: {fileID: 5185955168424354251, guid: 9fe06f1d51fb5a744be506b98b9e4e8c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185955168424354248, guid: 9fe06f1d51fb5a744be506b98b9e4e8c,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
