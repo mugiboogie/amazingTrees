@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     private float airborneTime;
     public AudioClip dashSound;
     private Vector3 cameraVector;
+    private PlayerControls controls;
+    private Vector2 move;
 
     public float stutterTime;
 
@@ -66,8 +69,10 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         audio = GetComponent<AudioSource>();
 
-        
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
+        //controls = new PlayerControls();
+        //controls.Gameplay.PlayerMove.performed += ctx => move = ctx.ReadValue<Vector2>();
+        //controls.Gameplay.PlayerMove.performed += ctx => move = Vector2.zero;
 
     }
 
@@ -79,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
         {
             //Get Inputs
             //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
+            float moveHorizontal = Input.GetAxis("Horizontal");//move.x * Time.deltaTime;
+            float moveVertical = Input.GetAxis("Vertical");//move.y * Time.deltaTime;
             //--Get Camera Vectors: Takes the Vertical (Tilt) and Horizontal (Pan) vectors of the camera and multiplies them by the input values.
             Vector3 cameraVertical = (camera.up + camera.forward) * moveVertical;
             Vector3 cameraHorizontal = (camera.right) * moveHorizontal;

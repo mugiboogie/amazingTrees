@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct WeightedObject
+{
+    public GameObject gameObject;
+    public float weight;
+}
+
+
 public class EnemyDirector : MonoBehaviour
 {
     private GameObject player;
@@ -37,7 +45,7 @@ public class EnemyDirector : MonoBehaviour
             return 0;
         });
 
-        if(Time.time>nextAggro)
+        if (Time.time > nextAggro)
         {
             nextAggro = Time.time + aggroCooldown;
             if (enemies.Count > 0)
@@ -50,7 +58,7 @@ public class EnemyDirector : MonoBehaviour
 
     public void AddEnemy(GameObject enemy)
     {
-        if(!enemies.Contains(enemy))
+        if (!enemies.Contains(enemy))
         {
             enemies.Add(enemy);
         }
