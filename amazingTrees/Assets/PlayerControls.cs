@@ -242,37 +242,15 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""MMove"",
-                    ""id"": ""b22838cf-c78b-4a32-857a-e9be8e88a8af"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""cc81ec19-9f5a-488e-b077-6108b82c4dc7"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
+                    ""processors"": ""ScaleVector2(x=0.022,y=0.0198)"",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""CameraMove"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""cb794df1-7537-43be-94ca-610a5794e558"",
-                    ""path"": ""<Mouse>/delta/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""CameraMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""71b5e866-b853-4a20-9eba-9cabc3c6dd3b"",
-                    ""path"": ""<Mouse>/position/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""CameraMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
