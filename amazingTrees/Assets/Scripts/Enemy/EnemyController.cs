@@ -15,7 +15,9 @@ public class EnemyController : MonoBehaviour {
     public float charSpeed;
     private float startMoving;
     private EnemyHealth enemyHealth;
-    public GameObject drop;
+    public float dropFrequency;
+    public List<WeightedObject> drops;
+    private GameObject drop;
 
     private EnemyDirector enemyDirector;
 
@@ -220,7 +222,14 @@ public class EnemyController : MonoBehaviour {
     {
         yield return new WaitForSeconds(5f);
         this.gameObject.SetActive(false);//destroy the dead enemy after 5 secondsz
-        Instantiate(drop, transform.position, drop.transform.rotation);
+
+        if (Random.Range(0f, .99f) < dropFrequency)
+        {
+            GameObject gameObjectToCreate = selectWeightedObject();
+            Instantiate(gameObjectToCreate, transform.position, transform.rotation);
+        }
+
+        //Instantiate(drop, transform.position, drop.transform.rotation);
         //Destroy(this.gameObject);
     }
 
@@ -290,6 +299,40 @@ public class EnemyController : MonoBehaviour {
         return false;
     }
 
+
+    private GameObject selectWeightedObject()
+    {
+        GameObject selected = null;
+        float maxChoice = SumOfWeights;
+        float randChoice = Random.Range(0, maxChoice);
+        float weightSum = 0;
+
+        foreach (WeightedObject weightedObject in drops)
+        {
+            weightSum += weightedObject.weight;
+            if (randChoice <= weightSum)
+            {
+                selected = weightedObject.gameObject;
+                break;
+            }
+        }
+
+        return selected;
+    }
+
+    private float SumOfWeights
+    {
+        get
+        {
+            float sumOfWeights = 0;
+            foreach (WeightedObject weightedObject in drops)
+            {
+                sumOfWeights += weightedObject.weight;
+            }
+
+            return sumOfWeights;
+        }
+    }
 
 
 }

@@ -260,7 +260,17 @@ MonoBehaviour:
   desiredDistance: 10
   stopDistance: 1
   charSpeed: 5
-  drop: {fileID: 8887703948734314598, guid: de849963e80d56c498beecb86bb1948e, type: 3}
+  dropFrequency: 0.8
+  drops:
+  - gameObject: {fileID: 7078931794856879547, guid: 745c6cac9a4cc4e4fb1218f7df1ecf95,
+      type: 3}
+    weight: 10
+  - gameObject: {fileID: 8887703948734314598, guid: de849963e80d56c498beecb86bb1948e,
+      type: 3}
+    weight: 15
+  - gameObject: {fileID: 8887703948734314598, guid: 2a8800b7be2993544aa933fa41ebf7ff,
+      type: 3}
+    weight: 5
   damageOrigin: {x: 0, y: 0, z: 0}
   knockUpVelocity: 0
   gravity: 10

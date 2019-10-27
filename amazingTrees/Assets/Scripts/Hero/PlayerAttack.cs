@@ -30,7 +30,10 @@ public class PlayerAttack : MonoBehaviour
     public float manaMax;
     public float manaRegenTime;
     private bool attackReloadAfterAirborne;
-    
+
+    public float buffTime;
+    public GameObject buffVisual;
+
 
     public float comboChain;
     public float comboChainReset;
@@ -78,6 +81,8 @@ public class PlayerAttack : MonoBehaviour
 
     public LayerMask levelLayers;
 
+    
+
     public void SummonHero()
     {
         anim = playerController.anim;
@@ -117,6 +122,7 @@ public class PlayerAttack : MonoBehaviour
     
     void Update()
     {
+        buffVisual.SetActive(Time.time < buffTime);
         if (anim != null)
         {
             comboCounter.SetBool("ShowCombo", Time.time < comboChainReset);
@@ -360,9 +366,13 @@ public class PlayerAttack : MonoBehaviour
 
     public void Melee(string property, bool isShooting)
     {
+        bool isBuffed = Time.time < buffTime;
 
         string[] propertyArray = property.Split(char.Parse("/"));
         float damage = float.Parse(propertyArray[0]);
+
+        if (isBuffed) { damage = damage * 1.5f; }
+
         string effect = propertyArray[1];
 
 
