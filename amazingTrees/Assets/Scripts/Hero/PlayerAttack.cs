@@ -423,6 +423,7 @@ public class PlayerAttack : MonoBehaviour
                         }
 
                         enemyHealth.TakeDamage(damage, effect, transform.position);
+                        AddSpAttack(damage);
 
                     }
 

@@ -77,7 +77,7 @@ MonoBehaviour:
   - {fileID: 3930427486361414291}
   - {fileID: 3930427484987561166}
   spellSound: {fileID: 8300000, guid: 316299385ff0d2947b78167cd43c6c96, type: 3}
-  attackSound: {fileID: 8300000, guid: 19550356a6bf6d3479daa1493a3b157b, type: 3}
+  attackSound: {fileID: 0}
 --- !u!1001 &7822770005616647742
 PrefabInstance:
   m_ObjectHideFlags: 0

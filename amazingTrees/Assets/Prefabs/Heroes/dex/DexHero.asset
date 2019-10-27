@@ -23,14 +23,10 @@ MonoBehaviour:
   dashTime: 1
   damageReduction: 1
   jumpForce: 9
-  summonSfx:
-  - {fileID: 8300000, guid: 0ff669cbe25461e4e8320bbcb070ccfc, type: 3}
-  - {fileID: 8300000, guid: e37b1ec60ae23b44babc7f21476aa757, type: 3}
-  injuredSfx:
-  - {fileID: 8300000, guid: f3c412f6d057dd341984ca5cf52de261, type: 3}
-  - {fileID: 8300000, guid: 7d4e4010c69114447ba09aab6b34dcbd, type: 3}
-  deathSfx: {fileID: 8300000, guid: 35d9b7a474e922a448e1b4807972012a, type: 3}
-  chargeAttackVoice: {fileID: 8300000, guid: b6bdb98e547aad244ba08fc0c9b5f2dd, type: 3}
+  summonSfx: []
+  injuredSfx: []
+  deathSfx: {fileID: 0}
+  chargeAttackVoice: {fileID: 0}
   spell: {fileID: 7822770006620496233, guid: 168a8050f6d41b64ea9300cc990320c4, type: 3}
   avatar: {fileID: 7584129048473984635, guid: 5ee71466f0f18af499899dbef2cbcba4, type: 3}
   decoy: {fileID: 1977986245746955056, guid: c00a70673309e2a42a2682dcba669975, type: 3}

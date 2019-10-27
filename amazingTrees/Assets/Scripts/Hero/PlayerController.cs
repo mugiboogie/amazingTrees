@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         avatarDefinition.playerAttack = playerAttack;
         anim = avatar.GetComponent<Animator>();
 
-        audio.PlayOneShot(hero.summonSfx[Random.Range(0, hero.summonSfx.Length)]);
+        if (hero.summonSfx.Length > 0) { audio.PlayOneShot(hero.summonSfx[Random.Range(0, hero.summonSfx.Length)]); }
 
         GameObject decoySpawn = Instantiate(hero.decoy, Vector3.zero, Quaternion.identity);
         decoy = decoySpawn;

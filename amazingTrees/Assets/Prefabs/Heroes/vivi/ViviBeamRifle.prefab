@@ -222,7 +222,7 @@ MonoBehaviour:
     m_Bits: 1
   player: {fileID: 0}
   spellSound: {fileID: 8300000, guid: 316299385ff0d2947b78167cd43c6c96, type: 3}
-  attackSound: {fileID: 8300000, guid: 21c5b3cfab717934d9a55ababc410958, type: 3}
+  attackSound: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 54b4881ca68a7f444bb0715fdc0960c8, type: 3}
   particleHit: {fileID: 0}
   particleEffect: {fileID: 0}
@@ -392,27 +392,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
@@ -428,33 +416,45 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+    - target: {fileID: 400004, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19800008, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: ShapeModule.radius.value
       value: 0.25
       objectReference: {fileID: 0}
-    - target: {fileID: 19800006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
-      propertyPath: InitialModule.startSize.scalar
+    - target: {fileID: 100000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800006, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91cd5fe2d8c1c0e41a24d1cee3f65016, type: 3}

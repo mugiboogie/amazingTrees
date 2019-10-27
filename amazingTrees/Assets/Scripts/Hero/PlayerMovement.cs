@@ -260,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
-        anim.applyRootMotion = (((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))) || (anim.GetCurrentAnimatorStateInfo(3).tagHash == Animator.StringToHash("Hit")));
+        anim.applyRootMotion = (((anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("Attack")) || (anim.GetCurrentAnimatorStateInfo(1).tagHash == Animator.StringToHash("FinalAttack"))) || (anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex("Reactions")).tagHash == Animator.StringToHash("Hit")));
 
         if (anim.applyRootMotion == false)
         {

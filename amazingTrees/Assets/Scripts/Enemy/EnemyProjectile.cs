@@ -46,13 +46,14 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if(other.gameObject == player)
         {
-           
-            playerHealth.TakeDamage(damage, effect, origin, hitVFX, hitSFX);
-
             if (playerHealth.canDamage == true)
             {
+                playerHealth.TakeDamage(damage, effect, origin, hitVFX, hitSFX);
                 Destroy(this.gameObject);
             }
+            
+                
+            
         }
     }
 

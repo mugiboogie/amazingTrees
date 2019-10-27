@@ -35,7 +35,7 @@ public class Scoreboard : MonoBehaviour
         result = result + "Damage Taken: " + playerHealth.damageTaken.ToString("F2") + "\n";
         result = result + "Damage Dealt: " + playerAttack.damageDealt.ToString("F2") + "\n";
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) || Time.time>5f)
         {
             defaultText = "";
         }
