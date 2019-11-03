@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class CameraController : MonoBehaviour
     private float yaw;
     private Vector3 pivot;
     private float setDistanceFinal;
+    PlayerControls controls;
+    Vector2 cameraMove;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        controls.Enable();
+        controls.Gameplay.CameraMove.performed += ctx => cameraMove = ctx.ReadValue<Vector2>();
+        controls.Gameplay.CameraMove.canceled += ctx => cameraMove = Vector2.zero;
     }
 
     private void Update()
@@ -29,10 +35,10 @@ public class CameraController : MonoBehaviour
     {
         pivot = Vector3.Lerp(pivot,player.position + offset,5f*Time.deltaTime);
 
-        pitch -= Input.GetAxis("Mouse Y") * sensitivityY;
+        pitch -= cameraMove.y * sensitivityY;
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
-        yaw += Input.GetAxis("Mouse X") * sensitivityX;
+        yaw += cameraMove.x * sensitivityX;
         if(yaw>360f) { yaw = 0f; }
 
         Vector3 targetDir = Vector3.forward;
