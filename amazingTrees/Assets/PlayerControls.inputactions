@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Dodge",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "f619c9ab-eb79-484f-849f-e385c8a13288",
                     "expectedControlType": "",
@@ -136,7 +136,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Dodge",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -147,7 +147,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Dodge",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -166,7 +166,7 @@
                     "name": "WASD",
                     "id": "41d8d529-a3e6-41bb-9be8-9aabf154498c",
                     "path": "2DVector",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "PlayerMove",

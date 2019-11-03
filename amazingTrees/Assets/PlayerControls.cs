@@ -43,7 +43,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Dodge"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""f619c9ab-eb79-484f-849f-e385c8a13288"",
                     ""expectedControlType"": """",
@@ -149,7 +149,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Dodge"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -160,7 +160,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Dodge"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -179,7 +179,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""WASD"",
                     ""id"": ""41d8d529-a3e6-41bb-9be8-9aabf154498c"",
                     ""path"": ""2DVector"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlayerMove"",
@@ -312,7 +312,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_LightAttack = m_Gameplay.FindAction("LightAttack", throwIfNotFound: true);
         m_Gameplay_HeavyAttack = m_Gameplay.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
-        m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
+        m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_PlayerMove = m_Gameplay.FindAction("PlayerMove", throwIfNotFound: true);
         m_Gameplay_CameraMove = m_Gameplay.FindAction("CameraMove", throwIfNotFound: true);
         m_Gameplay_LockOn = m_Gameplay.FindAction("LockOn", throwIfNotFound: true);
@@ -368,7 +368,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_LightAttack;
     private readonly InputAction m_Gameplay_HeavyAttack;
     private readonly InputAction m_Gameplay_Jump;
-    private readonly InputAction m_Gameplay_Dodge;
+    private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_PlayerMove;
     private readonly InputAction m_Gameplay_CameraMove;
     private readonly InputAction m_Gameplay_LockOn;
@@ -379,7 +379,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_Gameplay_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Gameplay_HeavyAttack;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
-        public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
+        public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @PlayerMove => m_Wrapper.m_Gameplay_PlayerMove;
         public InputAction @CameraMove => m_Wrapper.m_Gameplay_CameraMove;
         public InputAction @LockOn => m_Wrapper.m_Gameplay_LockOn;
@@ -401,9 +401,9 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                Dodge.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
-                Dodge.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
-                Dodge.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
+                Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 PlayerMove.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMove;
                 PlayerMove.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMove;
                 PlayerMove.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMove;
@@ -426,9 +426,9 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 Jump.started += instance.OnJump;
                 Jump.performed += instance.OnJump;
                 Jump.canceled += instance.OnJump;
-                Dodge.started += instance.OnDodge;
-                Dodge.performed += instance.OnDodge;
-                Dodge.canceled += instance.OnDodge;
+                Dash.started += instance.OnDash;
+                Dash.performed += instance.OnDash;
+                Dash.canceled += instance.OnDash;
                 PlayerMove.started += instance.OnPlayerMove;
                 PlayerMove.performed += instance.OnPlayerMove;
                 PlayerMove.canceled += instance.OnPlayerMove;
@@ -465,7 +465,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnPlayerMove(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);

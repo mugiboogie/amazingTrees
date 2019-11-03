@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 cameraVector;
     PlayerControls controls;
     Vector2 move;
+    private bool buttonJump;
+    private bool buttonDash;
 
     public float stutterTime;
 
@@ -74,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Enable();
         controls.Gameplay.PlayerMove.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Gameplay.PlayerMove.canceled += ctx => move = Vector2.zero;
+        controls.Gameplay.Jump.performed += ctx => StartCoroutine(inputJump());
+        controls.Gameplay.Dash.performed += ctx => StartCoroutine(inputDash());
 
 
     }
@@ -86,8 +90,8 @@ public class PlayerMovement : MonoBehaviour
         {
             //Get Inputs
             //--Get Controller Input Values: Grabs the horizontal and vertical inputs from the player's input.
-            float moveHorizontal = move.x * Time.deltaTime;//Input.GetAxis("Horizontal");
-            float moveVertical = move.y * Time.deltaTime;//Input.GetAxis("Vertical");
+            float moveHorizontal = move.x;//Input.GetAxis("Horizontal");
+            float moveVertical = move.y;//Input.GetAxis("Vertical");
             Vector2 m = new Vector2(move.x, move.y) * Time.deltaTime;
             transform.Translate(m, Space.World);
             //--Get Camera Vectors: Takes the Vertical (Tilt) and Horizontal (Pan) vectors of the camera and multiplies them by the input values.
@@ -142,6 +146,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    IEnumerator inputJump()
+    {
+        buttonJump = true;
+        yield return new WaitForEndOfFrame();
+        buttonJump = false;
+    }
+
+    IEnumerator inputDash()
+    {
+        buttonDash = true;
+        yield return new WaitForEndOfFrame();
+        buttonDash = false;
+    }
+
     void Movement(Vector3 inputDirection)
     {
         //This script controls both vertical, horizontal, and jump movement.
@@ -150,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Get Jump Input. A jump can only be performed when the character controller is grounded AND the input of jump is given. Otherwise, begin descending.
 
-        if ((!playerAttack.isCharging) && charCon.isGrounded && (Input.GetButtonDown("Jump")) && (!playerHealth.playerDead) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+        if ((!playerAttack.isCharging) && charCon.isGrounded && (buttonJump) && (!playerHealth.playerDead) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             //Character is jumping.
             verticalVelocity = jumpForce;
@@ -215,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
         //---The dash key is tapped
         //---The dash key is passed it's cooldown
         //---And the player has a dash ready
-        if ((!playerAttack.isCharging)&&(dash==false)&&(Input.GetButtonDown("Dash"))&&(dashCooldown<Time.time) && (canDash==true) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+        if (((!playerAttack.isCharging)&&(dash==false)&&(buttonDash)) && (dashCooldown<Time.time) && (canDash==true) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
         {
             //dashDirection by default where the player is facing. However, this can be overwritten if the player is holding down a direction.
 
