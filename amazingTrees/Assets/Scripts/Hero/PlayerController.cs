@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth playerHealth;
     public float[] heroMana;
 
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
 
     float autoSpawnTime;
     bool autoSpawned;
@@ -44,7 +45,8 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         playerMovement = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
-        audio = GetComponent<AudioSource>();
+        audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
         UI = GameObject.FindGameObjectWithTag("UI").transform;
         autoSpawnTime = Time.time + .1f;
         charPort = GameObject.FindGameObjectWithTag("HealthBar").transform.Find("CharacterPortrait").transform.Find("charPort").GetComponent<Image>();
@@ -155,7 +157,7 @@ public class PlayerController : MonoBehaviour
         avatarDefinition.playerAttack = playerAttack;
         anim = avatar.GetComponent<Animator>();
 
-        if (hero.summonSfx.Length > 0) { audio.PlayOneShot(hero.summonSfx[Random.Range(0, hero.summonSfx.Length)]); }
+        if (hero.summonSfx.Length > 0) { audioVoice.PlayOneShot(hero.summonSfx[Random.Range(0, hero.summonSfx.Length)]); }
 
         GameObject decoySpawn = Instantiate(hero.decoy, Vector3.zero, Quaternion.identity);
         decoy = decoySpawn;

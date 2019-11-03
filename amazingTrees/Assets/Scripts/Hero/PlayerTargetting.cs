@@ -17,7 +17,8 @@ public class PlayerTargetting : MonoBehaviour
     public bool lockedOn;
     private Transform camera;
 
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
     public AudioClip lockOnSound;
     public AudioClip lockOffSound;
     private bool lockOnPlayed;
@@ -30,7 +31,8 @@ public class PlayerTargetting : MonoBehaviour
         enemyTargetIndicator = GameObject.FindGameObjectWithTag("UI").transform.Find("EnemyTarget").GetComponent<RectTransform>();
         enemies = enemyDirector.enemies;
         camera = Camera.main.transform;
-        audio = GetComponent<AudioSource>();
+        audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -66,7 +68,7 @@ public class PlayerTargetting : MonoBehaviour
 
             if (lockOnPlayed == true)
             {
-                audio.PlayOneShot(lockOffSound);
+                audioSound.PlayOneShot(lockOffSound);
                 lockOnPlayed = false;
             }
         }
@@ -77,7 +79,7 @@ public class PlayerTargetting : MonoBehaviour
 
             if (lockOnPlayed == false)
             {
-                audio.PlayOneShot(lockOnSound);
+                audioSound.PlayOneShot(lockOnSound);
                 lockOnPlayed = true;
 
             }
