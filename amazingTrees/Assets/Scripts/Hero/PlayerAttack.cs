@@ -25,7 +25,8 @@ public class PlayerAttack : MonoBehaviour
     private float lightAttackCharge;
     private float heavyAttackCharge;
     private AudioClipController audioClipController;
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
     public float mana;
     public float manaMax;
     public float manaRegenTime;
@@ -111,7 +112,8 @@ public class PlayerAttack : MonoBehaviour
         comboNumber = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboNumber").GetComponent<Text>();
         comboComment = GameObject.FindGameObjectWithTag("ComboCounter").transform.Find("ComboComment").GetComponent<Text>();
         audioClipController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioClipController>();
-        audio = GetComponent<AudioSource>();
+        audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
 
         chargeEffect = GameObject.FindGameObjectWithTag("PlayerEffects/ChargeEffect").GetComponent<Animator>();
         chargeEffect.transform.SetParent(transform, false);
@@ -232,8 +234,8 @@ public class PlayerAttack : MonoBehaviour
                 durationTime = Time.time + lightAttackRate;
                 weaponVisibleTime = Time.time + 2f;
 
-                audio.PlayOneShot(chargeAttackVoice);
-                audio.PlayOneShot(chargeAttackFoley);
+                audioVoice.PlayOneShot(chargeAttackVoice);
+                audioSound.PlayOneShot(chargeAttackFoley);
                 chargeAttackDuration = Time.time + .5f;
                 Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
                 anim.SetTrigger("ChLightAttack");
@@ -264,8 +266,8 @@ public class PlayerAttack : MonoBehaviour
                 durationTime = Time.time + heavyAttackRate;
                 weaponVisibleTime = Time.time + 2f;
 
-                audio.PlayOneShot(chargeAttackVoice);
-                audio.PlayOneShot(chargeAttackFoley);
+                audioVoice.PlayOneShot(chargeAttackVoice);
+                audioSound.PlayOneShot(chargeAttackFoley);
                 chargeAttackDuration = Time.time + .5f;
                 Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
                 anim.SetTrigger("ChHeavyAttack");
@@ -300,14 +302,14 @@ public class PlayerAttack : MonoBehaviour
                     {
                         Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
                         chargeCompletePlayed = true;
-                        audio.PlayOneShot(chargeComplete);
+                        audioSound.PlayOneShot(chargeComplete);
                         chargePulseTime = Time.time + 1f;
                     }
                     if (Time.time > chargePulseTime)
                     {
                         Instantiate(chargeCompleteEffect, transform.position, transform.rotation);
                         chargePulseTime = Time.time + 1f;
-                        audio.PlayOneShot(chargingPulse);
+                        audioSound.PlayOneShot(chargingPulse);
                     }
                 }
             }

@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private TimeManager timeManager;
     public GameObject dashTrail;
     public GameObject shockWave;
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
     private float glitterCooldown;
     public GameObject glitterParticle;
 
@@ -69,7 +70,8 @@ public class PlayerMovement : MonoBehaviour
         playerTargetting = GetComponent<PlayerTargetting>();
         playerAttack = GetComponent<PlayerAttack>();
         playerHealth = GetComponent<PlayerHealth>();
-        audio = GetComponent<AudioSource>();
+        audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
 
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
         controls = new PlayerControls();
@@ -256,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
 
             playerAttack.AttackCancel();
 
-            audio.PlayOneShot(dashSound, 1f);
+            audioSound.PlayOneShot(dashSound, 1f);
         }
 
         if (Time.time < dashDuration)

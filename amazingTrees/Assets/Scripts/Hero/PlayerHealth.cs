@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     [HideInInspector] public bool playerDead;
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
     private bool dash;
 
     private UIHealthBar healthBar;
@@ -60,7 +61,8 @@ public class PlayerHealth : MonoBehaviour
         playerController = GetComponent<PlayerController>();
        
         playerMovement = GetComponent<PlayerMovement>();
-        audio = GetComponent<AudioSource>();
+        audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
         currentHealth = maxHealth;
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<UIHealthBar>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
@@ -92,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
                 {
                     deathPlayed = true;
                     AudioClip clip = dead;
-                    audio.PlayOneShot(clip, 1f);
+                    audioSound.PlayOneShot(clip, 1f);
                 }
                 if(deadTime<5f) { deadTime += Time.deltaTime; }
                 else { playerController.TrySummonHero(); }
@@ -238,7 +240,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void PlayHits(Vector3 position)
     {
-        if (hits.Length > 0) { AudioClip clip = hits[Random.Range(0, hits.Length)]; audio.PlayOneShot(clip, 1f); }        
+        if (hits.Length > 0) { AudioClip clip = hits[Random.Range(0, hits.Length)]; audioSound.PlayOneShot(clip, 1f); }        
         
         //AudioSource.PlayClipAtPoint(clip, position);
     }

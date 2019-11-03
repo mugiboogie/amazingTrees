@@ -16,13 +16,15 @@ public class PlayerAvatarDefinition : MonoBehaviour
 
     private bool isShooting;
 
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
 
     public AudioClip[] shotSounds;
 
     private void Awake()
     {
-        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        audioVoice = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroSound").GetComponent<AudioSource>();
     }
 
     public void Swing()
@@ -39,7 +41,7 @@ public class PlayerAvatarDefinition : MonoBehaviour
             Transform selectedHand = (playerAttack.activeHand ? rightHandWeapon : leftHandWeapon);
             Instantiate(muzzleFlash, selectedHand.position, selectedHand.rotation);
 
-            audio.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
+            audioSound.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
 
         }
 
