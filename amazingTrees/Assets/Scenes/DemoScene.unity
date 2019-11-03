@@ -16712,12 +16712,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204149897}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1209253011 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7386615764869028618, guid: 311fd8474250c8f4485f79b6fcb009d8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2036649062}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1209553359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24390,20 +24384,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3af955d00c1bd4f9340adb8fc919cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAt: {fileID: 1209253011}
-  camTransform: {fileID: 534669905}
-  sensitivityX: 3
-  sensitivityY: 3
-  target: {fileID: 0}
-  followSpeed: 5
-  follow: 0
-  anchor: {fileID: 0}
-  desiredFOV: 0
-  distance: 12
+  offset: {x: 0, y: 2, z: 0}
+  sensitivityY: 5
+  sensitivityX: 5
   levelLayers:
     serializedVersion: 2
     m_Bits: 1
-  combatZone: {fileID: 0}
 --- !u!1 &1850086097
 GameObject:
   m_ObjectHideFlags: 0
