@@ -179,7 +179,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""WASD"",
                     ""id"": ""41d8d529-a3e6-41bb-9be8-9aabf154498c"",
                     ""path"": ""2DVector"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlayerMove"",
