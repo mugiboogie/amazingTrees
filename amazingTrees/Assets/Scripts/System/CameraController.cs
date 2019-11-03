@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
         }
 
         float setDistanceSpeed = setDistanceFinal < setDistance ? 1f : 10f;
-        setDistanceFinal = Mathf.Lerp(setDistanceFinal, setDistance, setDistanceSpeed * Time.deltaTime); 
+        setDistanceFinal = Mathf.Lerp(setDistanceFinal, setDistance, setDistanceFinal < setDistance ? (1f * Time.deltaTime):1f); 
 
         //Debug.DrawLine(pivot, pivot + targetDir);
 
