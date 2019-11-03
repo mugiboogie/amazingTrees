@@ -60,6 +60,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Spell",
+                    "type": "Button",
+                    "id": "f9db9f7d-0c51-4c6e-b166-eda98397c3ff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -132,7 +140,7 @@
                 {
                     "name": "",
                     "id": "20cd8a39-818c-4848-b256-12824ebfa284",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
@@ -242,7 +250,7 @@
                 {
                     "name": "",
                     "id": "c99c949d-cf97-4014-b6e1-76a14756b4cd",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "Gamepad",
@@ -258,6 +266,28 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8f2fb49-f71f-4897-b55c-847ac9463deb",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Spell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f435eb8-f1ed-41bf-88ef-2e5e0be6c883",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

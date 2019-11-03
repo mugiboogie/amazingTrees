@@ -24385,8 +24385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 2, z: 0}
-  sensitivityY: 5
-  sensitivityX: 5
+  sensitivityY: 1.5
+  sensitivityX: 3
   levelLayers:
     serializedVersion: 2
     m_Bits: 1

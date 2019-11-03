@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -81,6 +82,9 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public Animator HUDparent;
 
     public LayerMask levelLayers;
+    PlayerControls controls;
+    private bool buttonLightAttack;
+    private bool buttonHeavyAttack;
 
     
 
@@ -119,9 +123,27 @@ public class PlayerAttack : MonoBehaviour
         chargeEffect.transform.SetParent(transform, false);
 
         HUDparent = GameObject.FindGameObjectWithTag("HUDParent").GetComponent<Animator>();
+        controls = new PlayerControls();
+        controls.Enable();
+        controls.Gameplay.LightAttack.performed += ctx => StartCoroutine(inputLightAttack());
+        controls.Gameplay.HeavyAttack.performed += ctx => StartCoroutine(inputHeavyAttack());
+
     }
 
+    IEnumerator inputLightAttack()
+    {
+        buttonLightAttack = true;
+        yield return new WaitForEndOfFrame();
+        buttonLightAttack = false;
+    }
     
+    IEnumerator inputHeavyAttack()
+    {
+        buttonHeavyAttack = true;
+        yield return new WaitForEndOfFrame();
+        buttonHeavyAttack = false;
+    }
+
     void Update()
     {
         buffVisual.SetActive(Time.time < buffTime);
@@ -188,7 +210,7 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("LightAttack") && (Time.time > durationTime))
+            if (buttonLightAttack && (Time.time > durationTime))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -204,7 +226,7 @@ public class PlayerAttack : MonoBehaviour
                 
             }
 
-            if (Input.GetButtonDown("HeavyAttack") && (Time.time > durationTime))
+            if (buttonHeavyAttack && (Time.time > durationTime))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -223,7 +245,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             //Light Attack Charge
-            if ((!Input.GetButton("LightAttack")) && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            if (buttonLightAttack && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -240,7 +262,7 @@ public class PlayerAttack : MonoBehaviour
                 Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
                 anim.SetTrigger("ChLightAttack");
             }
-            if (Input.GetButton("LightAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+            if (buttonLightAttack && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -255,7 +277,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             //Heavy Attack Charge
-            if ((!Input.GetButton("HeavyAttack")) && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            if (buttonHeavyAttack && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -272,7 +294,7 @@ public class PlayerAttack : MonoBehaviour
                 Instantiate(shockWave, transform.position + Vector3.up, transform.rotation);
                 anim.SetTrigger("ChHeavyAttack");
             }
-            if (Input.GetButton("HeavyAttack") && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
+            if (buttonHeavyAttack && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("Hit")) && (anim.GetCurrentAnimatorStateInfo(3).tagHash != Animator.StringToHash("KnockUp")))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }

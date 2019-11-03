@@ -73,6 +73,14 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Spell"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9db9f7d-0c51-4c6e-b166-eda98397c3ff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -145,7 +153,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""20cd8a39-818c-4848-b256-12824ebfa284"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -255,7 +263,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c99c949d-cf97-4014-b6e1-76a14756b4cd"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -271,6 +279,28 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8f2fb49-f71f-4897-b55c-847ac9463deb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Spell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f435eb8-f1ed-41bf-88ef-2e5e0be6c883"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -316,6 +346,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_PlayerMove = m_Gameplay.FindAction("PlayerMove", throwIfNotFound: true);
         m_Gameplay_CameraMove = m_Gameplay.FindAction("CameraMove", throwIfNotFound: true);
         m_Gameplay_LockOn = m_Gameplay.FindAction("LockOn", throwIfNotFound: true);
+        m_Gameplay_Spell = m_Gameplay.FindAction("Spell", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +403,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_PlayerMove;
     private readonly InputAction m_Gameplay_CameraMove;
     private readonly InputAction m_Gameplay_LockOn;
+    private readonly InputAction m_Gameplay_Spell;
     public struct GameplayActions
     {
         private PlayerControls m_Wrapper;
@@ -383,6 +415,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         public InputAction @PlayerMove => m_Wrapper.m_Gameplay_PlayerMove;
         public InputAction @CameraMove => m_Wrapper.m_Gameplay_CameraMove;
         public InputAction @LockOn => m_Wrapper.m_Gameplay_LockOn;
+        public InputAction @Spell => m_Wrapper.m_Gameplay_Spell;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +446,9 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 LockOn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLockOn;
                 LockOn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLockOn;
                 LockOn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLockOn;
+                Spell.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpell;
+                Spell.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpell;
+                Spell.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpell;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -438,6 +474,9 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 LockOn.started += instance.OnLockOn;
                 LockOn.performed += instance.OnLockOn;
                 LockOn.canceled += instance.OnLockOn;
+                Spell.started += instance.OnSpell;
+                Spell.performed += instance.OnSpell;
+                Spell.canceled += instance.OnSpell;
             }
         }
     }
@@ -469,5 +508,6 @@ public class PlayerControls : IInputActionCollection, IDisposable
         void OnPlayerMove(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
+        void OnSpell(InputAction.CallbackContext context);
     }
 }

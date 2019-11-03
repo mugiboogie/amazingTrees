@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        controls = new PlayerControls();
         controls.Enable();
         controls.Gameplay.CameraMove.performed += ctx => cameraMove = ctx.ReadValue<Vector2>();
         controls.Gameplay.CameraMove.canceled += ctx => cameraMove = Vector2.zero;
