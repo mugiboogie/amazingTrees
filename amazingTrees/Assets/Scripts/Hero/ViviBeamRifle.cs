@@ -7,7 +7,8 @@ public class ViviBeamRifle : MonoBehaviour
     private CapsuleCollider collider;
     private PlayerAttack playerAttack;
     private Animator bishoujoEyes;
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
     private TimeManager timeManager;
     private Animator playerAnim;
     private float endTime;
@@ -32,7 +33,8 @@ public class ViviBeamRifle : MonoBehaviour
         collider = GetComponent<CapsuleCollider>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
-        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        audioVoice = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroSound").GetComponent<AudioSource>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().anim;
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -52,8 +54,8 @@ public class ViviBeamRifle : MonoBehaviour
         {
             bishoujoEyes = GameObject.FindGameObjectWithTag("PlayerEffects/BishoujoEyes").GetComponent<Animator>();
             //AudioSource.PlayClipAtPoint(attackSound, playerAttack.transform.position);
-            audio.PlayOneShot(spellSound, 1f);
-            audio.PlayOneShot(attackSound, 1f);
+            audioSound.PlayOneShot(spellSound, 1f);
+            audioVoice.PlayOneShot(attackSound, 1f);
             bishoujoEyes.SetTrigger("Activate");
             timeManager.DoSlowmotion();
             playerAnim.SetTrigger("Spell");
