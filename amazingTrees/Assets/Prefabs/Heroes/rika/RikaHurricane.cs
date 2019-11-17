@@ -71,7 +71,7 @@ public class RikaHurricane : MonoBehaviour
                         if (soundPlayed == false)
                         {
                             Instantiate(particleHit,playerAttack.transform.position,Quaternion.identity);
-                            audio.PlayOneShot(hitSound, 1f);
+                            GetComponent<AudioSource>().PlayOneShot(hitSound, 1f);
                             soundPlayed = true;
                         }
                     }
