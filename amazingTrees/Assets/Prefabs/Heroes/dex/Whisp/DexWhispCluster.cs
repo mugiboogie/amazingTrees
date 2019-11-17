@@ -8,7 +8,8 @@ public class DexWhispCluster : MonoBehaviour
     private EnemyDirector enemyDirector;
     private PlayerAttack playerAttack;
     private Animator playerAnim;
-    private AudioSource audio;
+    private AudioSource audioVoice;
+    private AudioSource audioSound;
 
     public AudioClip spellSound;
     public AudioClip attackSound;
@@ -20,7 +21,9 @@ public class DexWhispCluster : MonoBehaviour
         enemyDirector = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyDirector>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().anim;
-        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        audioVoice = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroVoice").GetComponent<AudioSource>();
+        audioSound = GameObject.FindGameObjectWithTag("Player").transform.Find("HeroSound").GetComponent<AudioSource>();
+        
         
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
     }
@@ -38,8 +41,8 @@ public class DexWhispCluster : MonoBehaviour
         {
             bishoujoEyes = GameObject.FindGameObjectWithTag("PlayerEffects/BishoujoEyes").GetComponent<Animator>();
             //AudioSource.PlayClipAtPoint(attackSound, playerAttack.transform.position);
-            audio.PlayOneShot(spellSound, 1f);
-            audio.PlayOneShot(attackSound, 1f);
+            audioSound.PlayOneShot(spellSound, 1f);
+            audioVoice.PlayOneShot(attackSound, 1f);
             bishoujoEyes.SetTrigger("Activate");
             timeManager.DoSlowmotion();
             playerAnim.SetTrigger("Spell");
