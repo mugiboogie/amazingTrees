@@ -128,12 +128,14 @@ public class CombatZoneController : MonoBehaviour
 
     void SpawnWave(int waveToSpawn)
     {
+        if (waveToSpawn < waves.Count)
+        {
             for (int j = 0; j < waves[waveToSpawn].enemies.Count; j++)
             {
                 waves[waveToSpawn].enemies[j].SetActive(true);
 
             }
-        
+        }
     }
 
 }

@@ -231,7 +231,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             //Light Attack Charge
-            if (buttonLightAttack && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            if ((!buttonLightAttack) && (lightAttackCharge >= lightAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
@@ -263,7 +263,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             //Heavy Attack Charge
-            if (buttonHeavyAttack && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
+            if ((!buttonHeavyAttack) && (heavyAttackCharge >= heavyAttackChargeTime) && (playerMovement.charCon.isGrounded))
             {
                 if (playerTargetting.lockedOn) { transform.rotation = lookAtTarget(playerTargetting.enemyTarget.transform); }
                 //else { if (playerTargetting.forwardEnemyFromPlayer != null) { transform.rotation = lookAtTarget(playerTargetting.forwardEnemyFromPlayer.transform); } }
