@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DexWhispCluster : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class DexWhispCluster : MonoBehaviour
     public AudioClip attackSound;
     private Animator bishoujoEyes;
     private TimeManager timeManager;
+    PlayerControls controls;
+    private bool buttonSpell;
 
     void Awake()
     {
@@ -26,6 +29,17 @@ public class DexWhispCluster : MonoBehaviour
         
         
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
+
+        controls = new PlayerControls();
+        controls.Enable();
+        controls.Gameplay.Spell.performed += ctx => StartCoroutine(inputSpell());
+    }
+
+    IEnumerator inputSpell()
+    {
+        buttonSpell = true;
+        yield return new WaitForEndOfFrame();
+        buttonSpell = false;
     }
 
     void Update()
@@ -37,7 +51,7 @@ public class DexWhispCluster : MonoBehaviour
             AssignTargets();
         }
 
-        if((Input.GetButtonDown("SpellAttack"))&&(playerAttack.mana>=playerAttack.manaMax))
+        if(buttonSpell && (playerAttack.mana>=playerAttack.manaMax))
         {
             bishoujoEyes = GameObject.FindGameObjectWithTag("PlayerEffects/BishoujoEyes").GetComponent<Animator>();
             //AudioSource.PlayClipAtPoint(attackSound, playerAttack.transform.position);
