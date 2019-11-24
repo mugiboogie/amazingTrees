@@ -59,7 +59,7 @@ public class CombatZoneController : MonoBehaviour
                 playerAttack.weaponVisibleTime = Time.time + 2f;
             }
 
-            if (enemyDirector.enemies.Count==0)
+            if ((enemyDirector.enemies.Count==0) && (currentWave < waves.Count))
             {
                 currentWave++;
                 SpawnWave(currentWave);
