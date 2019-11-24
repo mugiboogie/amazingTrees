@@ -6235,7 +6235,7 @@ GameObject:
   - component: {fileID: 459155827}
   - component: {fileID: 459155826}
   - component: {fileID: 459155829}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CombatZoneFinal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8517,7 +8517,7 @@ GameObject:
   - component: {fileID: 590628666}
   - component: {fileID: 590628665}
   - component: {fileID: 590628664}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8824,7 +8824,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 54
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
@@ -8855,7 +8855,7 @@ GameObject:
   - component: {fileID: 640891645}
   - component: {fileID: 640891644}
   - component: {fileID: 640891643}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10373,7 +10373,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 55
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
@@ -10635,7 +10635,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 56
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
@@ -11656,7 +11656,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 53
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
@@ -13776,7 +13776,7 @@ GameObject:
   - component: {fileID: 996717118}
   - component: {fileID: 996717117}
   - component: {fileID: 996717116}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16260,7 +16260,7 @@ GameObject:
   - component: {fileID: 1175848293}
   - component: {fileID: 1175848292}
   - component: {fileID: 1175848291}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16640,7 +16640,7 @@ GameObject:
   - component: {fileID: 1204149901}
   - component: {fileID: 1204149900}
   - component: {fileID: 1204149899}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18627,7 +18627,7 @@ GameObject:
   - component: {fileID: 1320488588}
   - component: {fileID: 1320488587}
   - component: {fileID: 1320488586}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19991,7 +19991,7 @@ GameObject:
   - component: {fileID: 1460687323}
   - component: {fileID: 1460687322}
   - component: {fileID: 1460687325}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CombatZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20329,7 +20329,7 @@ GameObject:
   - component: {fileID: 1474727391}
   - component: {fileID: 1474727390}
   - component: {fileID: 1474727389}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22907,7 +22907,7 @@ GameObject:
   - component: {fileID: 1693593527}
   - component: {fileID: 1693593526}
   - component: {fileID: 1693593529}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CombatZone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23864,7 +23864,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 52
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
@@ -25442,7 +25442,7 @@ GameObject:
   - component: {fileID: 1918257575}
   - component: {fileID: 1918257574}
   - component: {fileID: 1918257573}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CombatZone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28157,7 +28157,7 @@ PrefabInstance:
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 57
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 3810846398453907692, guid: 6fcc10c1475928b4b93d595bac3c72dd,
         type: 3}
