@@ -6237,7 +6237,7 @@ GameObject:
   - component: {fileID: 459155829}
   m_Layer: 2
   m_Name: CombatZoneFinal
-  m_TagString: Untagged
+  m_TagString: CombatZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19993,7 +19993,7 @@ GameObject:
   - component: {fileID: 1460687325}
   m_Layer: 2
   m_Name: CombatZone2
-  m_TagString: Untagged
+  m_TagString: CombatZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22909,7 +22909,7 @@ GameObject:
   - component: {fileID: 1693593529}
   m_Layer: 2
   m_Name: CombatZone3
-  m_TagString: Untagged
+  m_TagString: CombatZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25444,7 +25444,7 @@ GameObject:
   - component: {fileID: 1918257573}
   m_Layer: 2
   m_Name: CombatZone1
-  m_TagString: Untagged
+  m_TagString: CombatZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
