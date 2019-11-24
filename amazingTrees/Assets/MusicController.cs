@@ -36,7 +36,7 @@ public class MusicController : MonoBehaviour
 
         for (int i = 0; i < combatZones.Length; i++)
         {
-            if (combatZones[i].currentWave >= (combatZones[i].waves.Count - 1))
+            if ((combatZones[i].currentWave >= (combatZones[i].waves.Count - 1)) && (combatZones[i].inCombat == true))
             {
                 musicIntensity = 2;
             }
