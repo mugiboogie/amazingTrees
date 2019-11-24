@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Linq;
 
 public class PlayerTargetting : MonoBehaviour
@@ -24,6 +25,8 @@ public class PlayerTargetting : MonoBehaviour
     private bool lockOnPlayed;
 
     private List<GameObject> sortedEnemies;
+    PlayerControls controls;
+    private bool buttonLockOn;
 
     void Awake()
     {
@@ -33,6 +36,16 @@ public class PlayerTargetting : MonoBehaviour
         camera = Camera.main.transform;
         audioVoice = transform.Find("HeroVoice").GetComponent<AudioSource>();
         audioSound = transform.Find("HeroSound").GetComponent<AudioSource>();
+        controls = new PlayerControls();
+        controls.Enable();
+        controls.Gameplay.LockOn.performed += ctx => StartCoroutine(inputLockOn());
+    }
+
+    IEnumerator inputLockOn()
+    {
+        buttonLockOn = true;
+        yield return new WaitForEndOfFrame();
+        buttonLockOn = false;
     }
 
     void Update()
@@ -40,7 +53,7 @@ public class PlayerTargetting : MonoBehaviour
 
         forwardEnemyFromPlayer = findForwardEnemyFromPlayer();
 
-        if ((!Input.GetButton("LockOn")) || (enemyTarget == null))
+        if (buttonLockOn && (Time.time > Time.deltaTime) || (enemyTarget == null))
         {
             /*if ((Time.time > overrideTime)||(overrideEnemy == null))
             {
