@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (charCon.isGrounded)
                 {
-                    verticalVelocity = -.1f;
+                    //verticalVelocity = -.1f;
 
 
                     //Cancel Attack if just landed
