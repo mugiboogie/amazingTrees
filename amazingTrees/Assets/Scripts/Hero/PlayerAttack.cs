@@ -125,23 +125,9 @@ public class PlayerAttack : MonoBehaviour
         HUDparent = GameObject.FindGameObjectWithTag("HUDParent").GetComponent<Animator>();
         controls = new PlayerControls();
         controls.Enable();
-        controls.Gameplay.LightAttack.performed += ctx => StartCoroutine(inputLightAttack());
-        controls.Gameplay.HeavyAttack.performed += ctx => StartCoroutine(inputHeavyAttack());
+        controls.Gameplay.LightAttack.performed += ctx => buttonLightAttack = ctx.ReadValue<float>() > .5f;
+        controls.Gameplay.HeavyAttack.performed += ctx => buttonHeavyAttack = ctx.ReadValue<float>() > .5f;
 
-    }
-
-    IEnumerator inputLightAttack()
-    {
-        buttonLightAttack = true;
-        yield return new WaitForEndOfFrame();
-        buttonLightAttack = false;
-    }
-    
-    IEnumerator inputHeavyAttack()
-    {
-        buttonHeavyAttack = true;
-        yield return new WaitForEndOfFrame();
-        buttonHeavyAttack = false;
     }
 
     void Update()
