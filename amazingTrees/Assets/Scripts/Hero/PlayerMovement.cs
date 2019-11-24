@@ -322,7 +322,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("FlinchNegate", false);
 
 
-        if (Input.GetButtonDown("Jump"))
+        if (buttonJump)
         {
             FlinchNegate();
         }
