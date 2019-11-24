@@ -30,17 +30,6 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "key": "editor.toolbarIconGUI",
-                "value": "{\"m_Value\":true}"
-            },
-            {
-                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
                 "key": "UnityEngine.ProBuilder.ProBuilderEditor-isUtilityWindow",
                 "value": "{\"m_Value\":false}"
             },
@@ -51,31 +40,13 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "key": "editor.showSceneInfo",
-=======
                 "key": "editor.toolbarIconGUI",
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
-=======
-                "key": "editor.toolbarIconGUI",
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
                 "value": "{\"m_Value\":false}"
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "key": "mesh.newShapesSnapToGrid",
-                "value": "{\"m_Value\":true}"
-=======
                 "key": "editor.showSceneInfo",
                 "value": "{\"m_Value\":false}"
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
-=======
-                "key": "editor.showSceneInfo",
-                "value": "{\"m_Value\":false}"
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -98,17 +69,6 @@
                 "value": "{\"m_Value\":false}"
             },
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "editor.closeWindowAfterShapeCreation",
-                "value": "{\"m_Value\":false}"
-            },
-            {
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
                 "type": "UnityEngine.ProBuilder.SelectionModifierBehavior, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.rectSelectModifier",
                 "value": "{\"m_Value\":2}"
@@ -162,17 +122,6 @@
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ExtrudeFaces.distance",
                 "value": "{\"m_Value\":0.5}"
-<<<<<<< HEAD
-<<<<<<< HEAD
-            },
-            {
-                "type": "UnityEditor.ProBuilder.Actions.MirrorObjects+MirrorSettings, Unity.ProBuilder.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-                "key": "MirrorObjects.mirrorAxes",
-                "value": "{\"m_Value\":12}"
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
-=======
->>>>>>> e4db180c842bec07c28578bfcf7ae59bd3e18b1f
             }
         ]
     }
