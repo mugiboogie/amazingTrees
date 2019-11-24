@@ -28,7 +28,7 @@ public class MusicController : MonoBehaviour
 
         for (int i = 0; i < combatZones.Length; i++)
         {
-            if (combatZones[i] == true)
+            if (combatZones[i].inCombat == true)
             {
                 musicIntensity = 1;
             }
