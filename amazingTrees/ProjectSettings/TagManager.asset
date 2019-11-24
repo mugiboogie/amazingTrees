@@ -24,6 +24,8 @@ TagManager:
   - AudioListener
   - HUDParent
   - Ragdoll
+  - FxTemporaire
+  - CombatZone
   layers:
   - Default
   - TransparentFX
