@@ -283,7 +283,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a3b8e472-d217-460c-b9a5-1a722cfe43cf"",
                     ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""LockOn"",

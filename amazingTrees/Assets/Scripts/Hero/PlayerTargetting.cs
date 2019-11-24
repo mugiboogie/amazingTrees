@@ -27,6 +27,7 @@ public class PlayerTargetting : MonoBehaviour
     private List<GameObject> sortedEnemies;
     PlayerControls controls;
     private bool buttonLockOn;
+    private bool lockOnState;
 
     void Awake()
     {
@@ -39,6 +40,7 @@ public class PlayerTargetting : MonoBehaviour
         controls = new PlayerControls();
         controls.Enable();
         controls.Gameplay.LockOn.performed += ctx => StartCoroutine(inputLockOn());
+        lockOnState = true;
     }
 
     IEnumerator inputLockOn()
@@ -53,7 +55,9 @@ public class PlayerTargetting : MonoBehaviour
 
         forwardEnemyFromPlayer = findForwardEnemyFromPlayer();
 
-        if (buttonLockOn || (enemyTarget == null))
+        if (buttonLockOn) { lockOnState = !lockOnState; }
+
+        if (lockOnState || (enemyTarget == null))
         {
             /*if ((Time.time > overrideTime)||(overrideEnemy == null))
             {
