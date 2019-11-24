@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private Transform camera;
 
     public bool allHeroesDead;
+    PlayerControls controls;
+    private bool buttonChange;
     
 
     private void Awake()
@@ -55,6 +58,9 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main.transform;
         heroHealth = new float[heroes.Length];
         heroMana = new float[heroes.Length];
+        controls = new PlayerControls();
+        controls.Enable();
+        controls.Gameplay.Change.performed += ctx => StartCoroutine(inputChange());
         
         for(int i=0; i<heroHealth.Length; i++)
         {
@@ -66,6 +72,13 @@ public class PlayerController : MonoBehaviour
             heroMana[i] = 0f;
         }
 
+    }
+
+    IEnumerator inputChange()
+    {
+        buttonChange = true;
+        yield return new WaitForEndOfFrame();
+        buttonChange = false;
     }
 
     void FixedUpdate()
@@ -95,7 +108,7 @@ public class PlayerController : MonoBehaviour
             SummonHero();
         }
 
-        if((allHeroesDead == false) &&(Input.GetKeyDown(KeyCode.F)) && (numHeroesAlive>1))
+        if((allHeroesDead == false) && buttonChange && (numHeroesAlive>1))
         {
             TrySummonHero();            
         }

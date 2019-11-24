@@ -53,7 +53,7 @@ public class PlayerTargetting : MonoBehaviour
 
         forwardEnemyFromPlayer = findForwardEnemyFromPlayer();
 
-        if (buttonLockOn && (Time.time > Time.deltaTime) || (enemyTarget == null))
+        if (buttonLockOn || (enemyTarget == null))
         {
             /*if ((Time.time > overrideTime)||(overrideEnemy == null))
             {
