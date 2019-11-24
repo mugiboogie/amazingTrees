@@ -17,7 +17,7 @@ public class CombatZoneController : MonoBehaviour
     public List<EnemyWave> waves;
     //public List<GameObject> enemies;
     public bool completed;
-    private bool inCombat;
+    public bool inCombat;
     public float combatTimer;
     private EnemyDirector enemyDirector;
     private Scoreboard scoreboard;
@@ -26,7 +26,7 @@ public class CombatZoneController : MonoBehaviour
 
     private TimeManager timeManager;
     private bool encountered;
-    private int currentWave;
+    public int currentWave;
     
 
     void Awake()
