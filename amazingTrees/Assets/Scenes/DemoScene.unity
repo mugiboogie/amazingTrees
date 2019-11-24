@@ -262,16 +262,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 42384744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_RepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceSelectAction: {fileID: 2559092417903258184, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
 --- !u!114 &42384746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4646,12 +4665,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 345016665}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &348502850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5672407910452344749, guid: c2670456b1caddf41b70c7491c32a285,
-    type: 3}
-  m_PrefabInstance: {fileID: 1960542894}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &348502851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5672407910452767629, guid: c2670456b1caddf41b70c7491c32a285,
@@ -5038,12 +5051,6 @@ PrefabInstance:
 --- !u!4 &368604002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6788247689319896648, guid: ba39dd1dd2fe77345bd5f27fe8c5182a,
-    type: 3}
-  m_PrefabInstance: {fileID: 368604001}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &368604003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6788247689319467560, guid: ba39dd1dd2fe77345bd5f27fe8c5182a,
     type: 3}
   m_PrefabInstance: {fileID: 368604001}
   m_PrefabAsset: {fileID: 0}
@@ -6352,36 +6359,42 @@ MonoBehaviour:
   cameraAnchor: {fileID: 0}
   walls:
   - {fileID: 1175848289}
-  enemies:
-  - {fileID: 1258593773}
-  - {fileID: 1151659831}
-  - {fileID: 765813674}
-  - {fileID: 1297430433}
-  - {fileID: 58671391}
-  - {fileID: 1786172824}
-  - {fileID: 2098007773}
-  - {fileID: 2000753440}
-  - {fileID: 1894529092}
-  - {fileID: 380632878}
-  - {fileID: 2054931279}
-  - {fileID: 1404048693}
-  - {fileID: 2057584998}
-  - {fileID: 315607149}
-  - {fileID: 854999155}
-  - {fileID: 944180803}
-  - {fileID: 1356355246}
-  - {fileID: 504766747}
-  - {fileID: 2092418956}
-  - {fileID: 1747600201}
-  - {fileID: 1302499628}
-  - {fileID: 1098258103}
-  - {fileID: 895391421}
-  - {fileID: 1450176755}
-  - {fileID: 95311560}
-  - {fileID: 170406031}
-  - {fileID: 1675728365}
-  - {fileID: 95733549}
-  - {fileID: 466786741}
+  waves:
+  - enemies:
+    - {fileID: 2000753440}
+    - {fileID: 1894529092}
+    - {fileID: 504766747}
+    - {fileID: 2092418956}
+  - enemies:
+    - {fileID: 1258593773}
+    - {fileID: 315607149}
+    - {fileID: 854999155}
+    - {fileID: 1450176755}
+    - {fileID: 95311560}
+  - enemies:
+    - {fileID: 944180803}
+    - {fileID: 1356355246}
+    - {fileID: 1098258103}
+    - {fileID: 895391421}
+  - enemies:
+    - {fileID: 380632878}
+    - {fileID: 2054931279}
+    - {fileID: 1747600201}
+    - {fileID: 1302499628}
+  - enemies:
+    - {fileID: 765813674}
+    - {fileID: 1786172824}
+    - {fileID: 58671391}
+    - {fileID: 170406031}
+    - {fileID: 1675728365}
+  - enemies:
+    - {fileID: 1297430433}
+    - {fileID: 1151659831}
+    - {fileID: 466786741}
+    - {fileID: 95733549}
+    - {fileID: 1404048693}
+    - {fileID: 2057584998}
+    - {fileID: 2098007773}
   completed: 0
   combatTimer: 0
 --- !u!1001 &459538558
@@ -9012,12 +9025,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649488071}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &658348439 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5672407910452344749, guid: c2670456b1caddf41b70c7491c32a285,
-    type: 3}
-  m_PrefabInstance: {fileID: 801981946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &658348440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5672407910452767629, guid: c2670456b1caddf41b70c7491c32a285,
@@ -20097,23 +20104,26 @@ MonoBehaviour:
   walls:
   - {fileID: 590628662}
   - {fileID: 1474727387}
-  enemies:
-  - {fileID: 1751114761}
-  - {fileID: 376261203}
-  - {fileID: 1882188610}
-  - {fileID: 1388811262}
-  - {fileID: 1691854337}
-  - {fileID: 104032068}
-  - {fileID: 2044069183}
-  - {fileID: 658348439}
-  - {fileID: 348502850}
-  - {fileID: 976201061}
-  - {fileID: 4360683}
-  - {fileID: 1454936284}
-  - {fileID: 1508149327}
-  - {fileID: 1762098062}
-  - {fileID: 2086453638}
-  - {fileID: 616933806}
+  waves:
+  - enemies:
+    - {fileID: 616933806}
+    - {fileID: 4360683}
+    - {fileID: 976201061}
+  - enemies:
+    - {fileID: 104032068}
+    - {fileID: 1691854337}
+    - {fileID: 1388811262}
+  - enemies:
+    - {fileID: 1882188610}
+    - {fileID: 376261203}
+    - {fileID: 1751114761}
+  - enemies:
+    - {fileID: 1508149327}
+    - {fileID: 1454936284}
+  - enemies:
+    - {fileID: 2044069183}
+    - {fileID: 2086453638}
+    - {fileID: 1762098062}
   completed: 0
   combatTimer: 0
 --- !u!1001 &1462308015
@@ -23009,22 +23019,26 @@ MonoBehaviour:
   walls:
   - {fileID: 1320488584}
   - {fileID: 1204149897}
-  enemies:
-  - {fileID: 567425794}
-  - {fileID: 2096507908}
-  - {fileID: 45333381}
-  - {fileID: 415835690}
-  - {fileID: 924145683}
-  - {fileID: 368604003}
-  - {fileID: 1318546928}
-  - {fileID: 1959577396}
-  - {fileID: 621316663}
-  - {fileID: 2143830828}
-  - {fileID: 70360040}
-  - {fileID: 386382405}
-  - {fileID: 49109606}
-  - {fileID: 964420553}
-  - {fileID: 2005107428}
+  waves:
+  - enemies:
+    - {fileID: 567425794}
+    - {fileID: 45333381}
+  - enemies:
+    - {fileID: 415835690}
+    - {fileID: 924145683}
+    - {fileID: 2143830828}
+  - enemies:
+    - {fileID: 1318546928}
+    - {fileID: 1318546928}
+    - {fileID: 70360040}
+  - enemies:
+    - {fileID: 1959577396}
+    - {fileID: 621316663}
+    - {fileID: 386382405}
+  - enemies:
+    - {fileID: 2005107428}
+    - {fileID: 49109606}
+    - {fileID: 964420553}
   completed: 0
   combatTimer: 0
 --- !u!1001 &1706307159
@@ -25473,13 +25487,16 @@ MonoBehaviour:
   walls:
   - {fileID: 996717114}
   - {fileID: 640891641}
-  enemies:
-  - {fileID: 1211430022}
-  - {fileID: 320717038}
-  - {fileID: 2013840527}
-  - {fileID: 612534969}
-  - {fileID: 586768104}
-  - {fileID: 413889453}
+  waves:
+  - enemies:
+    - {fileID: 1211430022}
+  - enemies:
+    - {fileID: 320717038}
+    - {fileID: 2013840527}
+  - enemies:
+    - {fileID: 612534969}
+    - {fileID: 586768104}
+    - {fileID: 413889453}
   completed: 0
   combatTimer: 0
 --- !u!65 &1918257574
@@ -27904,12 +27921,6 @@ PrefabInstance:
 --- !u!4 &2096507907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6788247689319896648, guid: ba39dd1dd2fe77345bd5f27fe8c5182a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2096507906}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2096507908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6788247689319467560, guid: ba39dd1dd2fe77345bd5f27fe8c5182a,
     type: 3}
   m_PrefabInstance: {fileID: 2096507906}
   m_PrefabAsset: {fileID: 0}
