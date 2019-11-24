@@ -44,9 +44,20 @@ public class ViviBeamRifle : MonoBehaviour
 
         timeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimeManager>();
 
+
+    }
+
+    void OnEnable()
+    {
         controls = new PlayerControls();
         controls.Enable();
         controls.Gameplay.Spell.performed += ctx => StartCoroutine(inputSpell());
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
+        controls.Gameplay.Spell.performed -= ctx => StartCoroutine(inputSpell());
     }
 
     IEnumerator inputSpell()
